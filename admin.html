@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAMEN` & HVOYA | Панель управления администратора</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
+    <style>
+        :root {
+            --bg-dark: #1E1E1E;
+            --bg-secondary: #252525;
+            --bg-light: #F4F1EB;
+            --bg-stone-dark: #EAE6DF;
+            
+            --accent-green: #1F3C2C;
+            --accent-green-hover: #2E523E;
+            --accent-green-light: rgba(31, 60, 44, 0.2);
+            
+            --text-light: #F4F1EB;
+            --text-light-muted: #AFAAA0;
+            --text-dark: #1A1A1A;
+            --text-muted: #6E6A60;
+            
+            --border-dark: #3A3D3C;
+            --border-light: #DDD8CE;
+            
+            --shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            --font-headers: 'Manrope', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 1. Вход в систему (Gate) */
+        .login-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-dark);
+            padding: 4.5rem 3.5rem;
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .login-card h2 {
+            font-family: var(--font-headers);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .logo-divider {
+            color: var(--accent-green);
+            font-weight: 300;
+        }
+
+        .login-card p {
+            font-size: 0.85rem;
+            color: var(--text-light-muted);
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-family: var(--font-headers);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-light-muted);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.15rem 1.5rem;
+            border: 1px solid var(--border-dark);
+            background: transparent;
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.15rem 2.4rem;
+            font-family: var(--font-headers);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-green);
+            color: var(--text-light);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-green-hover);
+        }
+
+        .error-msg {
+            font-size: 0.8rem;
+            color: #ff8a80;
+            margin-top: 0.8rem;
+            display: none;
+        }
+
+        /* 2. Панель управления (Dashboard) */
+        .dashboard-container {
+            display: none; /* Скрыта по умолчанию */
+            width: 100%;
+            max-width: 1240px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            align-self: flex-start;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-family: var(--font-headers);
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .dashboard-header .btn-logout {
+            background-color: transparent;
+            border: 1px solid var(--border-dark);
+            color: var(--text-light-muted);
+            padding: 0.7rem 1.4rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dashboard-header .btn-logout:hover {
+            border-color: var(--text-light);
+            color: var(--text-light);
+        }
+
+        /* Навигация панели */
+        .tabs {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 1px;
+        }
+
+        .tab-btn {
+            font-family: var(--font-headers);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-light-muted);
+            background: none;
+            border: none;
+            padding: 1rem 0;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--text-light);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-green);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 3. Сетка настроек тарифов */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .settings-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-dark);
+            padding: 3.5rem;
+        }
+
+        .settings-card h3 {
+            font-family: var(--font-headers);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 1rem;
+        }
+
+        .settings-form .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .settings-form label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light-muted);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group .form-control {
+            border-right: none;
+        }
+
+        .input-addon {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-dark);
+            padding: 1.15rem 1.5rem;
+            color: var(--text-light-muted);
+            font-family: var(--font-headers);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        /* 4. Таблица лидов (Заявок) */
+        .leads-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+        }
+
+        .leads-search {
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .leads-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.8rem;
+            width: auto;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-dark);
+            color: var(--text-light-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-light);
+            color: var(--text-light);
+        }
+
+        .leads-table-container {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border-dark);
+            background-color: var(--bg-secondary);
+        }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .leads-table th {
+            background-color: var(--bg-dark);
+            font-family: var(--font-headers);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-light-muted);
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .leads-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border-dark);
+            vertical-align: middle;
+            color: var(--text-light);
+        }
+
+        .leads-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .leads-table tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .lead-type-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0;
+            background-color: var(--accent-green-light);
+            color: var(--text-light);
+            border: 1px solid var(--accent-green);
+        }
+
+        .lead-phone {
+            font-family: var(--font-headers);
+            font-weight: 700;
+        }
+
+        .lead-price {
+            font-family: var(--font-headers);
+            font-weight: 700;
+            color: #81c784;
+        }
+
+        .lead-actions-cell {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.75rem;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-dark);
+            color: var(--text-light-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-action:hover {
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+
+        .btn-action.btn-wa-direct {
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            color: var(--text-light);
+        }
+
+        .btn-action.btn-wa-direct:hover {
+            background-color: #1b5e20;
+        }
+
+        .btn-action.btn-delete-lead {
+            color: #ef5350;
+        }
+
+        .btn-action.btn-delete-lead:hover {
+            background-color: #c62828;
+            border-color: #c62828;
+            color: var(--text-light);
+        }
+
+        .empty-state {
+            padding: 6rem;
+            text-align: center;
+            color: var(--text-light-muted);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+
+        /* Уведомление Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent-green);
+            border: 1px solid var(--text-light-muted);
+            padding: 1.2rem 2.2rem;
+            color: var(--text-light);
+            font-family: var(--font-headers);
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Вход в систему (Gate) -->
+    <div class="login-card" id="login-card">
+        <h2>KAMEN` <span class="logo-divider">&</span> HVOYA</h2>
+        <p>Панель управления администратора</p>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="admin-pass">Введите пароль доступа</label>
+                <input type="password" id="admin-pass" class="form-control" placeholder="••••••••" required>
+                <span class="error-msg" id="login-error-msg">Неверный пароль доступа</span>
+            </div>
+            
+            <button type="submit" class="btn btn-accent">Войти в панель</button>
+        </form>
+    </div>
+
+    <!-- 2. Панель управления (Dashboard) -->
+    <div class="dashboard-container" id="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1>KAMEN` <span class="logo-divider">&</span> HVOYA</h1>
+                <p style="color: var(--text-light-muted); font-size: 0.85rem;">Система управления тарифами и заявками</p>
+            </div>
+            <button class="btn-logout" id="btn-logout">Выйти</button>
+        </div>
+
+        <!-- Переключатель вкладок -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="leads-tab">Заявки (<span id="leads-count">0</span>)</button>
+            <button class="tab-btn" data-tab="pricing-tab">Настройки тарифов</button>
+        </div>
+
+        <!-- ВКЛАДКА 1: ЗАЯВКИ -->
+        <div class="tab-content active" id="leads-tab">
+            <div class="leads-controls">
+                <input type="text" id="leads-search-input" class="form-control leads-search" placeholder="Поиск по имени или телефону...">
+                <div class="leads-actions">
+                    <button class="btn btn-outline btn-sm" id="btn-export-csv">Экспорт в CSV</button>
+                    <button class="btn btn-outline btn-sm btn-delete-lead" id="btn-clear-leads">Очистить все</button>
+                </div>
+            </div>
+
+            <div class="leads-table-container">
+                <table class="leads-table" id="leads-table">
+                    <thead>
+                        <tr>
+                            <th>Дата / Время</th>
+                            <th>Тип заявки</th>
+                            <th>Имя</th>
+                            <th>Телефон</th>
+                            <th>Детали заказа</th>
+                            <th>Сумма (расчет)</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leads-tbody">
+                        <!-- Сюда вставляются заявки из JS -->
+                    </tbody>
+                </table>
+                <div class="empty-state" id="leads-empty-state" style="display: none;">
+                    <div class="empty-icon">&#128196;</div>
+                    <h3>Список заявок пуст</h3>
+                    <p>Все входящие запросы с лендинга будут автоматически появляться в этой таблице.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 2: НАСТРОЙКИ ТАРИФОВ -->
+        <div class="tab-content" id="pricing-tab">
+            <form id="pricing-form" class="settings-form">
+                <div class="settings-grid">
+                    
+                    <!-- Карточка 1: Основные покрытия -->
+                    <div class="settings-card">
+                        <h3>Базовые тарифы на покрытия (м²)</h3>
+                        
+                        <div class="form-group">
+                            <label for="price-stone-carpet">Каменный ковер (Флагман)</label>
+                            <div class="input-group">
+                                <input type="number" id="price-stone-carpet" class="form-control" min="0" required>
+                                <span class="input-addon">₽/м²</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price-rubber-crumb">Резиновая крошка (Спорт/Детские)</label>
+                            <div class="input-group">
+                                <input type="number" id="price-rubber-crumb" class="form-control" min="0" required>
+                                <span class="input-addon">₽/м²</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price-paving-stones">Укладка брусчатки / плитки</label>
+                            <div class="input-group">
+                                <input type="number" id="price-paving-stones" class="form-control" min="0" required>
+                                <span class="input-addon">₽/м²</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Карточка 2: Дополнительные услуги -->
+                    <div class="settings-card">
+                        <h3>Дополнительные услуги / работы</h3>
+                        
+                        <div class="form-group">
+                            <label for="price-border">Установка скрытых бордюров (м)</label>
+                            <div class="input-group">
+                                <input type="number" id="price-border" class="form-control" min="0" required>
+                                <span class="input-addon">₽/м</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price-drain">Системы дренажа и водоотведения (м)</label>
+                            <div class="input-group">
+                                <input type="number" id="price-drain" class="form-control" min="0" required>
+                                <span class="input-addon">₽/м</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price-base">Подготовка бетонного/щебеночного основания (м²)</label>
+                            <div class="input-group">
+                                <input type="number" id="price-base" class="form-control" min="0" required>
+                                <span class="input-addon">₽/м²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">Сохранить тарифы</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Настройки тарифов успешно сохранены</div>
+
+    <!-- JavaScript логика -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Password Protection Gateway
+            const loginCard = document.getElementById('login-card');
+            const dashboardContainer = document.getElementById('dashboard-container');
+            const loginForm = document.getElementById('login-form');
+            const adminPassInput = document.getElementById('admin-pass');
+            const errorMsg = document.getElementById('login-error-msg');
+            const btnLogout = document.getElementById('btn-logout');
+
+            // Session state check
+            if (sessionStorage.getItem('admin_logged_in') === 'true') {
+                showDashboard();
+            }
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const pass = adminPassInput.value.trim();
+                
+                // Дефолтный пароль для премиум админки
+                if (pass === 'admin' || pass === 'admin2026') {
+                    sessionStorage.setItem('admin_logged_in', 'true');
+                    errorMsg.style.display = 'none';
+                    showDashboard();
+                } else {
+                    errorMsg.style.display = 'block';
+                    adminPassInput.classList.add('error');
+                    setTimeout(() => {
+                        adminPassInput.classList.remove('error');
+                    }, 1000);
+                }
+            });
+
+            btnLogout.addEventListener('click', () => {
+                sessionStorage.removeItem('admin_logged_in');
+                hideDashboard();
+            });
+
+            function showDashboard() {
+                loginCard.style.display = 'none';
+                dashboardContainer.style.display = 'block';
+                document.body.style.alignItems = 'flex-start';
+                loadLeads();
+                loadPricingSettings();
+            }
+
+            function hideDashboard() {
+                loginCard.style.display = 'block';
+                dashboardContainer.style.display = 'none';
+                document.body.style.alignItems = 'center';
+                adminPassInput.value = '';
+            }
+
+
+            /* ==========================================
+               2. TABS CONTROLLER
+               ========================================== */
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    this.classList.add('active');
+                    const targetTabId = this.getAttribute('data-tab');
+                    document.getElementById(targetTabId).classList.add('active');
+                });
+            });
+
+
+            /* ==========================================
+               3. PRICING SETTINGS FORM
+               ========================================== */
+            const pricingForm = document.getElementById('pricing-form');
+            const inputStoneCarpet = document.getElementById('price-stone-carpet');
+            const inputRubberCrumb = document.getElementById('price-rubber-crumb');
+            const inputPavingStones = document.getElementById('price-paving-stones');
+            const inputBorder = document.getElementById('price-border');
+            const inputDrain = document.getElementById('price-drain');
+            const inputBase = document.getElementById('price-base');
+            const toast = document.getElementById('toast');
+
+            function loadPricingSettings() {
+                const defaults = {
+                    stone_carpet: 4500,
+                    rubber_crumb: 1800,
+                    paving_stones: 2400,
+                    border: 600,
+                    drain: 950,
+                    base: 1200
+                };
+                
+                let pricing = defaults;
+                const saved = localStorage.getItem('kamen_hvoya_pricing');
+                if (saved) {
+                    try {
+                        pricing = JSON.parse(saved);
+                    } catch (e) {
+                        pricing = defaults;
+                    }
+                }
+
+                inputStoneCarpet.value = pricing.stone_carpet;
+                inputRubberCrumb.value = pricing.rubber_crumb;
+                inputPavingStones.value = pricing.paving_stones;
+                inputBorder.value = pricing.border;
+                inputDrain.value = pricing.drain;
+                inputBase.value = pricing.base;
+            }
+
+            pricingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const newPricing = {
+                    stone_carpet: parseInt(inputStoneCarpet.value) || 0,
+                    rubber_crumb: parseInt(inputRubberCrumb.value) || 0,
+                    paving_stones: parseInt(inputPavingStones.value) || 0,
+                    border: parseInt(inputBorder.value) || 0,
+                    drain: parseInt(inputDrain.value) || 0,
+                    base: parseInt(inputBase.value) || 0
+                };
+
+                localStorage.setItem('kamen_hvoya_pricing', JSON.stringify(newPricing));
+                showToast("Цены тарифов успешно обновлены!");
+            });
+
+            function showToast(message) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+
+            /* ==========================================
+               4. LEADS LISTING & OPERATIONS
+               ========================================== */
+            const leadsTbody = document.getElementById('leads-tbody');
+            const leadsEmptyState = document.getElementById('leads-empty-state');
+            const leadsTable = document.getElementById('leads-table');
+            const leadsCountEl = document.getElementById('leads-count');
+            const searchInput = document.getElementById('leads-search-input');
+            const btnClearLeads = document.getElementById('btn-clear-leads');
+            const btnExportCsv = document.getElementById('btn-export-csv');
+
+            let allLeads = [];
+
+            function loadLeads() {
+                allLeads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                renderLeads(allLeads);
+            }
+
+            function renderLeads(leadsList) {
+                leadsTbody.innerHTML = '';
+                leadsCountEl.textContent = allLeads.length;
+
+                if (leadsList.length === 0) {
+                    leadsTable.style.display = 'none';
+                    leadsEmptyState.style.display = 'block';
+                    return;
+                }
+
+                leadsTable.style.display = 'table';
+                leadsEmptyState.style.display = 'none';
+
+                leadsList.forEach(lead => {
+                    const tr = document.createElement('tr');
+                    tr.setAttribute('data-id', lead.id);
+
+                    // Badge color matching the type of lead
+                    let badgeClass = 'lead-type-badge';
+                    
+                    const cleanPhone = lead.phone ? lead.phone.replace(/\D/g, '') : '';
+                    const encodedMsg = lead.details ? encodeURIComponent(`Здравствуйте, ${lead.name}! Вы оставляли заявку на расчет благоустройства: ${lead.details}.`) : '';
+                    
+                    tr.innerHTML = `
+                        <td style="color: var(--text-light-muted); white-space: nowrap;">${lead.date}</td>
+                        <td><span class="${badgeClass}">${lead.type}</span></td>
+                        <td style="font-weight: 600;">${lead.name || '—'}</td>
+                        <td class="lead-phone">${lead.phone || '—'}</td>
+                        <td style="font-size: 0.85rem; max-width: 320px; line-height: 1.5;">${lead.details || '—'}</td>
+                        <td class="lead-price">${lead.price || '—'}</td>
+                        <td class="lead-actions-cell">
+                            ${lead.phone ? `
+                                <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="btn-action btn-wa-direct" title="Открыть чат в WhatsApp">WhatsApp</a>
+                                <a href="tel:${cleanPhone}" class="btn-action" title="Позвонить клиенту">Позвонить</a>
+                            ` : ''}
+                            <button class="btn-action btn-delete-lead" onclick="deleteLead(${lead.id})" title="Удалить заявку">Удалить</button>
+                        </td>
+                    `;
+                    leadsTbody.appendChild(tr);
+                });
+            }
+
+            // Expose deleteLead to window so inline onclick can access it
+            window.deleteLead = (id) => {
+                if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
+                    let leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                    leads = leads.filter(l => l.id !== id);
+                    localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+                    loadLeads();
+                    showToast('Заявка удалена');
+                }
+            };
+
+            // Search Filter
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.toLowerCase().trim();
+                    if (!query) {
+                        renderLeads(allLeads);
+                        return;
+                    }
+                    const filtered = allLeads.filter(lead => {
+                        const nameMatch = lead.name ? lead.name.toLowerCase().includes(query) : false;
+                        const phoneMatch = lead.phone ? lead.phone.includes(query) : false;
+                        const detailsMatch = lead.details ? lead.details.toLowerCase().includes(query) : false;
+                        return nameMatch || phoneMatch || detailsMatch;
+                    });
+                    renderLeads(filtered);
+                });
+            }
+
+            // Clear All leads
+            if (btnClearLeads) {
+                btnClearLeads.addEventListener('click', () => {
+                    if (confirm('Вы уверены, что хотите БЕЗВОЗВРАТНО удалить все заявки из базы?')) {
+                        localStorage.removeItem('kamen_hvoya_leads');
+                        loadLeads();
+                        showToast('База заявок полностью очищена');
+                    }
+                });
+            }
+
+            // Export to CSV
+            if (btnExportCsv) {
+                btnExportCsv.addEventListener('click', () => {
+                    if (allLeads.length === 0) {
+                        alert('Нет заявок для экспорта.');
+                        return;
+                    }
+
+                    // CSV Headers
+                    let csvContent = '\uFEFF'; // BOM for Excel Cyrillic support
+                    csvContent += 'Дата;Тип;Имя;Телефон;Детали заказа;Сумма\n';
+
+                    allLeads.forEach(lead => {
+                        const date = lead.date || '';
+                        const type = lead.type || '';
+                        const name = lead.name || '';
+                        const phone = lead.phone || '';
+                        const details = (lead.details || '').replace(/;/g, ',').replace(/\n/g, ' ');
+                        const price = (lead.price || '').replace(/;/g, '');
+                        
+                        csvContent += `"${date}";"${type}";"${name}";"${phone}";"${details}";"${price}"\n`;
+                    });
+
+                    // Download trigger
+                    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.setAttribute("href", url);
+                    link.setAttribute("download", `kamen_hvoya_leads_${new Date().toLocaleDateString('ru-RU')}.csv`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast('Экспорт в CSV успешно выполнен');
+                });
+            }
+
+            // Автоматическая синхронизация заявок между вкладками в реальном времени
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'kamen_hvoya_leads') {
+                    loadLeads();
+                    showToast('Поступила новая заявка с лендинга!');
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

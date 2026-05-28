@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAMEN` & HVOYA | Комплексное благоустройство территорий в Ижевске и Удмуртии</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Комплексное благоустройство загородных и коммерческих территорий в Ижевске и Удмуртской Республике. Укладка премиального бесшовного каменного ковра, резиновой крошки и брусчатки под ключ. Собственное производство, гарантия по договору.">
+    <meta name="keywords" content="каменный ковер ижевск, укладка резиновой крошки удмуртия, укладка брусчатки ижевск, благоустройство территории ижевск, бесшовные покрытия премиум-класса, ландшафтное озеленение, дренаж участка">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KAMEN` & HVOYA | Комплексное благоустройство территорий">
+    <meta property="og:description" content="Укладка премиального каменного ковра, резиновой крошки и брусчатки под ключ в Ижевске и Удмуртии. Эстетика 'тихой роскоши'.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/stone_carpet_hero.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo" id="header-logo">
+                KAMEN` <span class="logo-divider">&</span> HVOYA
+            </a>
+            <nav class="nav" aria-label="Основная навигация">
+                <a href="#directions-menu" class="nav-link">Направления</a>
+                <a href="#stone-carpet" class="nav-link">Каменный ковер</a>
+                <a href="#rubber-crumb" class="nav-link">Резиновая крошка</a>
+                <a href="#paving-stones" class="nav-link">Брусчатка</a>
+                <a href="#under-key-dev" class="nav-link">Благоустройство</a>
+                <a href="#calculator" class="nav-link">Калькулятор</a>
+            </nav>
+            <div class="header-contacts">
+                <button class="btn btn-accent btn-sm open-callback-modal" id="header-cta-btn" data-subject="Заказ обратного звонка из хедера">Рассчитать проект</button>
+            </div>
+            <button class="burger" id="burger-menu-btn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <span class="logo">KAMEN` <span class="logo-divider">&</span> HVOYA</span>
+            <button class="drawer-close" id="drawer-close-btn">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="#directions-menu" class="drawer-link">Направления</a>
+            <a href="#stone-carpet" class="drawer-link">Каменный ковер</a>
+            <a href="#rubber-crumb" class="drawer-link">Резиновая крошка</a>
+            <a href="#paving-stones" class="drawer-link">Брусчатка</a>
+            <a href="#under-key-dev" class="drawer-link">Благоустройство</a>
+            <a href="#calculator" class="drawer-link">Калькулятор</a>
+        </nav>
+        <div class="drawer-footer">
+            <a href="tel:+73412998877" class="drawer-phone">+7 (3412) 99-88-77</a>
+            <button class="btn btn-accent open-callback-modal" style="width: 100%;" data-subject="Заказ обратного звонка (Мобильное меню)">Связаться</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Блок 1: Hero Section (Главный экран) -->
+        <section class="hero" id="hero">
+            <div class="hero-bg" style="background-image: linear-gradient(180deg, rgba(18, 20, 22, 0.45) 0%, rgba(18, 20, 22, 0.75) 100%), url('images/stone_carpet_hero.png');"></div>
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge fade-in">
+                        <span class="badge-dot"></span>
+                        Премиальное благоустройство • Ижевск & Удмуртия
+                    </div>
+                    <h1 class="hero-title fade-in" id="hero-main-title">
+                        Комплексное благоустройство вашей территории
+                    </h1>
+                    <p class="hero-subtitle fade-in">
+                        От укладки премиального каменного ковра до ландшафтного озеленения. Создаем эстетику и комфорт под ключ для ценителей безупречного качества.
+                    </p>
+                    <div class="hero-actions fade-in">
+                        <a href="#calculator" class="btn btn-accent btn-lg" id="hero-primary-cta">Рассчитать стоимость проекта</a>
+                        <a href="#directions-menu" class="btn btn-outline btn-lg" id="hero-secondary-cta">Посмотреть направления</a>
+                    </div>
+                </div>
+                
+                <!-- Hero Quick Benefits -->
+                <div class="hero-stats grid grid-3 fade-in">
+                    <div class="stat-card">
+                        <span class="stat-num">15+ лет</span>
+                        <p class="stat-text">Срок службы покрытий благодаря собственным технологиям полимеров</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num">0% субподряда</span>
+                        <p class="stat-text">Штатные бригады и полный контроль работ от подготовки до озеленения</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num">5 лет</span>
+                        <p class="stat-text">Официальная гарантия по договору с фиксированной сметой</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 2: Меню направлений (Grid-сетка из 3 крупных карточек) -->
+        <section class="directions-section section" id="directions-menu">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Спектр решений</span>
+                    <h2 class="section-title text-dark">Направления благоустройства</h2>
+                    <p class="section-desc text-dark">
+                        Выберите покрытие, чтобы ознакомиться с его уникальными характеристиками, эстетическими свойствами и технологией укладки.
+                    </p>
+                </div>
+                
+                <div class="grid grid-3 direction-cards">
+                    <!-- Карточка 1 -->
+                    <a href="#stone-carpet" class="direction-card animate-on-scroll" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%), url('images/stone_carpet_macro.png');">
+                        <div class="card-content">
+                            <span class="card-tag">Флагман</span>
+                            <h3 class="card-title">Каменный ковер</h3>
+                            <p class="card-desc">Природная эстетика без швов. Идеально для патио, террас и зон бассейнов.</p>
+                            <span class="card-link-arrow">Подробнее &rarr;</span>
+                        </div>
+                    </a>
+                    
+                    <!-- Карточка 2 -->
+                    <a href="#rubber-crumb" class="direction-card animate-on-scroll" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%), url('images/rubber_crumb_sport.png');">
+                        <div class="card-content">
+                            <span class="card-tag">Практичность</span>
+                            <h3 class="card-title">Резиновая крошка</h3>
+                            <p class="card-desc">Безопасность и износостойкость. Для спортивных, детских площадок и воркаут-зон.</p>
+                            <span class="card-link-arrow">Подробнее &rarr;</span>
+                        </div>
+                    </a>
+                    
+                    <!-- Карточка 3 -->
+                    <a href="#paving-stones" class="direction-card animate-on-scroll" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%), url('images/paving_stones.png');">
+                        <div class="card-content">
+                            <span class="card-tag">Классика</span>
+                            <h3 class="card-title">Брусчатка</h3>
+                            <p class="card-desc">Классическая надежность. Строгие линии мощения, долговечные схемы раскладки.</p>
+                            <span class="card-link-arrow">Подробнее &rarr;</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 3: Услуга — Каменный ковер (Флагман) -->
+        <section class="service-section section bg-stone-light" id="stone-carpet">
+            <div class="container">
+                <div class="grid grid-2 align-center">
+                    <div class="service-info animate-on-scroll">
+                        <span class="section-subtitle accent-text">Флагманское покрытие</span>
+                        <h2 class="section-title text-dark">Каменный ковер.<br>Инновации в ландшафтном дизайне.</h2>
+                        <p class="service-desc text-dark">
+                            Бесшовное покрытие из натурального камня (кварц, мрамор, яшма, речная галька) и полиуретанового связующего. Создает благородную текстуру, подчеркивающую премиальный статус загородного владения.
+                        </p>
+                        <p class="service-desc text-dark">
+                            Уникальная пористая структура моментально пропускает воду, исключая образование луж даже после сильного дождя.
+                        </p>
+                        
+                        <div class="benefits-list light-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Долговечность от 15 лет</h4>
+                                    <p class="text-dark">Эластичное полиуретановое связующее не рассыхается и не крошится с годами.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Абсолютно ровная поверхность</h4>
+                                    <p class="text-dark">Идеальная плоскость без швов, выступов и зазоров. Безопасно для босой ходьбы.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Стойкость к экстремальным морозам</h4>
+                                    <p class="text-dark">Материал выдерживает температурные перепады Удмуртии (от -40°C до +40°C).</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <button class="btn btn-accent open-callback-modal" id="stone-carpet-cta" data-subject="Запрос цен: Каменный ковер">Заказать расчет проекта</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Асимметричный визуальный блок в стиле журнальной верстки -->
+                    <div class="editorial-gallery animate-on-scroll">
+                        <div class="editorial-wrapper">
+                            <img src="images/stone_carpet_hero.png" alt="Патио с каменным ковром у бассейна" class="editorial-img">
+                            <div class="editorial-caption">
+                                <span class="caption-num">01 /</span>
+                                <span class="caption-text">Эксклюзивная укладка кварцевого патио в Ижевске</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 4: Услуга — Резиновая крошка -->
+        <section class="service-section section bg-white" id="rubber-crumb">
+            <div class="container">
+                <div class="grid grid-2 align-center reverse-tablet">
+                    <!-- Слайдер-галерея -->
+                    <div class="slider-gallery animate-on-scroll">
+                        <div class="slider-container">
+                            <div class="slider-track" id="rubber-slider-track">
+                                <div class="slide-item active">
+                                    <img src="images/rubber_crumb_sport.png" alt="Спортивная площадка с резиновой крошкой">
+                                    <div class="slide-label">Частная универсальная спортплощадка</div>
+                                </div>
+                                <div class="slide-item">
+                                    <img src="images/stone_carpet_hero.png" alt="Входная группа из крошки">
+                                    <div class="slide-label">Входная группа и пандус</div>
+                                </div>
+                            </div>
+                            <div class="slider-controls">
+                                <button class="slider-btn prev-btn" id="rubber-slider-prev" aria-label="Предыдущий слайд">&#8592;</button>
+                                <button class="slider-btn next-btn" id="rubber-slider-next" aria-label="Следующий слайд">&#8594;</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Премиальный блок RAL палитры -->
+                        <div class="ral-selector-card">
+                            <h4>Интерактивный подбор цвета RAL</h4>
+                            <p>Выберите премиальный тон покрытия для визуализации на площадке:</p>
+                            <div class="ral-palette">
+                                <button class="ral-dot active" style="background-color: #1F3C2C;" data-ral="RAL 6005" data-name="Глубокий хвойный" data-hex="#1F3C2C"></button>
+                                <button class="ral-dot" style="background-color: #2D3130;" data-ral="RAL 7016" data-name="Темный графит" data-hex="#2D3130"></button>
+                                <button class="ral-dot" style="background-color: #702619;" data-ral="RAL 3016" data-name="Благородный терракот" data-hex="#702619"></button>
+                                <button class="ral-dot" style="background-color: #314652;" data-ral="RAL 5011" data-name="Стальной синий" data-hex="#314652"></button>
+                                <button class="ral-dot" style="background-color: #BCA374;" data-ral="RAL 1001" data-name="Песчаный беж" data-hex="#BCA374"></button>
+                                <button class="ral-dot" style="background-color: #1A1A1A;" data-ral="RAL 9005" data-name="Угольно-черный" data-hex="#1A1A1A"></button>
+                            </div>
+                            <div class="ral-result">
+                                Выбран цвет: <strong id="ral-color-title">RAL 6005 (Глубокий хвойный)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-info animate-on-scroll">
+                        <span class="section-subtitle accent-text">Безопасность и амортизация</span>
+                        <h2 class="section-title text-dark">Покрытия из резиновой крошки.</h2>
+                        <p class="service-desc text-dark">
+                            Травмобезопасные, износостойкие покрытия для активных зон, детских площадок, домашних воркаут-комплексов и входных групп. 
+                        </p>
+                        <p class="service-desc text-dark">
+                            Собственное производство резиновой крошки позволяет контролировать качество очистки сырья (0% текстиля и металлической пыли) на каждом этапе и колеровать полиуретан в любые цвета по палитре RAL.
+                        </p>
+                        
+                        <div class="benefits-list light-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Мягкая амортизация</h4>
+                                    <p class="text-dark">Снижает риск травм при падении, предохраняет суставы во время занятий спортом.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Абсолютная экологичность</h4>
+                                    <p class="text-dark">Отсутствие токсичных запахов при сильном нагреве солнцем. Только сертифицированные связующие.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <button class="btn btn-dark open-callback-modal" id="rubber-crumb-cta" data-subject="Показ палитры RAL и консультация" data-ral-request="true">Консультация по палитре RAL</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 5: Услуга — Брусчатка -->
+        <section class="service-section section bg-stone-light" id="paving-stones">
+            <div class="container">
+                <div class="grid grid-2 align-center">
+                    <div class="service-info animate-on-scroll">
+                        <span class="section-subtitle accent-text">Классическое мощение</span>
+                        <h2 class="section-title text-dark">Укладка брусчатки и тротуарной плитки.</h2>
+                        <p class="service-desc text-dark">
+                            Идеальная геометрия швов, строгий параллелизм линий и безукоризненное соблюдение технологического процесса подготовки жесткого основания. 
+                        </p>
+                        <p class="service-desc text-dark">
+                            Воплощаем классические европейские и современные архитектурные схемы мощения с использованием вибропрессованной плитки, гранитного и клинкерного кирпича.
+                        </p>
+                        
+                        <div class="benefits-list light-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Многослойное основание по немецким стандартам</h4>
+                                    <p class="text-dark">Послойное вибротрамбование с правильным уклоном исключает просадку отдельных элементов.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <span class="benefit-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 01.72-.294h14.56a1 1 0 01.72 1.706l-4.137 4.137a1 1 0 00-.293.707v5.172a1 1 0 01-.293.707l-2 2A1 1 0 0112 18.5V11.5a1 1 0 00-.293-.707L7.57 6.657A1 1 0 014 5.765V5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h4 class="text-dark">Скрытые швы и дренаж</h4>
+                                    <p class="text-dark">Правильная затирка отсевом или кварцем для быстрого отвода влаги.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <button class="btn btn-accent open-callback-modal" id="paving-stones-cta" data-subject="Запрос цен: Брусчатка">Получить каталог схем мощения</button>
+                        </div>
+                    </div>
+                    
+                    <div class="editorial-gallery animate-on-scroll">
+                        <div class="editorial-wrapper">
+                            <img src="images/paving_stones.png" alt="Строгие линии уложенной брусчатки" class="editorial-img">
+                            <div class="editorial-caption">
+                                <span class="caption-num">02 /</span>
+                                <span class="caption-text">Идеально ровные линии примыкания брусчатки к газону</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 6: Благоустройство "Под ключ" (Дополняющие услуги) -->
+        <section class="section dark-section bg-graphite" id="under-key-dev">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle light-subtitle">Комплексный подход</span>
+                    <h2 class="section-title text-light">Дьявол кроется в деталях.<br>Благоустройство под ключ.</h2>
+                    <p class="section-desc text-muted">
+                        Идеальное покрытие требует идеального окружения. Мы берем на себя все сопутствующие работы, избавляя вас от поиска сторонних бригад и несогласованности процессов.
+                    </p>
+                </div>
+                
+                <div class="grid grid-4 complement-cards">
+                    <!-- Карточка 1 -->
+                    <div class="complement-card animate-on-scroll">
+                        <div class="card-num">01</div>
+                        <h3 class="card-title text-light">Установка скрытых бордюров</h3>
+                        <p class="card-desc text-muted">Используем скрытые пластиковые или классические бетонные бордюры для фиксации четких границ зон.</p>
+                    </div>
+                    
+                    <!-- Карточка 2 -->
+                    <div class="complement-card animate-on-scroll">
+                        <div class="card-num">02</div>
+                        <h3 class="card-title text-light">Системы дренажа & водоотвода</h3>
+                        <p class="card-desc text-muted">Проектируем и укладываем водоприемники, дождеприемники и дренажные трубы для осушения участка.</p>
+                    </div>
+                    
+                    <!-- Карточка 3 -->
+                    <div class="complement-card animate-on-scroll">
+                        <div class="card-num">03</div>
+                        <h3 class="card-title text-light">Подготовка основания</h3>
+                        <p class="card-desc text-muted">Послойная отсыпка, бетонирование площадок, армирование. Гарантируем идеальную несущую способность.</p>
+                    </div>
+                    
+                    <!-- Карточка 4 -->
+                    <div class="complement-card animate-on-scroll">
+                        <div class="card-num">04</div>
+                        <h3 class="card-title text-light">Озеленение и рулонный газон</h3>
+                        <p class="card-desc text-muted">Планирование чернозема, укладка изумрудных рулонных газонов и посадка хвойных растений.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 7: Интерактивный Калькулятор (Генератор лидов) -->
+        <section class="section bg-white" id="calculator">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Интерактивный расчет</span>
+                    <h2 class="section-title text-dark">Соберите свой проект и узнайте стоимость</h2>
+                    <p class="section-desc text-dark">
+                        Сделайте предварительный выбор параметров. Калькулятор мгновенно рассчитает базовую стоимость материалов и работ.
+                    </p>
+                </div>
+                
+                <div class="calc-grid">
+                    <!-- Левая сторона: Шаги -->
+                    <div class="calc-steps-card">
+                        <!-- Шаг 1: Выбор покрытия -->
+                        <div class="calc-step-group">
+                            <span class="step-badge">Шаг 1 из 3</span>
+                            <h3 class="calc-step-title">Тип покрытия</h3>
+                            
+                            <div class="calc-radio-grid">
+                                <label class="calc-radio-card">
+                                    <input type="radio" name="calc_coating" value="stone_carpet" checked>
+                                    <div class="radio-card-content">
+                                        <div class="radio-dot"></div>
+                                        <div class="radio-details">
+                                            <span class="radio-title">Каменный ковер</span>
+                                            <span class="radio-price" id="label-price-stone_carpet">от 4 500 ₽/м²</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                
+                                <label class="calc-radio-card">
+                                    <input type="radio" name="calc_coating" value="rubber_crumb">
+                                    <div class="radio-card-content">
+                                        <div class="radio-dot"></div>
+                                        <div class="radio-details">
+                                            <span class="radio-title">Резиновая крошка</span>
+                                            <span class="radio-price" id="label-price-rubber_crumb">от 1 800 ₽/м²</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                
+                                <label class="calc-radio-card">
+                                    <input type="radio" name="calc_coating" value="paving_stones">
+                                    <div class="radio-card-content">
+                                        <div class="radio-dot"></div>
+                                        <div class="radio-details">
+                                            <span class="radio-title">Укладка брусчатки</span>
+                                            <span class="radio-price" id="label-price-paving_stones">от 2 400 ₽/м²</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Шаг 2: Ползунок площади -->
+                        <div class="calc-step-group">
+                            <span class="step-badge">Шаг 2 из 3</span>
+                            <h3 class="calc-step-title">Укажите площадь территории</h3>
+                            
+                            <div class="calc-range-wrapper">
+                                <div class="range-value-box">
+                                    <input type="number" id="calc-area-num" class="range-num-input" value="45" min="10" max="1000">
+                                    <span class="range-unit">м²</span>
+                                </div>
+                                <input type="range" id="calc-area-range" class="calc-range-slider" min="10" max="500" step="5" value="45">
+                                <div class="range-min-max">
+                                    <span>10 м²</span>
+                                    <span>500+ м²</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Шаг 3: Чекбоксы дополнительных услуг -->
+                        <div class="calc-step-group" style="border: none; padding-bottom: 0;">
+                            <span class="step-badge">Шаг 3 из 3</span>
+                            <h3 class="calc-step-title">Дополнительные работы</h3>
+                            
+                            <div class="calc-checkbox-grid">
+                                <label class="calc-checkbox-card">
+                                    <input type="checkbox" id="calc-need-border" value="border">
+                                    <span class="checkbox-box"></span>
+                                    <span class="checkbox-text" id="label-price-border">Установка скрытых бордюров (+600 ₽/м)</span>
+                                </label>
+                                
+                                <label class="calc-checkbox-card">
+                                    <input type="checkbox" id="calc-need-drain" value="drainage">
+                                    <span class="checkbox-box"></span>
+                                    <span class="checkbox-text" id="label-price-drain">Устройство ливневого дренажа (+950 ₽/м)</span>
+                                </label>
+                                
+                                <label class="calc-checkbox-card">
+                                    <input type="checkbox" id="calc-need-base" value="base">
+                                    <span class="checkbox-box"></span>
+                                    <span class="checkbox-text" id="label-price-base">Подготовка бетонного/щебеночного основания (+1200 ₽/м²)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая сторона: Итоги -->
+                    <div class="calc-result-card">
+                        <div class="result-header">
+                            <h4>Ориентировочный расчет стоимости</h4>
+                            <p>Расчет произведен по актуальным тарифам сезона 2026</p>
+                        </div>
+                        
+                        <div class="result-price-box">
+                            <span class="price-label">Предварительный итог:</span>
+                            <div class="price-value-container">
+                                <span class="blurred-price" id="calc-blurred-price">от 202 500 ₽</span>
+                            </div>
+                            <span class="price-note">*Включает работу, сертифицированные материалы и доставку</span>
+                        </div>
+                        
+                        <div class="result-lead-form">
+                            <p class="form-instructions">Чтобы зафиксировать стоимость проекта по текущим тарифам, получить детальную смету на WhatsApp и согласовать выезд инженера с образцами, введите номер телефона:</p>
+                            
+                            <form id="calc-lead-form" novalidate>
+                                <div class="form-group">
+                                    <input type="tel" id="calc-phone" class="form-control form-control-dark" placeholder="+7 (999) 000-00-00" required>
+                                    <span class="error-message" id="calc-phone-error">Введите корректный номер телефона</span>
+                                </div>
+                                <button type="submit" class="btn btn-accent btn-block" id="calc-submit-btn">Получить точную смету в WhatsApp</button>
+                            </form>
+                            <p class="privacy-note">Нажимая кнопку, вы соглашаетесь с <a href="#" class="open-privacy-link">политикой конфиденциальности</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 8: О нас / Почему мы (Trust-факторы) -->
+        <section class="section bg-stone-light" id="about-us">
+            <div class="container">
+                <div class="grid grid-2 align-center">
+                    <div class="editorial-gallery animate-on-scroll">
+                        <div class="editorial-wrapper">
+                            <img src="images/process_work.png" alt="Мастер укладывает премиальный каменный ковер" class="editorial-img">
+                            <div class="editorial-caption">
+                                <span class="caption-num">03 /</span>
+                                <span class="caption-text">Процесс ручной шлифовки каменного ковра правилом</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-info animate-on-scroll" style="padding-left: 2rem; padding-right: 0;">
+                        <span class="section-subtitle accent-text">Культура производства</span>
+                        <h2 class="section-title text-dark">Работа без компромиссов.</h2>
+                        <p class="service-desc text-dark">
+                            Мы не занимаемся дешевой укладкой на скорую руку. В премиальном сегменте благоустройства каждый миллиметр и каждый технологический слой определяют срок службы и эстетику готового двора.
+                        </p>
+                        
+                        <div class="trust-factors-list">
+                            <!-- Фактор 1 -->
+                            <div class="trust-factor-item">
+                                <div class="trust-factor-header">
+                                    <span class="factor-icon">&#10003;</span>
+                                    <h4>Строго по договору</h4>
+                                </div>
+                                <p>Стоимость работ и сроки фиксируются юридически до начала процесса. Никаких доплат за материалы или «непредвиденные расходы».</p>
+                            </div>
+                            
+                            <!-- Фактор 2 -->
+                            <div class="trust-factor-item">
+                                <div class="trust-factor-header">
+                                    <span class="factor-icon">&#10003;</span>
+                                    <h4>Штатные сертифицированные бригады</h4>
+                                </div>
+                                <p>Мы не нанимаем сезонных рабочих и субподрядчиков с Авито. Все мастера проходят ежегодную аттестацию по нанесению полимерных эластомеров.</p>
+                            </div>
+                            
+                            <!-- Фактор 3 -->
+                            <div class="trust-factor-item">
+                                <div class="trust-factor-header">
+                                    <span class="factor-icon">&#10003;</span>
+                                    <h4>Прямые закупки камня и крошки</h4>
+                                </div>
+                                <p>Закупаем отборный кварцевый песок и мраморную крошку напрямую на карьерах Урала крупным оптом. Контролируем фракцию и чистоту материала.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 9: Закрывающий экран и Форма обратной связи -->
+        <section class="section dark-section bg-graphite" id="closing-form-section">
+            <div class="container">
+                <div class="grid grid-2 align-center">
+                    <div class="closing-info animate-on-scroll">
+                        <span class="section-subtitle light-subtitle">Сделайте первый шаг</span>
+                        <h2 class="section-title text-light">Начнем с бесплатного выезда на замер</h2>
+                        <p class="section-desc text-muted">
+                            Наш главный инженер приедет на ваш объект с демонстрационным чемоданом образцов (вы сможете лично оценить фактуру каменного ковра, оттенки крошки и качество брусчатки). 
+                        </p>
+                        <p class="section-desc text-muted">
+                            Он оценит рельеф участка, произведет точный лазерный замер плоскостей и составит детальную смету, которая не изменится в процессе работы.
+                        </p>
+                        
+                        <div class="demo-suitcase-badge">
+                            <div class="suitcase-icon">&#128188;</div>
+                            <div class="suitcase-text">
+                                <strong>Чемодан образцов бесплатно</strong>
+                                <span>Привезем 12 реальных вариантов покрытий на ваш участок</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="closing-form-box animate-on-scroll">
+                        <h3>Заказать бесплатный замер и смету</h3>
+                        <p>Заполните форму, и мы свяжемся с вами в течение 10 минут для согласования даты и времени выезда инженера.</p>
+                        
+                        <form id="closing-feedback-form" novalidate>
+                            <div class="form-group">
+                                <label for="client-name">Ваше имя</label>
+                                <input type="text" id="client-name" class="form-control form-control-dark" placeholder="Александр" required>
+                                <span class="error-message" id="client-name-error">Пожалуйста, введите ваше имя</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="client-phone">Номер телефона</label>
+                                <input type="tel" id="client-phone" class="form-control form-control-dark" placeholder="+7 (999) 000-00-00" required>
+                                <span class="error-message" id="client-phone-error">Введите корректный номер телефона</span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-accent btn-block btn-lg" id="closing-submit-btn">Вызвать инженера на замер</button>
+                            
+                            <p class="privacy-consent">Нажимая кнопку, вы соглашаетесь с <a href="#" class="open-privacy-link text-light">политикой конфиденциальности</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Футер -->
+        <footer class="footer bg-black" id="footer">
+            <div class="container">
+                <div class="grid grid-2 footer-top">
+                    <!-- Левая сторона: Контакты -->
+                    <div class="footer-contacts animate-on-scroll">
+                        <a href="#" class="logo footer-logo">
+                            KAMEN` <span class="logo-divider">&</span> HVOYA
+                        </a>
+                        <p class="footer-desc text-muted">
+                            Создаем эксклюзивный архитектурный облик загородных участков и коммерческих территорий. Профессиональное благоустройство европейского уровня в Ижевске и Удмуртии.
+                        </p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon-wrapper">&#128222;</span>
+                                <div>
+                                    <span class="contact-label">Отдел продаж в Ижевске:</span>
+                                    <a href="tel:+73412998877" class="contact-value">+7 (3412) 99-88-77</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon-wrapper">&#128205;</span>
+                                <div>
+                                    <span class="contact-label">Адрес офиса и шоурума:</span>
+                                    <span class="contact-value">г. Ижевск, ул. Пушкинская, д. 268</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon-wrapper">&#9200;</span>
+                                <div>
+                                    <span class="contact-label">Время работы офиса:</span>
+                                    <span class="contact-value">Ежедневно с 09:00 до 20:00 (выезд инженера — круглосуточно)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://wa.me/73412998877" class="btn-social btn-whatsapp" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.733-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.45 5.489 0 9.954-4.41 9.957-9.829.002-2.624-1.017-5.09-2.871-6.949C16.484 1.966 14.021 1.05 11.4 1.05c-5.49 0-9.954 4.41-9.957 9.828a9.712 9.712 0 001.554 5.176l-.101.161-1.02 3.727 3.825-1.002.164.098zm12.355-6.6c-.33-.165-1.951-.963-2.251-1.073-.3-.109-.518-.165-.736.165-.218.329-.844 1.073-1.036 1.293-.191.219-.383.245-.713.08-1.536-.759-2.585-1.332-3.606-3.084-.27-.463.27-.429.774-1.429.083-.166.041-.311-.02-.476-.062-.165-.518-1.25-.71-1.71-.186-.448-.376-.387-.518-.395-.133-.007-.285-.008-.437-.008-.152 0-.401.057-.61.286-.21.23-.8.78-.8 1.9s.814 2.2 1.032 2.5c.218.3 1.625 2.487 3.937 3.483.55.237 1.07.382 1.443.501.553.176 1.056.151 1.454.092.443-.066 1.352-.553 1.541-1.085.19-.533.19-.99.133-1.085-.057-.095-.21-.165-.54-.33z"/>
+                                </svg>
+                                WhatsApp
+                            </a>
+                            <a href="https://t.me/kamen_hvoya" class="btn-social btn-telegram" target="_blank" rel="noopener">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-1.12.102-1.667-.532-2.737-1.232-1.675-1.096-2.584-1.616-4.213-2.69-1.88-1.238-.662-1.92.41-3.037.28-.29 5.15-4.726 5.244-5.127.012-.05.023-.239-.089-.339-.112-.1-.277-.067-.396-.04-.168.039-2.85 1.812-8.04 5.32-.76.522-1.448.777-2.062.763-.678-.015-1.982-.384-2.951-.7-.988-.323-1.774-.495-1.706-.996.035-.26.39-.529 1.066-.807 4.16-1.812 6.93-3.007 8.31-3.585 3.95-1.65 4.77-1.936 5.3-.948.12.22.1.66-.08.832z"/>
+                                </svg>
+                                Telegram
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая сторона: Стилизованная темная карта -->
+                    <div class="footer-map-box animate-on-scroll">
+                        <div class="map-overlay-title">Шоурум и Шоссейное производство</div>
+                        <div class="styled-map-container" id="visual-map">
+                            <div class="map-grid-pattern"></div>
+                            <div class="map-river"></div>
+                            <div class="map-street street-1"></div>
+                            <div class="map-street street-2"></div>
+                            <div class="map-street street-3"></div>
+                            <div class="map-pin">
+                                <span class="pin-dot"></span>
+                                <span class="pin-pulse"></span>
+                                <div class="pin-tooltip">KAMEN` & HVOYA<br>ул. Пушкинская, 268</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2026 KAMEN` & HVOYA. Все права защищены. Собственное производство покрытий.</p>
+                    <div class="footer-links">
+                        <a href="admin.html" target="_blank" class="text-muted" id="admin-panel-link"><span style="font-size: 0.8rem; margin-right: 3px;">&#128274;</span> Панель управления</a>
+                        <span class="divider">|</span>
+                        <a href="#" class="open-privacy-link text-muted">Политика конфиденциальности</a>
+                        <span class="divider">|</span>
+                        <span>Арт-дирекшн & Дизайн: Премиум Студия</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Модальное окно заказа звонка / проекта -->
+    <div class="modal" id="callback-modal" aria-hidden="true" role="dialog">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="callback-close-btn" aria-label="Закрыть модальное окно">&times;</button>
+            <h3 class="modal-title" id="callback-modal-title">Обсудить проект благоустройства</h3>
+            <p class="modal-desc">Наш ведущий инженер-архитектор свяжется с вами, ответит на технологические вопросы и сориентирует по стоимости.</p>
+            
+            <form id="callback-form">
+                <input type="hidden" name="modal_subject" id="modal-subject-field" value="Заказ обратного звонка">
+                <div class="form-group">
+                    <label for="modal-name">Ваше имя</label>
+                    <input type="text" id="modal-name" name="name" class="form-control form-control-dark" placeholder="Дмитрий" required>
+                    <span class="error-message" id="modal-name-error">Введите ваше имя</span>
+                </div>
+                <div class="form-group">
+                    <label for="modal-phone">Номер телефона</label>
+                    <input type="tel" id="modal-phone" name="phone" class="form-control form-control-dark" placeholder="+7 (999) 000-00-00" required>
+                    <span class="error-message" id="modal-phone-error">Введите правильный номер телефона</span>
+                </div>
+                <button type="submit" class="btn btn-accent btn-block" style="margin-top: 15px;">Связаться со мной</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно Политики конфиденциальности -->
+    <div class="modal" id="privacy-modal" aria-hidden="true" role="dialog">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-lg">
+            <button class="modal-close" id="privacy-close-btn" aria-label="Закрыть модальное окно">&times;</button>
+            <h3 class="modal-title">Политика конфиденциальности</h3>
+            <div class="modal-scrollable-body">
+                <p>Настоящая Политика конфиденциальности персональных данных (далее – Политика) действует в отношении всей информации, которую сайт KAMEN` & HVOYA может получить о Пользователе во время использования сайта.</p>
+                <h4>1. Предоставление персональных данных</h4>
+                <p>1.1. Заполняя формы на сайте, Пользователь выражает свое согласие на сбор, обработку и хранение следующих персональных данных: имя, номер контактного телефона.</p>
+                <p>1.2. Мы собираем эти данные исключительно с целью связи с Пользователем для предоставления предварительной сметы и консультаций по технологиям благоустройства в городе Ижевск и Удмуртской Республике.</p>
+                <h4>2. Цели сбора персональной информации</h4>
+                <p>2.1. Персональные данные Пользователя могут быть использованы в целях идентификации, уточнения параметров расчета, отправки детальной сметы в мессенджер и согласования времени выезда инженера-замерщика.</p>
+                <h4>3. Защита персональных данных</h4>
+                <p>3.1. Мы обязуемся не передавать полученные персональные данные третьим лицам без согласия Пользователя, за исключением случаев, предусмотренных законодательством РФ.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление об успешной отправке -->
+    <div class="modal" id="success-modal" aria-hidden="true" role="dialog">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content text-center">
+            <div class="success-icon">&#10003;</div>
+            <h3 class="modal-title">Запрос успешно отправлен</h3>
+            <p class="modal-desc" id="success-modal-desc">Спасибо за обращение. Мы свяжемся с вами в течение 10 минут для уточнения деталей.</p>
+            <button class="btn btn-accent" id="success-done-btn" style="min-width: 150px; margin-top: 15px;">Отлично</button>
+        </div>
+    </div>
+
+    <!-- Скрипт -->
+    <script src="app.js"></script>
+</body>
+</html>
