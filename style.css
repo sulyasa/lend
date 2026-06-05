@@ -2181,3 +2181,33 @@ a {
     padding: 0.6rem 1rem;
     display: inline-block;
 }
+
+/* Fix for buttons inside task cards on light backgrounds */
+.task-card-item .btn-outline {
+    color: var(--accent-green);
+    border-color: var(--accent-green-light);
+    background-color: transparent;
+}
+
+.task-card-item .btn-outline:hover {
+    color: var(--text-light);
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+/* Fix for alignment and layout next to buttons */
+.flex-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.action-caption {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 420px;
+    line-height: 1.55;
+    display: inline-block;
+}
