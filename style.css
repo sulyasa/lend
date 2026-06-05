@@ -524,16 +524,93 @@ a {
     font-weight: 300;
 }
 
-.hero-actions {
+
+.hero-category-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    width: 100%;
+}
+
+.category-pill-btn {
     display: flex;
-    gap: 1.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 1.8rem;
+    background: rgba(34, 34, 34, 0.45); /* Premium dark glass */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: var(--transition-smooth);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 4px; /* Subtle edge radius for a premium look */
 }
 
-.hero-stats {
-    border-top: 1px solid rgba(244, 241, 235, 0.15);
-    padding-top: 3.5rem;
+.category-pill-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: 0;
 }
 
+.category-pill-btn:hover {
+    background: rgba(31, 60, 44, 0.7); /* Accented forest green glass on hover */
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(31, 60, 44, 0.2);
+}
+
+.category-pill-btn:hover::before {
+    opacity: 1;
+}
+
+.category-pill-btn > * {
+    position: relative;
+    z-index: 1;
+}
+
+.category-pill-btn .pill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.category-pill-btn:hover .pill-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.category-pill-btn .pill-title {
+    font-family: var(--font-headers);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+}
+
+.category-pill-btn .pill-desc {
+    font-size: 0.8rem;
+    color: var(--text-light-muted);
+    font-weight: 400;
+    line-height: 1.4;
+    transition: var(--transition-smooth);
+}
+
+.category-pill-btn:hover .pill-desc {
+    color: rgba(244, 241, 235, 0.9);
+}
+
+/* Base Stats classes (kept for compatibility if needed elsewhere) */
 .stat-card {
     display: flex;
     flex-direction: column;
@@ -556,6 +633,73 @@ a {
     color: var(--text-light-muted);
     padding-left: 1.2rem;
 }
+
+/* Trust Stats Divider Section */
+#trust-stats-divider {
+    padding: 5rem 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+#trust-stats-divider .trust-stats-bar {
+    gap: 4rem;
+}
+
+#trust-stats-divider .stat-card {
+    background: var(--bg-white);
+    padding: 2.2rem;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+#trust-stats-divider .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent-green);
+}
+
+#trust-stats-divider .stat-num {
+    color: var(--accent-green);
+    border-left: 3px solid var(--accent-green);
+    font-size: 2.5rem;
+    font-weight: 800;
+    padding-left: 1.2rem;
+}
+
+#trust-stats-divider .stat-text {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding-left: 1.4rem;
+    line-height: 1.6;
+}
+
+/* Responsiveness for hero-category-selector & trust-stats-divider */
+@media (max-width: 992px) {
+    .hero-category-selector {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 2.5rem;
+    }
+    
+    .category-pill-btn {
+        padding: 1.2rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #trust-stats-divider {
+        padding: 4rem 0;
+    }
+    
+    #trust-stats-divider .trust-stats-bar {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
 
 /* Directions Section (Grid of 3 Cards) */
 .direction-cards {
