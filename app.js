@@ -153,16 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================
-       6. INTERACTIVE CALCULATOR (Step-by-Step Sync)
+       6. LEADS DATABASE MANAGER
        ========================================== */
-    const areaRange = document.getElementById('calc-area-range');
-    const areaNum = document.getElementById('calc-area-num');
-    const coatingRadios = document.querySelectorAll('input[name="calc_coating"]');
-    const chkBorder = document.getElementById('calc-need-border');
-    const chkDrain = document.getElementById('calc-need-drain');
-    const chkBase = document.getElementById('calc-need-base');
-    const blurredPrice = document.getElementById('calc-blurred-price');
-
     // Вспомогательная функция для сохранения лидов в localStorage для админ-панели
     const saveLead = (leadType, name, phone, details = '', price = '') => {
         try {
@@ -188,138 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Ошибка сохранения лида:', e);
         }
     };
-
-    // Динамическая загрузка тарифов из localStorage с дефолтными значениями
-    const getPricingConfig = () => {
-        const defaults = {
-            stone_carpet: 4500,
-            rubber_crumb: 1800,
-            paving_stones: 2400,
-            border: 600,
-            drain: 950,
-            base: 1200
-        };
-        const saved = localStorage.getItem('kamen_hvoya_pricing');
-        if (saved) {
-            try {
-                return JSON.parse(saved);
-            } catch(e) {
-                return defaults;
-            }
-        }
-        localStorage.setItem('kamen_hvoya_pricing', JSON.stringify(defaults));
-        return defaults;
-    };
-
-    const config = getPricingConfig();
-
-    const pricing = {
-        coatings: {
-            stone_carpet: config.stone_carpet,
-            rubber_crumb: config.rubber_crumb,
-            paving_stones: config.paving_stones
-        },
-        services: {
-            border_per_meter: config.border,
-            drainage_per_meter: config.drain,
-            base_prep_per_sqm: config.base
-        }
-    };
-
-    // Динамическое обновление подписей цен на самом лендинге под калькулятор
-    const updatePricingLabels = () => {
-        const stoneCarpetLbl = document.getElementById('label-price-stone_carpet');
-        const rubberCrumbLbl = document.getElementById('label-price-rubber_crumb');
-        const pavingStonesLbl = document.getElementById('label-price-paving_stones');
-        const borderLbl = document.getElementById('label-price-border');
-        const drainLbl = document.getElementById('label-price-drain');
-        const baseLbl = document.getElementById('label-price-base');
-
-        if (stoneCarpetLbl) stoneCarpetLbl.textContent = `от ${pricing.coatings.stone_carpet.toLocaleString('ru-RU')} ₽/м²`;
-        if (rubberCrumbLbl) rubberCrumbLbl.textContent = `от ${pricing.coatings.rubber_crumb.toLocaleString('ru-RU')} ₽/м²`;
-        if (pavingStonesLbl) pavingStonesLbl.textContent = `от ${pricing.coatings.paving_stones.toLocaleString('ru-RU')} ₽/м²`;
-        if (borderLbl) borderLbl.textContent = `Установка скрытых бордюров (+${pricing.services.border_per_meter.toLocaleString('ru-RU')} ₽/м)`;
-        if (drainLbl) drainLbl.textContent = `Устройство ливневого дренажа (+${pricing.services.drainage_per_meter.toLocaleString('ru-RU')} ₽/м)`;
-        if (baseLbl) baseLbl.textContent = `Подготовка бетонного/щебеночного основания (+${pricing.services.base_prep_per_sqm.toLocaleString('ru-RU')} ₽/м²)`;
-    };
-
-    updatePricingLabels();
-
-    const calculateCost = () => {
-        if (!blurredPrice) return;
-
-        // 1. Get current values
-        const area = parseFloat(areaNum.value) || 0;
-        let selectedCoating = 'stone_carpet';
-        
-        coatingRadios.forEach(radio => {
-            if (radio.checked) selectedCoating = radio.value;
-        });
-
-        const needBorder = chkBorder ? chkBorder.checked : false;
-        const needDrain = chkDrain ? chkDrain.checked : false;
-        const needBase = chkBase ? chkBase.checked : false;
-
-        // 2. Base coating cost
-        const coatingPricePerSqm = pricing.coatings[selectedCoating];
-        let total = coatingPricePerSqm * area;
-
-        // 3. Add borders (perimeter ≈ 4 * sqrt(area))
-        if (needBorder) {
-            const perimeter = Math.round(4 * Math.sqrt(area));
-            total += pricing.services.border_per_meter * perimeter;
-        }
-
-        // 4. Add drainage (assume drainage length ≈ 1.5 * sqrt(area))
-        if (needDrain) {
-            const drainageLength = Math.round(1.5 * Math.sqrt(area));
-            total += pricing.services.drainage_per_meter * drainageLength;
-        }
-
-        // 5. Add base preparation (per m²)
-        if (needBase) {
-            total += pricing.services.base_prep_per_sqm * area;
-        }
-
-        // 6. Update visual price (with formatted space thousands separator)
-        const formattedTotal = Math.round(total).toLocaleString('ru-RU');
-        blurredPrice.textContent = `от ${formattedTotal} ₽`;
-    };
-
-    // Sync input range and input number
-    if (areaRange && areaNum) {
-        areaRange.addEventListener('input', function() {
-            areaNum.value = this.value;
-            calculateCost();
-        });
-
-        areaNum.addEventListener('input', function() {
-            let val = parseFloat(this.value);
-            if (isNaN(val)) val = 10;
-            if (val < 10) val = 10;
-            if (val > 1000) val = 1000;
-            
-            areaRange.value = val;
-            calculateCost();
-        });
-
-        areaNum.addEventListener('blur', function() {
-            if (!this.value.trim() || parseFloat(this.value) < 10) {
-                this.value = 10;
-                areaRange.value = 10;
-                calculateCost();
-            }
-        });
-    }
-
-    // Add change triggers to all inputs
-    coatingRadios.forEach(radio => radio.addEventListener('change', calculateCost));
-    [chkBorder, chkDrain, chkBase].forEach(chk => {
-        if (chk) chk.addEventListener('change', calculateCost);
-    });
-
-    // Initial calculation
-    calculateCost();
 
 
     /* ==========================================
@@ -474,9 +334,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closingName) closingName.addEventListener('input', () => validateField(closingName, null, closingNameError));
     if (closingPhone) closingPhone.addEventListener('input', () => validateField(closingPhone, phoneRegex, closingPhoneError));
 
+    const calcNameInput = document.getElementById('calc-name');
+    const calcNameError = document.getElementById('calc-name-error');
     const calcPhoneInput = document.getElementById('calc-phone');
     const calcPhoneError = document.getElementById('calc-phone-error');
 
+    if (calcNameInput) calcNameInput.addEventListener('input', () => validateField(calcNameInput, null, calcNameError));
     if (calcPhoneInput) calcPhoneInput.addEventListener('input', () => validateField(calcPhoneInput, phoneRegex, calcPhoneError));
 
 
@@ -500,10 +363,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeAllModals();
                     
                     // Сохраняем заявку в админку
-                    saveLead("Обратный звонок", modalName.value, modalPhone.value, "Заказ обратного звонка из формы хедера/кнопки");
+                    saveLead("Обратный звонок", modalName.value, modalPhone.value, "Заказ бесплатной консультации из хедера/меню");
 
                     if (successDesc) {
-                        successDesc.textContent = "Благодарим за обращение! Наш ведущий специалист свяжется с вами по указанному телефону в течение 10 минут для детального обсуждения вашего проекта.";
+                        successDesc.textContent = "Благодарим за обращение! Наш специалист свяжется с вами по указанному телефону в течение 10 минут для детального обсуждения вашего проекта.";
                     }
                     
                     openModal(successModal);
@@ -516,82 +379,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SUBMIT 2: Calculator Lead Form (WhatsApp)
+    // SUBMIT 2: Calculator Lead Form (Simplified Request Form)
     const calcLeadForm = document.getElementById('calc-lead-form');
     if (calcLeadForm) {
         calcLeadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            const isNameValid = validateField(calcNameInput, null, calcNameError);
             const isPhoneValid = validateField(calcPhoneInput, phoneRegex, calcPhoneError);
 
-            if (isPhoneValid) {
+            if (isNameValid && isPhoneValid) {
                 const submitBtn = document.getElementById('calc-submit-btn');
-                const area = areaNum.value;
-                
-                let selectedCoatingName = 'Каменный ковер';
-                coatingRadios.forEach(radio => {
-                    if (radio.checked) {
-                        if (radio.value === 'rubber_crumb') selectedCoatingName = 'Резиновая крошка';
-                        if (radio.value === 'paving_stones') selectedCoatingName = 'Укладка брусчатки';
-                    }
-                });
-
-                const needBorder = chkBorder ? chkBorder.checked : false;
-                const needDrain = chkDrain ? chkDrain.checked : false;
-                const needBase = chkBase ? chkBase.checked : false;
-
+                const name = calcNameInput.value;
                 const phone = calcPhoneInput.value;
-                const priceText = blurredPrice.textContent;
 
-                submitBtn.textContent = "Отправка в WhatsApp...";
+                submitBtn.textContent = "Отправка запроса...";
                 submitBtn.disabled = true;
-
-                // Reveal price on successful submission!
-                if (blurredPrice) {
-                    blurredPrice.style.filter = 'none';
-                    blurredPrice.style.webkitFilter = 'none';
-                }
 
                 setTimeout(() => {
                     closeAllModals();
 
                     // Сохраняем заявку в админку
-                    const details = `Покрытие: ${selectedCoatingName}, Площадь: ${area} м², Доп. услуги: ${[needBorder ? 'бордюры' : '', needDrain ? 'дренаж' : '', needBase ? 'основание' : ''].filter(Boolean).join(', ') || 'нет'}`;
-                    saveLead("Калькулятор стоимости", "Заявка из квиза", phone, details, priceText);
+                    saveLead("Запрос расчета", name, phone, "Заявка на расчет стоимости благоустройства с сайта");
 
                     if (successDesc) {
                         successDesc.innerHTML = `
-                            Ваш проект успешно сформирован!<br><br>
-                            <strong>Параметры расчета:</strong><br>
-                            • Покрытие: ${selectedCoatingName}<br>
-                            • Площадь: ${area} м²<br>
-                            • Доп. услуги: ${[needBorder ? 'бордюры' : '', needDrain ? 'дренаж' : '', needBase ? 'основание' : ''].filter(Boolean).join(', ') || 'нет'}<br>
-                            • Итог: <strong>${priceText}</strong><br><br>
-                            Детальная смета по материалам и доставке отправлена на номер <strong>${phone}</strong> в WhatsApp. Наш специалист уже готовит КП.
+                            <strong>Заявка на расчет стоимости принята!</strong><br><br>
+                            Благодарим за обращение!<br>
+                            Наш специалист свяжется с вами на номере <strong>${phone}</strong> в течение 10 минут для уточнения параметров проекта и составления сметы.
                         `;
                     }
 
                     openModal(successModal);
-                    
-                    // Open WhatsApp transition link in new window for real premium lead flow!
-                    const textMsg = `Здравствуйте! Я рассчитал проект на сайте KAMEN & HVOYA. Покрытие: ${selectedCoatingName}, Площадь: ${area} м², Стоимость: ${priceText}. Отправьте мне подробную смету.`;
-                    const waUrl = `https://wa.me/73412998877?text=${encodeURIComponent(textMsg)}`;
-                    window.open(waUrl, '_blank');
 
                     calcLeadForm.reset();
-                    submitBtn.textContent = "Получить точную смету в WhatsApp";
+                    submitBtn.textContent = "Рассчитать стоимость";
                     submitBtn.disabled = false;
-                    
-                    // Reset price blurring after reset
-                    setTimeout(() => {
-                        if (blurredPrice) {
-                            blurredPrice.style.filter = '';
-                            blurredPrice.style.webkitFilter = '';
-                        }
-                        calculateCost();
-                    }, 5000);
-
-                }, 1200);
+                }, 1000);
             }
         });
     }

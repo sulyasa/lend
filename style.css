@@ -1907,13 +1907,277 @@ a {
     .slider-gallery {
         max-width: 100%;
     }
-    .footer-top {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-    }
     .footer-bottom {
         flex-direction: column;
         gap: 1.5rem;
         text-align: center;
     }
+}
+
+/* DIY Kits Section Styles */
+.diy-container {
+    align-items: center;
+    gap: 4rem;
+}
+
+.diy-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.diy-features-list {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.diy-features-list li {
+    position: relative;
+    padding-left: 2rem;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.diy-features-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+.diy-pricing-badge {
+    background-color: var(--bg-stone);
+    border: 1px solid var(--border-light);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 450px;
+    margin-top: 2rem;
+}
+
+.badge-price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.badge-price-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.badge-price-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.badge-price-val {
+    font-family: var(--font-headers);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent-green);
+}
+
+.diy-visual-box {
+    width: 100%;
+}
+
+.diy-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-premium);
+}
+
+/* Simplified calculator styles */
+.calculator-form-card {
+    background-color: var(--bg-stone);
+    border: 1px solid var(--border-light);
+    padding: 4rem;
+    max-width: 550px;
+    margin: 3rem auto 0 auto;
+}
+
+.calc-lead-simplified .form-group {
+    margin-bottom: 2rem;
+}
+
+/* Landscaping elements styling */
+.landscape-works-grid {
+    gap: 2rem;
+}
+
+.landscape-work-card {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-dark);
+    padding: 2.5rem;
+    transition: var(--transition-smooth);
+}
+
+.landscape-work-card:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateY(-5px);
+}
+
+.work-icon-box {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.landscape-work-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.8rem;
+}
+
+.landscape-work-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.project-gallery-item {
+    border: 1px solid var(--border-dark);
+    background-color: rgba(255, 255, 255, 0.01);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.project-gallery-item img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+    display: block;
+}
+
+.project-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.project-label {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.project-label strong {
+    font-family: var(--font-headers);
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.project-label span {
+    color: var(--text-light-muted);
+    font-size: 0.8rem;
+}
+
+.stone-tasks-box {
+    border-top: 1px solid var(--border-light);
+    padding-top: 5rem;
+}
+
+.stone-task-card {
+    background-color: var(--bg-stone);
+    border: 1px solid var(--border-light);
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.stone-task-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-green);
+}
+
+.stone-task-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-green);
+}
+
+.stone-task-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.stone-task-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.tasks-section {
+    padding: 6.5rem 0;
+}
+
+.task-cards {
+    gap: 2rem;
+}
+
+.task-card-item {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-light);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-smooth);
+}
+
+.task-card-item:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.task-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.task-card-icon {
+    font-size: 2rem;
+}
+
+.task-card-header h3 {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+}
+
+.task-card-body {
+    margin-bottom: 2rem;
+}
+
+.task-problem {
+    font-size: 0.9rem;
+    color: #c62828;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.task-solution {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+.task-fact {
+    font-family: var(--font-headers);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    background-color: var(--accent-green-light);
+    padding: 0.6rem 1rem;
+    display: inline-block;
 }
