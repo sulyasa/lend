@@ -176,6 +176,38 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             leads.unshift(newLead);
             localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+
+            // Отправка в локальный API (если запущен Node-сервер)
+            fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newLead)
+            }).catch(err => {
+                console.log('Локальный сервер не запущен, данные сохранены только в localStorage');
+            });
+
+            // Отправка в Telegram (если настроено в панели управления)
+            const tgToken = localStorage.getItem('kamen_hvoya_tg_token');
+            const tgChatId = localStorage.getItem('kamen_hvoya_tg_chat_id');
+            if (tgToken && tgChatId) {
+                const text = `🔔 *Новая заявка на сайте KAMEN & HVOYA!*\n\n` +
+                             `👤 *Имя:* ${name}\n` +
+                             `📞 *Телефон:* ${phone}\n` +
+                             `📋 *Тип:* ${leadType}\n` +
+                             `💬 *Детали:* ${details || '—'}`;
+                
+                fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: tgChatId,
+                        text: text,
+                        parse_mode: 'Markdown'
+                    })
+                }).catch(err => {
+                    console.error('Ошибка отправки в Telegram:', err);
+                });
+            }
         } catch (e) {
             console.error('Ошибка сохранения лида:', e);
         }

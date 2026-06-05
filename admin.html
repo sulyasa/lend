@@ -509,7 +509,7 @@
         <!-- Переключатель вкладок -->
         <div class="tabs">
             <button class="tab-btn active" data-tab="leads-tab">Заявки (<span id="leads-count">0</span>)</button>
-            <button class="tab-btn" data-tab="pricing-tab">Настройки тарифов</button>
+            <button class="tab-btn" data-tab="pricing-tab">Настройки</button>
         </div>
 
         <!-- ВКЛАДКА 1: ЗАЯВКИ -->
@@ -609,17 +609,35 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Карточка 3: Уведомления Telegram -->
+                    <div class="settings-card" style="grid-column: span 2;">
+                        <h3>Уведомления в Telegram</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
+                            Настройте моментальную отправку заявок с сайта в ваш Telegram-чат через Telegram Bot API.
+                        </p>
+                        
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <label for="tg-token">Токен Telegram-бота (Bot Token)</label>
+                            <input type="text" id="tg-token" class="form-control" placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
+                        </div>
+                        
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="tg-chat-id">ID чата или канала (Chat ID)</label>
+                            <input type="text" id="tg-chat-id" class="form-control" placeholder="-100123456789 или 123456789">
+                        </div>
+                    </div>
                 </div>
 
                 <div style="margin-top: 3rem; display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">Сохранить тарифы</button>
+                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">Сохранить настройки</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div class="toast" id="toast">Настройки тарифов успешно сохранены</div>
+    <div class="toast" id="toast">Настройки успешно сохранены</div>
 
     <!-- JavaScript логика -->
     <script>
@@ -707,6 +725,9 @@
             const inputBase = document.getElementById('price-base');
             const toast = document.getElementById('toast');
 
+            const inputTgToken = document.getElementById('tg-token');
+            const inputTgChatId = document.getElementById('tg-chat-id');
+
             function loadPricingSettings() {
                 const defaults = {
                     stone_carpet: 4500,
@@ -733,6 +754,10 @@
                 inputBorder.value = pricing.border;
                 inputDrain.value = pricing.drain;
                 inputBase.value = pricing.base;
+
+                // Load Telegram credentials
+                inputTgToken.value = localStorage.getItem('kamen_hvoya_tg_token') || '';
+                inputTgChatId.value = localStorage.getItem('kamen_hvoya_tg_chat_id') || '';
             }
 
             pricingForm.addEventListener('submit', (e) => {
@@ -748,7 +773,12 @@
                 };
 
                 localStorage.setItem('kamen_hvoya_pricing', JSON.stringify(newPricing));
-                showToast("Цены тарифов успешно обновлены!");
+                
+                // Save Telegram credentials
+                localStorage.setItem('kamen_hvoya_tg_token', inputTgToken.value.trim());
+                localStorage.setItem('kamen_hvoya_tg_chat_id', inputTgChatId.value.trim());
+                
+                showToast("Настройки успешно сохранены!");
             });
 
             function showToast(message) {
@@ -774,8 +804,18 @@
             let allLeads = [];
 
             function loadLeads() {
-                allLeads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
-                renderLeads(allLeads);
+                fetch('/api/leads')
+                    .then(res => res.json())
+                    .then(data => {
+                        allLeads = data;
+                        localStorage.setItem('kamen_hvoya_leads', JSON.stringify(allLeads));
+                        renderLeads(allLeads);
+                    })
+                    .catch(err => {
+                        console.log('Локальный сервер недоступен, загружаем данные из localStorage');
+                        allLeads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                        renderLeads(allLeads);
+                    });
             }
 
             function renderLeads(leadsList) {
@@ -823,11 +863,23 @@
             // Expose deleteLead to window so inline onclick can access it
             window.deleteLead = (id) => {
                 if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
-                    let leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
-                    leads = leads.filter(l => l.id !== id);
-                    localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
-                    loadLeads();
-                    showToast('Заявка удалена');
+                    fetch('/api/delete-lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id })
+                    }).then(() => {
+                        let leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                        leads = leads.filter(l => l.id !== id);
+                        localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+                        loadLeads();
+                        showToast('Заявка удалена');
+                    }).catch(err => {
+                        let leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                        leads = leads.filter(l => l.id !== id);
+                        localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+                        loadLeads();
+                        showToast('Заявка удалена (локально)');
+                    });
                 }
             };
 
@@ -853,9 +905,17 @@
             if (btnClearLeads) {
                 btnClearLeads.addEventListener('click', () => {
                     if (confirm('Вы уверены, что хотите БЕЗВОЗВРАТНО удалить все заявки из базы?')) {
-                        localStorage.removeItem('kamen_hvoya_leads');
-                        loadLeads();
-                        showToast('База заявок полностью очищена');
+                        fetch('/api/clear-leads', {
+                            method: 'POST'
+                        }).then(() => {
+                            localStorage.removeItem('kamen_hvoya_leads');
+                            loadLeads();
+                            showToast('База заявок полностью очищена');
+                        }).catch(err => {
+                            localStorage.removeItem('kamen_hvoya_leads');
+                            loadLeads();
+                            showToast('База заявок полностью очищена (локально)');
+                        });
                     }
                 });
             }
