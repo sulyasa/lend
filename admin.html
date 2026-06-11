@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAMEN` & HVOYA | Панель управления администратора</title>
+    <title>АльфаСтрой | Панель управления администратора</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -482,7 +482,7 @@
 
     <!-- 1. Вход в систему (Gate) -->
     <div class="login-card" id="login-card">
-        <h2>KAMEN` <span class="logo-divider">&</span> HVOYA</h2>
+        <h2>Альфа<span class="logo-divider">Строй</span></h2>
         <p>Панель управления администратора</p>
         
         <form id="login-form">
@@ -500,7 +500,7 @@
     <div class="dashboard-container" id="dashboard-container">
         <div class="dashboard-header">
             <div>
-                <h1>KAMEN` <span class="logo-divider">&</span> HVOYA</h1>
+                <h1>Альфа<span class="logo-divider">Строй</span></h1>
                 <p style="color: var(--text-light-muted); font-size: 0.85rem;">Система управления тарифами и заявками</p>
             </div>
             <button class="btn-logout" id="btn-logout">Выйти</button>
@@ -739,7 +739,7 @@
                 };
                 
                 let pricing = defaults;
-                const saved = localStorage.getItem('kamen_hvoya_pricing');
+                const saved = localStorage.getItem('alfastroy_pricing');
                 if (saved) {
                     try {
                         pricing = JSON.parse(saved);
@@ -756,8 +756,8 @@
                 inputBase.value = pricing.base;
 
                 // Load Telegram credentials
-                inputTgToken.value = localStorage.getItem('kamen_hvoya_tg_token') || '';
-                inputTgChatId.value = localStorage.getItem('kamen_hvoya_tg_chat_id') || '';
+                inputTgToken.value = localStorage.getItem('alfastroy_tg_token') || '';
+                inputTgChatId.value = localStorage.getItem('alfastroy_tg_chat_id') || '';
             }
 
             pricingForm.addEventListener('submit', (e) => {
@@ -772,11 +772,11 @@
                     base: parseInt(inputBase.value) || 0
                 };
 
-                localStorage.setItem('kamen_hvoya_pricing', JSON.stringify(newPricing));
+                localStorage.setItem('alfastroy_pricing', JSON.stringify(newPricing));
                 
                 // Save Telegram credentials
-                localStorage.setItem('kamen_hvoya_tg_token', inputTgToken.value.trim());
-                localStorage.setItem('kamen_hvoya_tg_chat_id', inputTgChatId.value.trim());
+                localStorage.setItem('alfastroy_tg_token', inputTgToken.value.trim());
+                localStorage.setItem('alfastroy_tg_chat_id', inputTgChatId.value.trim());
                 
                 showToast("Настройки успешно сохранены!");
             });
@@ -808,12 +808,12 @@
                     .then(res => res.json())
                     .then(data => {
                         allLeads = data;
-                        localStorage.setItem('kamen_hvoya_leads', JSON.stringify(allLeads));
+                        localStorage.setItem('alfastroy_leads', JSON.stringify(allLeads));
                         renderLeads(allLeads);
                     })
                     .catch(err => {
                         console.log('Локальный сервер недоступен, загружаем данные из localStorage');
-                        allLeads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                        allLeads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
                         renderLeads(allLeads);
                     });
             }
@@ -868,15 +868,15 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ id })
                     }).then(() => {
-                        let leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                        let leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
                         leads = leads.filter(l => l.id !== id);
-                        localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+                        localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
                         loadLeads();
                         showToast('Заявка удалена');
                     }).catch(err => {
-                        let leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                        let leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
                         leads = leads.filter(l => l.id !== id);
-                        localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+                        localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
                         loadLeads();
                         showToast('Заявка удалена (локально)');
                     });
@@ -908,11 +908,11 @@
                         fetch('/api/clear-leads', {
                             method: 'POST'
                         }).then(() => {
-                            localStorage.removeItem('kamen_hvoya_leads');
+                            localStorage.removeItem('alfastroy_leads');
                             loadLeads();
                             showToast('База заявок полностью очищена');
                         }).catch(err => {
-                            localStorage.removeItem('kamen_hvoya_leads');
+                            localStorage.removeItem('alfastroy_leads');
                             loadLeads();
                             showToast('База заявок полностью очищена (локально)');
                         });
@@ -948,7 +948,7 @@
                     const url = URL.createObjectURL(blob);
                     const link = document.createElement("a");
                     link.setAttribute("href", url);
-                    link.setAttribute("download", `kamen_hvoya_leads_${new Date().toLocaleDateString('ru-RU')}.csv`);
+                    link.setAttribute("download", `alfastroy_leads_${new Date().toLocaleDateString('ru-RU')}.csv`);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -958,7 +958,7 @@
 
             // Автоматическая синхронизация заявок между вкладками в реальном времени
             window.addEventListener('storage', (e) => {
-                if (e.key === 'kamen_hvoya_leads') {
+                if (e.key === 'alfastroy_leads') {
                     loadLeads();
                     showToast('Поступила новая заявка с лендинга!');
                 }

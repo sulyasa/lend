@@ -1,5 +1,5 @@
 {
-  "name": "kamen-hvoya-landing",
+  "name": "alfastroy-landing",
   "version": "1.0.0",
   "description": "Landing page and admin panel with local JSON file leads storage",
   "main": "server.js",

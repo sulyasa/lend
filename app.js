@@ -121,6 +121,104 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Touch Swipe support for Main Slider
+    let mainTouchStartX = 0;
+    let mainTouchEndX = 0;
+    if (sliderTrack) {
+        sliderTrack.addEventListener('touchstart', e => {
+            mainTouchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        sliderTrack.addEventListener('touchend', e => {
+            mainTouchEndX = e.changedTouches[0].screenX;
+            const threshold = 50;
+            if (mainTouchStartX - mainTouchEndX > threshold) {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            } else if (mainTouchEndX - mainTouchStartX > threshold) {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+        }, { passive: true });
+    }
+
+
+    /* ==========================================
+       4A. COLOR GAMUT SLIDER
+       ========================================== */
+    const colorTrack = document.getElementById('color-slider-track');
+    const colorPrev = document.getElementById('color-slider-prev');
+    const colorNext = document.getElementById('color-slider-next');
+    const colorSlides = document.querySelectorAll('.color-slide');
+    const colorDots = document.querySelectorAll('.color-dot');
+    
+    let currentColorSlide = 0;
+    const totalColorSlides = colorSlides.length;
+
+    const updateColorSlider = () => {
+        if (!colorTrack) return;
+        const offset = -currentColorSlide * 100;
+        colorTrack.style.transform = `translateX(${offset}%)`;
+        
+        colorSlides.forEach((slide, idx) => {
+            if (idx === currentColorSlide) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        colorDots.forEach((dot, idx) => {
+            if (idx === currentColorSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    if (colorNext) {
+        colorNext.addEventListener('click', () => {
+            currentColorSlide = (currentColorSlide + 1) % totalColorSlides;
+            updateColorSlider();
+        });
+    }
+
+    if (colorPrev) {
+        colorPrev.addEventListener('click', () => {
+            currentColorSlide = (currentColorSlide - 1 + totalColorSlides) % totalColorSlides;
+            updateColorSlider();
+        });
+    }
+
+    colorDots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            currentColorSlide = parseInt(this.getAttribute('data-index')) || 0;
+            updateColorSlider();
+        });
+    });
+
+    // Touch Swipe support for Color Slider
+    let colorTouchStartX = 0;
+    let colorTouchEndX = 0;
+    if (colorTrack) {
+        colorTrack.addEventListener('touchstart', e => {
+            colorTouchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        colorTrack.addEventListener('touchend', e => {
+            colorTouchEndX = e.changedTouches[0].screenX;
+            const threshold = 50;
+            if (colorTouchStartX - colorTouchEndX > threshold) {
+                currentColorSlide = (currentColorSlide + 1) % totalColorSlides;
+                updateColorSlider();
+            } else if (colorTouchEndX - colorTouchStartX > threshold) {
+                currentColorSlide = (currentColorSlide - 1 + totalColorSlides) % totalColorSlides;
+                updateColorSlider();
+            }
+        }, { passive: true });
+    }
+
 
     /* ==========================================
        5. INTERACTIVE RAL PALETTE SELECTOR
@@ -160,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             let leads = [];
             try {
-                leads = JSON.parse(localStorage.getItem('kamen_hvoya_leads')) || [];
+                leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
                 if (!Array.isArray(leads)) leads = [];
             } catch (err) {
                 leads = [];
@@ -175,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 price: price
             };
             leads.unshift(newLead);
-            localStorage.setItem('kamen_hvoya_leads', JSON.stringify(leads));
+            localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
 
             // Отправка в локальный API (если запущен Node-сервер)
             fetch('/api/leads', {
@@ -187,10 +285,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Отправка в Telegram (если настроено в панели управления)
-            const tgToken = localStorage.getItem('kamen_hvoya_tg_token');
-            const tgChatId = localStorage.getItem('kamen_hvoya_tg_chat_id');
+            const tgToken = localStorage.getItem('alfastroy_tg_token');
+            const tgChatId = localStorage.getItem('alfastroy_tg_chat_id');
             if (tgToken && tgChatId) {
-                const text = `🔔 *Новая заявка на сайте KAMEN & HVOYA!*\n\n` +
+                const text = `🔔 *Новая заявка на сайте АльфаСтрой!*\n\n` +
                              `👤 *Имя:* ${name}\n` +
                              `📞 *Телефон:* ${phone}\n` +
                              `📋 *Тип:* ${leadType}\n` +

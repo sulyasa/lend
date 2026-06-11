@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------
-   KAMEN` & HVOYA - Premium Landscape Architectural Coatings Design System
+   АльфаСтрой - Premium Landscape Architectural Coatings Design System
    Style: Architectural Minimalism, Quiet Luxury, Editorial Layout
    Palette: Graphite (#222222), Warm Beige/Stone (#F4F1EB), Deep Forest Green (#1F3C2C)
    Typography: Manrope & Inter
@@ -2355,3 +2355,425 @@ a {
     line-height: 1.55;
     display: inline-block;
 }
+
+
+/* =============================================================
+   ALFA STROY CUSTOM SECTIONS & MOBILE RESPONSIVE POLISH
+   ============================================================= */
+
+/* 1. Color Gamut Slider Styles */
+.color-slider-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.color-slider-container {
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-light);
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow-soft);
+    border-radius: 4px;
+}
+
+.color-slider-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+.color-slide {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-white);
+}
+
+.color-slide-image-box {
+    flex: 0 0 45%;
+    background-color: var(--bg-stone-dark);
+    line-height: 0;
+    overflow: hidden;
+    position: relative;
+    border-right: 1px solid var(--border-light);
+}
+
+.color-slide-image-box img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.color-slide:hover .color-slide-image-box img {
+    transform: scale(1.03);
+}
+
+.color-slide-info {
+    flex: 0 0 55%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.color-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.color-slide-info h3 {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+}
+
+.color-slide-info p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.color-slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background-color: var(--bg-stone);
+    border-top: 1px solid var(--border-light);
+}
+
+.color-slider-pagination {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid transparent;
+    opacity: 0.45;
+    transition: var(--transition-smooth);
+}
+
+.color-dot:hover {
+    opacity: 0.8;
+}
+
+.color-dot.active {
+    opacity: 1;
+    transform: scale(1.3);
+    border-color: var(--text-dark);
+}
+
+
+/* 2. Rubber Tile Types Showcase */
+.tile-types-grid {
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+.tile-type-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: var(--transition-smooth);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tile-type-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-green);
+    box-shadow: var(--shadow-premium);
+}
+
+.tile-type-image {
+    width: 100%;
+    height: 250px;
+    background-color: var(--bg-stone);
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.tile-type-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tile-type-card:hover .tile-type-image img {
+    transform: scale(1.05);
+}
+
+.tile-type-content {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.tile-type-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-dark);
+}
+
+.tile-type-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.tile-type-specs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    border-top: 1px solid var(--border-light);
+    padding-top: 1.2rem;
+}
+
+.tile-type-specs li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+.tile-type-specs li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+
+/* 3. Application Areas Cards */
+.applications-grid {
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.app-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-green);
+    box-shadow: var(--shadow-premium);
+}
+
+.app-card-image {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+}
+
+.app-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.app-card:hover .app-card-image img {
+    transform: scale(1.06);
+}
+
+.app-card-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.app-card-info h3 {
+    font-size: 1.15rem;
+    color: var(--text-dark);
+}
+
+.app-card-info p {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+}
+
+
+/* 4. Advanced Responsive Overrides for Perfect Adaptability */
+
+/* Hero Title scale fix */
+.hero-title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    word-wrap: break-word;
+}
+
+/* Modal sizing & form adjustments on mobile */
+@media (max-width: 576px) {
+    .modal-content {
+        padding: 2.5rem 1.8rem !important;
+        width: 92% !important;
+    }
+    .modal-title {
+        font-size: 1.5rem !important;
+    }
+    .modal-desc {
+        font-size: 0.85rem !important;
+        margin-bottom: 1.8rem !important;
+    }
+}
+
+/* Tablet viewports (<= 992px) */
+@media (max-width: 992px) {
+    .tile-types-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .applications-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .color-slide {
+        flex-direction: column;
+    }
+    .color-slide-image-box {
+        flex: 0 0 100%;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+    .color-slide-image-box img {
+        height: 300px;
+    }
+    .color-slide-info {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: 2.5rem;
+        gap: 1rem;
+    }
+    .color-slider-controls {
+        padding: 1.25rem 2rem;
+    }
+}
+
+/* Mobile viewports (<= 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem !important;
+    }
+    .section {
+        padding: 5rem 0 !important;
+    }
+    .section-title {
+        font-size: 2.2rem !important;
+        margin-bottom: 1.2rem !important;
+    }
+    .section-header {
+        margin-bottom: 3.5rem !important;
+    }
+    .tile-types-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .applications-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .hero {
+        padding-top: 120px !important;
+        padding-bottom: 4rem !important;
+    }
+    .header-container {
+        height: 75px !important;
+    }
+    .header.scrolled {
+        height: 70px !important;
+    }
+    .header.scrolled .header-container {
+        height: 70px !important;
+    }
+    .logo {
+        font-size: 1rem !important;
+    }
+    .header-contacts {
+        display: none !important; /* Hide button on mobile bar to prevent clutter, burger menu contains action button */
+    }
+    .color-slide-image-box img {
+        height: 240px;
+    }
+    .color-slide-info {
+        padding: 1.8rem;
+    }
+    .color-slide-info h3 {
+        font-size: 1.4rem;
+    }
+    .color-slider-controls {
+        padding: 1rem 1.2rem;
+    }
+    .color-slider-pagination {
+        gap: 0.5rem;
+    }
+    .color-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    /* Grid spacing overrides */
+    .grid {
+        gap: 1.5rem !important;
+    }
+    
+    /* Footer layout */
+    .footer-top {
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+    }
+    .footer-map-box {
+        height: 300px !important;
+    }
+    .pin-tooltip {
+        padding: 0.6rem 1rem !important;
+        font-size: 0.7rem !important;
+    }
+    .footer-bottom {
+        padding-top: 2rem !important;
+        margin-top: 3rem !important;
+    }
+}
+
+/* Tiny mobile viewport enhancements (<= 360px) */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 1rem !important;
+    }
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    .color-slide-image-box img {
+        height: 180px;
+    }
+}
+

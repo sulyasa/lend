@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAMEN` & HVOYA | Благоустройство территорий в Ижевске и Удмуртии +200км</title>
+    <title>АльфаСтрой | Благоустройство территорий в Ижевске и Удмуртии +200км</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Благоустройство загородных и коммерческих территорий в Ижевске и Удмуртской Республике в радиусе 200 км. Укладка бесшовного каменного ковра, резиновой крошки и брусчатки под ключ. Собственное производство, гарантия 2 года.">
+    <meta name="description" content="Благоустройство загородных и коммерческих территорий в Ижевске и Удмуртской Республике в радиусе 200 км. Укладка бесшовного каменного ковра, резиновой крошки и плитки под ключ. Собственное производство, гарантия 2 года.">
     <meta name="keywords" content="каменный ковер ижевск, укладка резиновой крошки удмуртия, укладка брусчатки ижевск, благоустройство территории ижевск, бесшовные покрытия, ландшафтное озеленение, дренаж участка">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="KAMEN` & HVOYA | Благоустройство территорий">
+    <meta property="og:title" content="АльфаСтрой | Благоустройство территорий">
     <meta property="og:description" content="Укладка каменного ковра, резиновой крошки и брусчатки под ключ в Ижевске и Удмуртии. Надежные покрытия и благоустройство.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="images/yard_udmurtia_hero.png">
@@ -29,10 +29,11 @@
     <header class="header">
         <div class="container header-container">
             <a href="#" class="logo" id="header-logo">
-                KAMEN` <span class="logo-divider">&</span> HVOYA
+                Альфа<span class="logo-divider">Строй</span>
             </a>
             <nav class="nav" aria-label="Основная навигация">
-                <a href="#rubber-crumb" class="nav-link">Полимерные покрытия</a>
+                <a href="#rubber-crumb" class="nav-link">Резиновые покрытия</a>
+                <a href="#rubber-tile-types" class="nav-link">Виды плитки</a>
                 <a href="#under-key-dev" class="nav-link">Благоустройство</a>
                 <a href="#diy-kits" class="nav-link">Наборы для укладки</a>
             </nav>
@@ -50,11 +51,12 @@
     <!-- Mobile Navigation Drawer -->
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
-            <span class="logo">KAMEN` <span class="logo-divider">&</span> HVOYA</span>
+            <span class="logo">Альфа<span class="logo-divider">Строй</span></span>
             <button class="drawer-close" id="drawer-close-btn">&times;</button>
         </div>
         <nav class="drawer-nav">
-            <a href="#rubber-crumb" class="drawer-link">Полимерные покрытия</a>
+            <a href="#rubber-crumb" class="drawer-link">Резиновые покрытия</a>
+            <a href="#rubber-tile-types" class="drawer-link">Виды плитки</a>
             <a href="#under-key-dev" class="drawer-link">Благоустройство</a>
             <a href="#diy-kits" class="drawer-link">Наборы для укладки</a>
         </nav>
@@ -189,119 +191,315 @@
             </div>
         </section>
 
-        <!-- Блок 4: Меню направлений (Grid-сетка из 3 крупных карточек) -->
-        <section class="directions-section section" id="directions-menu">
+        <!-- Блок 4A: Цветовая гамма резиновой плитки (Слайдер) -->
+        <section class="section bg-stone-light" id="rubber-colors-section">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-subtitle">Спектр решений</span>
-                    <h2 class="section-title text-dark">Направления благоустройства</h2>
+                    <span class="section-subtitle">Цветовая палитра</span>
+                    <h2 class="section-title text-dark">Цветовая гамма резиновой плитки</h2>
                     <p class="section-desc text-dark">
-                        Выберите подходящий вариант покрытия для благоустройства вашей территории в Ижевске и Удмуртии.
+                        Цветовое исполнение резиновой плитки достаточно широко. Выберите подходящий оттенок для идеального сочетания с ландшафтом:
                     </p>
                 </div>
                 
-                <div class="grid grid-3 direction-cards">
-                    <!-- Карточка 1 -->
-                    <a href="#stone-carpet" class="direction-card animate-on-scroll" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%), url('images/stone_carpet_macro.png');">
-                        <div class="card-content">
-                            <span class="card-tag">Натурально</span>
-                            <h3 class="card-title">Каменный ковер</h3>
-                            <p class="card-desc">Природная эстетика без швов. Идеально для отмостки, террас и входных групп.</p>
-                            <span class="card-link-arrow">Подробнее &rarr;</span>
+                <div class="color-slider-wrapper animate-on-scroll">
+                    <div class="color-slider-container">
+                        <div class="color-slider-track" id="color-slider-track">
+                            <!-- Слайд 1: Зеленый -->
+                            <div class="color-slide active" data-color="green">
+                                <div class="color-slide-image-box">
+                                    <img src="images/tile_color_green.png" alt="Зеленая резиновая плитка">
+                                </div>
+                                <div class="color-slide-info">
+                                    <span class="color-badge" style="background-color: #1F3C2C;"></span>
+                                    <h3>Зеленый тон</h3>
+                                    <p>Классический природный оттенок. Отлично гармонирует с газонами, зелеными насаждениями и идеально подходит для детских и спортивных площадок.</p>
+                                </div>
+                            </div>
+                            <!-- Слайд 2: Серый -->
+                            <div class="color-slide" data-color="grey">
+                                <div class="color-slide-image-box">
+                                    <img src="images/tile_color_grey.png" alt="Серая резиновая плитка">
+                                </div>
+                                <div class="color-slide-info">
+                                    <span class="color-badge" style="background-color: #5A5A5A;"></span>
+                                    <h3>Серый графит</h3>
+                                    <p>Сдержанный и современный урбанистический цвет. Подчеркивает строгость архитектурных форм и отлично подходит для дорожек, гаражей и отмостки.</p>
+                                </div>
+                            </div>
+                            <!-- Слайд 3: Терракотовый -->
+                            <div class="color-slide" data-color="terracotta">
+                                <div class="color-slide-image-box">
+                                    <img src="images/tile_color_terracotta.png" alt="Терракотовая резиновая плитка">
+                                </div>
+                                <div class="color-slide-info">
+                                    <span class="color-badge" style="background-color: #8E443D;"></span>
+                                    <h3>Благородный терракот</h3>
+                                    <p>Теплый глиняный оттенок, напоминающий традиционную кирпичную кладку. Придает участку уют и классический завершенный вид.</p>
+                                </div>
+                            </div>
+                            <!-- Слайд 4: Синий -->
+                            <div class="color-slide" data-color="blue">
+                                <div class="color-slide-image-box">
+                                    <img src="images/tile_color_blue.png" alt="Синяя резиновая плитка">
+                                </div>
+                                <div class="color-slide-info">
+                                    <span class="color-badge" style="background-color: #2E5A88;"></span>
+                                    <h3>Стальной синий</h3>
+                                    <p>Яркий и контрастный цвет. Идеален для выделения игровых зон, беговых дорожек и создания оригинальных рисунков на покрытии.</p>
+                                </div>
+                            </div>
+                            <!-- Слайд 5: Черный -->
+                            <div class="color-slide" data-color="black">
+                                <div class="color-slide-image-box">
+                                    <img src="images/tile_color_black.png" alt="Черная резиновая плитка">
+                                </div>
+                                <div class="color-slide-info">
+                                    <span class="color-badge" style="background-color: #1A1A1A;"></span>
+                                    <h3>Угольно-черный</h3>
+                                    <p>Практичный и насыщенный оттенок. Превосходно комбинируется с другими цветами для зонирования или укладки шахматным узором.</p>
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                    
-                    <!-- Карточка 2 -->
-                    <a href="#rubber-crumb" class="direction-card animate-on-scroll" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%), url('images/rubber_crumb_sport.png');">
-                        <div class="card-content">
-                            <span class="card-tag">Практичность</span>
-                            <h3 class="card-title">Резиновая крошка</h3>
-                            <p class="card-desc">Безопасность и долговечность. Для спортивных, детских площадок и дорожек.</p>
-                            <span class="card-link-arrow">Подробнее &rarr;</span>
+                        
+                        <!-- Слайдер навигация -->
+                        <div class="color-slider-controls">
+                            <button class="slider-btn prev-btn" id="color-slider-prev" aria-label="Предыдущий цвет">&#8592;</button>
+                            <!-- Точки-переключатели -->
+                            <div class="color-slider-pagination" id="color-slider-pagination">
+                                <span class="color-dot active" data-index="0" style="background-color: #1F3C2C;"></span>
+                                <span class="color-dot" data-index="1" style="background-color: #5A5A5A;"></span>
+                                <span class="color-dot" data-index="2" style="background-color: #8E443D;"></span>
+                                <span class="color-dot" data-index="3" style="background-color: #2E5A88;"></span>
+                                <span class="color-dot" data-index="4" style="background-color: #1A1A1A;"></span>
+                            </div>
+                            <button class="slider-btn next-btn" id="color-slider-next" aria-label="Следующий цвет">&#8594;</button>
                         </div>
-                    </a>
-                    
-                    <!-- Карточка 3 -->
-                    <a href="#diy-kits" class="direction-card animate-on-scroll" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%), url('images/stone_carpet_macro.png');">
-                        <div class="card-content">
-                            <span class="card-tag">Сделай сам</span>
-                            <h3 class="card-title">Наборы для укладки</h3>
-                            <p class="card-desc">Все материалы для самостоятельного монтажа резиновой крошки с выгодой до 30%.</p>
-                            <span class="card-link-arrow">Подробнее &rarr;</span>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Блок 4: Решаем реальные задачи (4 карточки) -->
-        <section class="tasks-section section bg-stone-light">
+        <!-- Блок 4B: Виды резиновой плитки -->
+        <section class="section bg-white" id="rubber-tile-types">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-subtitle">Решаем реальные задачи</span>
-                    <h2 class="section-title text-dark">Для каких целей используется резиновая крошка</h2>
+                    <span class="section-subtitle">Формы и размеры</span>
+                    <h2 class="section-title text-dark">Виды производимой резиновой плитки</h2>
+                    <p class="section-desc text-dark">
+                        Мы производим широкую линейку типоразмеров и форм резиновой плитки и брусчатки для любых задач благоустройства:
+                    </p>
                 </div>
                 
-                <div class="grid grid-2 task-cards">
-                    <!-- Карточка 1 -->
-                    <div class="task-card-item animate-on-scroll">
-                        <div class="task-card-header">
-                            <span class="task-card-icon">👶</span>
-                            <h3>Детская площадка</h3>
+                <div class="grid grid-3 tile-types-grid">
+                    <!-- Плитка 1: Плитка -->
+                    <div class="tile-type-card animate-on-scroll">
+                        <div class="tile-type-image">
+                            <img src="images/tile_type_square.png" alt="Резиновая плитка квадратная">
                         </div>
-                        <div class="task-card-body">
-                            <p class="task-problem"><strong>Проблема:</strong> Ребёнок падает на асфальт или бетон — ссадины, ушибы, страшно отпускать одного.</p>
-                            <p class="task-solution"><strong>Решение:</strong> Резиновая крошка толщиной 15–20 мм смягчает падение как на стадионе. Соответствует ГОСТ Р 56987-2016 по травмобезопасности.</p>
-                            <div class="task-fact">Высота падения до 1,5 м — без последствий.</div>
+                        <div class="tile-type-content">
+                            <h3>Квадратная плитка</h3>
+                            <p class="tile-type-desc">Классическая ровная квадратная плитка. Идеально подходит для больших ровных детских площадок, террас и отмостки.</p>
+                            <ul class="tile-type-specs">
+                                <li>Размеры: <strong>500×500 мм / 1000×1000 мм</strong></li>
+                                <li>Толщина: <strong>16, 20, 30, 40 мм</strong></li>
+                                <li>Укладка: <strong>на грунт, песок, бетон, асфальт</strong></li>
+                            </ul>
+                            <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Запрос расчета: Квадратная резиновая плитка">Узнать стоимость</button>
                         </div>
-                        <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Расчет детской площадки">Рассчитать детскую площадку</button>
                     </div>
-
-                    <!-- Карточка 2 -->
-                    <div class="task-card-item animate-on-scroll">
-                        <div class="task-card-header">
-                            <span class="task-card-icon">🏋️</span>
-                            <h3>Спортивная площадка / воркаут</h3>
+                    
+                    <!-- Плитка 2: Плитка-паутинка -->
+                    <div class="tile-type-card animate-on-scroll">
+                        <div class="tile-type-image">
+                            <img src="images/tile_type_spiderweb.png" alt="Резиновая плитка Паутинка">
                         </div>
-                        <div class="task-card-body">
-                            <p class="task-problem"><strong>Проблема:</strong> Твердое покрытие (бетон, плитка) убивает суставы при беге, прыжках, приземлениях. Зимой скользко.</p>
-                            <p class="task-solution"><strong>Решение:</strong> Резиновое покрытие с амортизацией 8–13 мм. Не скользит в дождь, снижает нагрузку на колени и позвоночник.</p>
-                            <div class="task-fact">Используется на профессиональных стадионах и воркаут-площадках.</div>
+                        <div class="tile-type-content">
+                            <h3>Плитка «Паутинка»</h3>
+                            <p class="tile-type-desc">Плитка с декоративным тиснением в виде паутины. Препятствует скольжению и имеет выраженный дренажный рельеф.</p>
+                            <ul class="tile-type-specs">
+                                <li>Размеры: <strong>500×500 мм</strong></li>
+                                <li>Толщина: <strong>30, 40 мм</strong></li>
+                                <li>Укладка: <strong>на подготовленное основание</strong></li>
+                            </ul>
+                            <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Запрос расчета: Резиновая плитка Паутинка">Узнать стоимость</button>
                         </div>
-                        <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Цена для спортзоны">Цена для спортзоны</button>
                     </div>
-
-                    <!-- Карточка 3 -->
-                    <div class="task-card-item animate-on-scroll">
-                        <div class="task-card-header">
-                            <span class="task-card-icon">🚗</span>
-                            <h3>Гараж / хозблок</h3>
+                    
+                    <!-- Плитка 3: Брусчатка "Кирпич" -->
+                    <div class="tile-type-card animate-on-scroll">
+                        <div class="tile-type-image">
+                            <img src="images/tile_type_brick.png" alt="Резиновая брусчатка Кирпич">
                         </div>
-                        <div class="task-card-body">
-                            <p class="task-problem"><strong>Проблема:</strong> Бетонный пол пылит, трескается, впитывает масло и грязь, холодный, скользкий от влаги.</p>
-                            <p class="task-solution"><strong>Решение:</strong> Резиновая крошка — тёплый, нескользящий, амортизирующий пол. Легко моется, не трескается, не пылит.</p>
-                            <div class="task-fact">Срок службы — от 10 лет без ремонта.</div>
+                        <div class="tile-type-content">
+                            <h3>Брусчатка «Кирпич»</h3>
+                            <p class="tile-type-desc">Имитация классического тротуарного кирпича. Позволяет делать стандартную перевязку швов и узоры "ёлочкой".</p>
+                            <ul class="tile-type-specs">
+                                <li>Размеры: <strong>200×100 мм</strong></li>
+                                <li>Толщина: <strong>20, 40 мм</strong></li>
+                                <li>Укладка: <strong>на песчано-гравийную смесь или бетон</strong></li>
+                            </ul>
+                            <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Запрос расчета: Резиновая брусчатка Кирпич">Узнать стоимость</button>
                         </div>
-                        <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Цена для гаража и хозблока">Цена для гаража и хозблока</button>
                     </div>
-
-                    <!-- Карточка 4 -->
-                    <div class="task-card-item animate-on-scroll">
-                        <div class="task-card-header">
-                            <span class="task-card-icon">💧</span>
-                            <h3>Постоянные лужи на участке</h3>
+                    
+                    <!-- Плитка 4: Брусчатка "Катушка" -->
+                    <div class="tile-type-card animate-on-scroll">
+                        <div class="tile-type-image">
+                            <img src="images/tile_type_spool.png" alt="Резиновая брусчатка Катушка">
                         </div>
-                        <div class="task-card-body">
-                            <p class="task-problem"><strong>Проблема:</strong> После дождя во дворе лужи стоят сутками, грязь, по дорожкам не пройти, газон вымокает.</p>
-                            <p class="task-solution"><strong>Решение:</strong> Водопроницаемая резиновая крошка (пористость до 30%). Вода уходит мгновенно — даже ливень не оставляет луж на дорожках и площадках.</p>
-                            <div class="task-fact">Пропускает до 10 литров воды в минуту на 1 м².</div>
+                        <div class="tile-type-content">
+                            <h3>Брусчатка «Катушка»</h3>
+                            <p class="tile-type-desc">Форма "двутавр" (косточка). За счет зацепления плитки скрепляются между собой и не расползаются даже без бордюров.</p>
+                            <ul class="tile-type-specs">
+                                <li>Размеры: <strong>225×135 мм</strong></li>
+                                <li>Толщина: <strong>20, 40 мм</strong></li>
+                                <li>Укладка: <strong>на песок или бетонное основание</strong></li>
+                            </ul>
+                            <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Запрос расчета: Резиновая брусчатка Катушка">Узнать стоимость</button>
                         </div>
-                        <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Убрать лужи во дворе">Убрать лужи во дворе</button>
+                    </div>
+                    
+                    <!-- Плитка 5: Брусчатка "Волна" -->
+                    <div class="tile-type-card animate-on-scroll">
+                        <div class="tile-type-image">
+                            <img src="images/tile_type_wave.png" alt="Резиновая брусчатка Волна">
+                        </div>
+                        <div class="tile-type-content">
+                            <h3>Брусчатка «Волна»</h3>
+                            <p class="tile-type-desc">Фигурная брусчатка с волнообразным краем. Красиво смотрится на извилистых садовых дорожках и отмостке.</p>
+                            <ul class="tile-type-specs">
+                                <li>Размеры: <strong>210×120 мм</strong></li>
+                                <li>Толщина: <strong>20, 40 мм</strong></li>
+                                <li>Укладка: <strong>на песок или бетонное основание</strong></li>
+                            </ul>
+                            <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Запрос расчета: Резиновая брусчатка Волна">Узнать стоимость</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Плитка 6: Бордюр резиновый -->
+                    <div class="tile-type-card animate-on-scroll">
+                        <div class="tile-type-image">
+                            <img src="images/tile_type_curb.png" alt="Резиновый бордюр">
+                        </div>
+                        <div class="tile-type-content">
+                            <h3>Резиновый бордюр</h3>
+                            <p class="tile-type-desc">Эластичный бордюр для ограждения детских и спортивных площадок. Предотвращает травмы при падении на край площадки.</p>
+                            <ul class="tile-type-specs">
+                                <li>Размеры: <strong>500×250×50 мм</strong></li>
+                                <li>Высота: <strong>250 мм</strong></li>
+                                <li>Укладка: <strong>по периметру резинового покрытия</strong></li>
+                            </ul>
+                            <button class="btn btn-outline btn-sm btn-block open-callback-modal" data-subject="Запрос расчета: Резиновый бордюр">Узнать стоимость</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Блок 4C: Области применения резиновой плитки -->
+        <section class="section bg-stone-light" id="rubber-tile-applications">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Сферы применения</span>
+                    <h2 class="section-title text-dark">Области применения резиновой плитки</h2>
+                    <p class="section-desc text-dark">
+                        Травмобезопасность, износостойкость и долговечность делают наше резиновое покрытие идеальным выбором для множества объектов:
+                    </p>
+                </div>
+                
+                <div class="grid grid-4 applications-grid">
+                    <!-- Сфера 1 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/simple_yard_path.png" alt="Благоустройство территорий резиновой плиткой">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Благоустройство территорий</h3>
+                            <p>Аккуратное покрытие для дворов частных домов, коммерческих территорий и парков.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 2 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/rubber_crumb_sport.png" alt="Спортивные площадки">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Спортивные площадки</h3>
+                            <p>Травмобезопасные амортизирующие зоны для воркаута, баскетбола и мини-футбола.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 3 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/simple_play_area.png" alt="Детские площадки">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Детские площадки</h3>
+                            <p>Мягкое и экологичное покрытие, защищающее детей от ушибов при падении.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 4 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/app_balcony.png" alt="Балконы и зоны отдыха">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Балконы и зоны отдыха</h3>
+                            <p>Приятное на ощупь, легко моющееся покрытие для террас, веранд и открытых балконов.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 5 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/app_pool.png" alt="Зоны у бассейна">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Зоны у бассейна</h3>
+                            <p>Нескользящее водопроницаемое покрытие. Вода уходит сквозь поры, не оставляя луж.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 6 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/rubber_crumb_detail.png" alt="Садовые дорожки">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Дорожки на участке</h3>
+                            <p>Удобные чистые тропинки. Не трескаются от мороза, сорняки не прорастают сквозь стыки.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 7 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/app_gym.png" alt="Тренажерные залы">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Тренажерные залы</h3>
+                            <p>Шумоизоляционные плиты, выдерживающие падение тяжелых штанг и гантелей.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Сфера 8 -->
+                    <div class="app-card animate-on-scroll">
+                        <div class="app-card-image">
+                            <img src="images/app_stables.png" alt="Помещения для животных">
+                        </div>
+                        <div class="app-card-info">
+                            <h3>Помещения для животных</h3>
+                            <p>Прочные, легко дезинфицируемые плиты для конюшен, вольеров и животноводческих ферм.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Блок 5: Услуга — Каменный ковер -->
         <section class="service-section section bg-white" id="stone-carpet">
@@ -340,32 +538,6 @@
                     </div>
                 </div>
                 
-                <!-- Задачи каменного ковра -->
-                <div class="stone-tasks-box" style="margin-top: 5rem;">
-                    <h3 class="text-dark text-center" style="font-size: 1.6rem; margin-bottom: 3rem;">Решение задач на вашем участке</h3>
-                    <div class="grid grid-3 stone-task-cards">
-                        <div class="stone-task-card animate-on-scroll">
-                            <div class="stone-task-icon">🏛</div>
-                            <h4>Входная группа / крыльцо</h4>
-                            <p>Аккуратно, чисто, абсолютно не скользит в дождь и зимой.</p>
-                        </div>
-                        <div class="stone-task-card animate-on-scroll">
-                            <div class="stone-task-icon">🏡</div>
-                            <h4>Отмостка вокруг дома</h4>
-                            <p>Защищает фундамент от сырости, не трескается от морозов, трава не прорастает сквозь поры.</p>
-                        </div>
-                        <div class="stone-task-card animate-on-scroll">
-                            <div class="stone-task-icon">🔥</div>
-                            <h4>Беседка / зона мангала</h4>
-                            <p>Не горит, не боится угля и жира, легко подметается и моется обычной водой из шланга.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center" style="margin-top: 3.5rem;">
-                        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-dark);">Хотите такой же красивый двор? Приедем с образцами камня бесплатно!</p>
-                        <button class="btn btn-accent open-callback-modal" data-subject="Запись на замер каменного ковра">Записаться на замер</button>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -651,7 +823,7 @@
                     <!-- Левая сторона: Контакты -->
                     <div class="footer-contacts animate-on-scroll">
                         <a href="#" class="logo footer-logo">
-                            KAMEN` <span class="logo-divider">&</span> HVOYA
+                            Альфа<span class="logo-divider">Строй</span>
                         </a>
                         <p class="footer-desc text-muted">
                             Создаем аккуратный архитектурный облик загородных участков и коммерческих территорий. Профессиональное благоустройство в Ижевске и Удмуртии.
@@ -688,7 +860,7 @@
                                 </svg>
                                 WhatsApp
                             </a>
-                            <a href="https://t.me/kamen_hvoya" class="btn-social btn-telegram" target="_blank" rel="noopener">
+                            <a href="https://t.me/alfastroy_izh" class="btn-social btn-telegram" target="_blank" rel="noopener">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-1.12.102-1.667-.532-2.737-1.232-1.675-1.096-2.584-1.616-4.213-2.69-1.88-1.238-.662-1.92.41-3.037.28-.29 5.15-4.726 5.244-5.127.012-.05.023-.239-.089-.339-.112-.1-.277-.067-.396-.04-.168.039-2.85 1.812-8.04 5.32-.76.522-1.448.777-2.062.763-.678-.015-1.982-.384-2.951-.7-.988-.323-1.774-.495-1.706-.996.035-.26.39-.529 1.066-.807 4.16-1.812 6.93-3.007 8.31-3.585 3.95-1.65 4.77-1.936 5.3-.948.12.22.1.66-.08.832z"/>
                                 </svg>
@@ -709,14 +881,14 @@
                             <div class="map-pin">
                                 <span class="pin-dot"></span>
                                 <span class="pin-pulse"></span>
-                                <div class="pin-tooltip">KAMEN` & HVOYA<br>ул. Пушкинская, 268</div>
+                                <div class="pin-tooltip">АльфаСтрой<br>ул. Пушкинская, 268</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="footer-bottom">
-                    <p>&copy; 2026 KAMEN` & HVOYA. Все права защищены. Собственное производство покрытий.</p>
+                    <p>&copy; 2026 АльфаСтрой. Все права защищены. Собственное производство покрытий.</p>
                     <div class="footer-links">
                         <a href="admin.html" target="_blank" class="text-muted" id="admin-panel-link"><span style="font-size: 0.8rem; margin-right: 3px;">&#128274;</span> Панель управления</a>
                         <span class="divider">|</span>
@@ -761,7 +933,7 @@
             <button class="modal-close" id="privacy-close-btn" aria-label="Закрыть модальное окно">&times;</button>
             <h3 class="modal-title">Политика конфиденциальности</h3>
             <div class="modal-scrollable-body">
-                <p>Настоящая Политика конфиденциальности персональных данных (далее – Политика) действует в отношении всей информации, которую сайт KAMEN` & HVOYA может получить о Пользователе во время использования сайта.</p>
+                <p>Настоящая Политика конфиденциальности персональных данных (далее – Политика) действует в отношении всей информации, которую сайт АльфаСтрой может получить о Пользователе во время использования сайта.</p>
                 <h4>1. Предоставление персональных данных</h4>
                 <p>1.1. Заполняя формы на сайте, Пользователь выражает свое согласие на сбор, обработку и хранение следующих персональных данных: имя, номер контактного телефона.</p>
                 <p>1.2. Мы собираем эти данные исключительно с целью связи с Пользователем для предоставления предварительной сметы и консультаций по технологиям благоустройства в городе Ижевск и Удмуртской Республике.</p>
