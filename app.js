@@ -226,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ralDots = document.querySelectorAll('.ral-dot');
     const ralTitle = document.getElementById('ral-color-title');
     const rubberSliderTrack = document.getElementById('rubber-slider-track');
+    const crumbTintBox = document.getElementById('crumb-tint-box');
 
     ralDots.forEach(dot => {
         dot.addEventListener('click', function() {
@@ -245,6 +246,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (sliderContainer) {
                 sliderContainer.style.borderColor = ralHex;
                 sliderContainer.style.transition = 'border-color 0.6s ease';
+            }
+
+            // Tint the rubber crumb close-up texture
+            if (crumbTintBox) {
+                crumbTintBox.style.backgroundColor = ralHex;
+            }
+
+            // Automatically switch to the 2nd slide (close-up textured crumb) to show the selected color
+            if (sliderTrack) {
+                currentSlide = 1; // Index 1 is the 2nd slide
+                updateSlider();
             }
         });
     });
