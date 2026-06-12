@@ -603,7 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================
-       10. MOBILE ACCORDIONS (Tasks & Tile Types)
+       10. MOBILE ACCORDIONS (Tasks, Tile Types & Applications)
        ========================================== */
     const isMobile = () => window.innerWidth <= 768;
 
@@ -647,6 +647,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Accordion for Application Area Cards
+    const appHeaders = document.querySelectorAll('.app-card .app-card-info h3');
+    appHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            if (!isMobile()) return;
+            const parentCard = header.closest('.app-card');
+            const wasExpanded = parentCard.classList.contains('expanded');
+            
+            // Collapse all app cards
+            document.querySelectorAll('.app-card').forEach(card => {
+                card.classList.remove('expanded');
+            });
+
+            // Toggle selected card
+            if (!wasExpanded) {
+                parentCard.classList.add('expanded');
+            }
+        });
+    });
+
     // Automatically expand the first card on load if mobile
     if (isMobile()) {
         const firstTask = document.querySelector('.task-card-item');
@@ -654,6 +674,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const firstTile = document.querySelector('.tile-type-card');
         if (firstTile) firstTile.classList.add('expanded');
+
+        const firstApp = document.querySelector('.app-card');
+        if (firstApp) firstApp.classList.add('expanded');
     }
 });
 

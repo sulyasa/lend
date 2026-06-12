@@ -881,7 +881,7 @@ a {
 
 .editorial-caption {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     margin-top: 1.5rem;
     font-family: var(--font-headers);
@@ -891,6 +891,8 @@ a {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--accent-green);
+    white-space: nowrap;
+    line-height: 1.2;
 }
 
 .caption-text {
@@ -899,6 +901,7 @@ a {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
+    line-height: 1.4;
 }
 
 /* Slider gallery for rubber crumb */
@@ -3091,6 +3094,73 @@ a {
     }
     .tile-type-card.expanded .tile-type-content .btn {
         display: flex !important;
+    }
+
+    /* Application Cards Accordion */
+    .app-card {
+        gap: 0 !important;
+    }
+    .app-card .app-card-image {
+        display: none !important;
+    }
+    .app-card.expanded .app-card-image {
+        display: block !important;
+        height: 200px !important;
+    }
+    .app-card .app-card-info {
+        padding: 1.5rem !important;
+    }
+    .app-card-info h3 {
+        position: relative;
+        cursor: pointer;
+        padding-right: 2.5rem;
+        margin-bottom: 0 !important;
+        width: 100%;
+    }
+    .app-card-info h3::after {
+        content: "+";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--accent-green);
+        transition: var(--transition-smooth);
+    }
+    .app-card.expanded h3 {
+        margin-bottom: 0.8rem !important;
+    }
+    .app-card.expanded h3::after {
+        content: "−";
+    }
+    .app-card .app-card-info p {
+        display: none !important;
+    }
+    .app-card.expanded .app-card-info p {
+        display: block !important;
+    }
+
+    /* DIY Kits Pricing Badge Formatting for mobile layout */
+    .diy-pricing-badge {
+        max-width: 100% !important;
+        padding: 1.5rem !important;
+        gap: 1.2rem !important;
+    }
+    .badge-price-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+        padding-bottom: 1rem !important;
+    }
+    .badge-price-item:last-child {
+        padding-bottom: 0 !important;
+    }
+    .badge-price-label {
+        font-size: 0.85rem;
+    }
+    .badge-price-val {
+        font-size: 1.2rem;
     }
 }
 
