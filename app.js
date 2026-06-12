@@ -601,4 +601,59 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    /* ==========================================
+       10. MOBILE ACCORDIONS (Tasks & Tile Types)
+       ========================================== */
+    const isMobile = () => window.innerWidth <= 768;
+
+    // Accordion for Task Cards
+    const taskHeaders = document.querySelectorAll('.task-card-item .task-card-header');
+    taskHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            if (!isMobile()) return;
+            const parentCard = header.closest('.task-card-item');
+            const wasExpanded = parentCard.classList.contains('expanded');
+            
+            // Collapse all task cards
+            document.querySelectorAll('.task-card-item').forEach(card => {
+                card.classList.remove('expanded');
+            });
+
+            // Toggle selected card
+            if (!wasExpanded) {
+                parentCard.classList.add('expanded');
+            }
+        });
+    });
+
+    // Accordion for Tile Type Cards
+    const tileHeaders = document.querySelectorAll('.tile-type-card h3');
+    tileHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            if (!isMobile()) return;
+            const parentCard = header.closest('.tile-type-card');
+            const wasExpanded = parentCard.classList.contains('expanded');
+            
+            // Collapse all tile cards
+            document.querySelectorAll('.tile-type-card').forEach(card => {
+                card.classList.remove('expanded');
+            });
+
+            // Toggle selected card
+            if (!wasExpanded) {
+                parentCard.classList.add('expanded');
+            }
+        });
+    });
+
+    // Automatically expand the first card on load if mobile
+    if (isMobile()) {
+        const firstTask = document.querySelector('.task-card-item');
+        if (firstTask) firstTask.classList.add('expanded');
+        
+        const firstTile = document.querySelector('.tile-type-card');
+        if (firstTile) firstTile.classList.add('expanded');
+    }
 });
+

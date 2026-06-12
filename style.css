@@ -2976,3 +2976,122 @@ a {
     }
 }
 
+/* Outline buttons contrast fix inside white cards */
+.tile-type-card .btn-outline,
+.task-card-item .btn-outline {
+    color: var(--accent-green) !important;
+    border-color: var(--border-light-focus) !important;
+    background-color: transparent !important;
+}
+
+.tile-type-card .btn-outline:hover,
+.task-card-item .btn-outline:hover {
+    background-color: var(--accent-green) !important;
+    color: var(--text-light) !important;
+    border-color: var(--accent-green) !important;
+}
+
+/* Mobile responsive padding and accordion styles */
+@media (max-width: 768px) {
+    .service-info {
+        padding: 0 1.5rem !important;
+    }
+
+    /* Tasks Accordion */
+    .task-card-item {
+        padding: 2rem !important;
+        gap: 0 !important;
+    }
+    .task-card-item .task-card-header {
+        position: relative;
+        cursor: pointer;
+        padding-right: 2.5rem;
+        margin-bottom: 0 !important; /* No margin when collapsed */
+        width: 100%;
+    }
+    .task-card-item .task-card-header::after {
+        content: "+";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--accent-green);
+        transition: var(--transition-smooth);
+    }
+    .task-card-item.expanded .task-card-header {
+        margin-bottom: 1.5rem !important;
+    }
+    .task-card-item.expanded .task-card-header::after {
+        content: "−";
+    }
+    .task-card-item .task-card-body,
+    .task-card-item .btn {
+        display: none !important;
+    }
+    .task-card-item.expanded .task-card-body,
+    .task-card-item.expanded .btn {
+        display: block !important;
+    }
+    .task-card-item.expanded .btn {
+        display: flex !important; /* CTA button should stretch block width */
+    }
+    
+    /* Tile Types Accordion */
+    .tile-type-card {
+        gap: 0 !important;
+    }
+    .tile-type-card .tile-type-image {
+        display: none !important;
+    }
+    .tile-type-card.expanded .tile-type-image {
+        display: block !important;
+        height: 200px !important;
+    }
+    .tile-type-card .tile-type-content {
+        padding: 1.8rem !important;
+    }
+    .tile-type-card h3 {
+        position: relative;
+        cursor: pointer;
+        padding-right: 2.5rem;
+        margin-bottom: 0 !important;
+        width: 100%;
+    }
+    .tile-type-card h3::after {
+        content: "+";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--accent-green);
+        transition: var(--transition-smooth);
+    }
+    .tile-type-card.expanded h3 {
+        margin-bottom: 0.8rem !important;
+    }
+    .tile-type-card.expanded h3::after {
+        content: "−";
+    }
+    .tile-type-card .tile-type-desc,
+    .tile-type-card .tile-type-specs,
+    .tile-type-card .tile-type-content .btn {
+        display: none !important;
+    }
+    .tile-type-card.expanded .tile-type-desc {
+        display: block !important;
+        margin-bottom: 1.5rem !important;
+    }
+    .tile-type-card.expanded .tile-type-specs {
+        display: block !important;
+        margin-bottom: 2rem !important;
+    }
+    .tile-type-card.expanded .tile-type-content .btn {
+        display: flex !important;
+    }
+}
+
+
