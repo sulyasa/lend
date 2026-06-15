@@ -107,18 +107,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const handleNextSlide = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+    };
+
+    const handlePrevSlide = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    };
+
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        });
+        nextBtn.addEventListener('click', handleNextSlide);
+        nextBtn.addEventListener('touchend', handleNextSlide, { passive: false });
     }
 
     if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        });
+        prevBtn.addEventListener('click', handlePrevSlide);
+        prevBtn.addEventListener('touchend', handlePrevSlide, { passive: false });
     }
 
     // Touch Swipe support for Main Slider
@@ -177,18 +191,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const handleColorNextSlide = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        currentColorSlide = (currentColorSlide + 1) % totalColorSlides;
+        updateColorSlider();
+    };
+
+    const handleColorPrevSlide = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        currentColorSlide = (currentColorSlide - 1 + totalColorSlides) % totalColorSlides;
+        updateColorSlider();
+    };
+
     if (colorNext) {
-        colorNext.addEventListener('click', () => {
-            currentColorSlide = (currentColorSlide + 1) % totalColorSlides;
-            updateColorSlider();
-        });
+        colorNext.addEventListener('click', handleColorNextSlide);
+        colorNext.addEventListener('touchend', handleColorNextSlide, { passive: false });
     }
 
     if (colorPrev) {
-        colorPrev.addEventListener('click', () => {
-            currentColorSlide = (currentColorSlide - 1 + totalColorSlides) % totalColorSlides;
-            updateColorSlider();
-        });
+        colorPrev.addEventListener('click', handleColorPrevSlide);
+        colorPrev.addEventListener('touchend', handleColorPrevSlide, { passive: false });
     }
 
     colorDots.forEach(dot => {
@@ -613,17 +641,16 @@ document.addEventListener('DOMContentLoaded', () => {
         header.addEventListener('click', () => {
             if (!isMobile()) return;
             const parentCard = header.closest('.task-card-item');
-            const wasExpanded = parentCard.classList.contains('expanded');
             
-            // Collapse all task cards
-            document.querySelectorAll('.task-card-item').forEach(card => {
-                card.classList.remove('expanded');
-            });
+            // Toggle clicked card
+            parentCard.classList.toggle('expanded');
 
-            // Toggle selected card
-            if (!wasExpanded) {
-                parentCard.classList.add('expanded');
-            }
+            // Collapse all other task cards
+            document.querySelectorAll('.task-card-item').forEach(card => {
+                if (card !== parentCard) {
+                    card.classList.remove('expanded');
+                }
+            });
         });
     });
 
@@ -633,17 +660,16 @@ document.addEventListener('DOMContentLoaded', () => {
         header.addEventListener('click', () => {
             if (!isMobile()) return;
             const parentCard = header.closest('.tile-type-card');
-            const wasExpanded = parentCard.classList.contains('expanded');
             
-            // Collapse all tile cards
-            document.querySelectorAll('.tile-type-card').forEach(card => {
-                card.classList.remove('expanded');
-            });
+            // Toggle clicked card
+            parentCard.classList.toggle('expanded');
 
-            // Toggle selected card
-            if (!wasExpanded) {
-                parentCard.classList.add('expanded');
-            }
+            // Collapse all other tile cards
+            document.querySelectorAll('.tile-type-card').forEach(card => {
+                if (card !== parentCard) {
+                    card.classList.remove('expanded');
+                }
+            });
         });
     });
 
@@ -653,17 +679,16 @@ document.addEventListener('DOMContentLoaded', () => {
         header.addEventListener('click', () => {
             if (!isMobile()) return;
             const parentCard = header.closest('.app-card');
-            const wasExpanded = parentCard.classList.contains('expanded');
             
-            // Collapse all app cards
-            document.querySelectorAll('.app-card').forEach(card => {
-                card.classList.remove('expanded');
-            });
+            // Toggle clicked card
+            parentCard.classList.toggle('expanded');
 
-            // Toggle selected card
-            if (!wasExpanded) {
-                parentCard.classList.add('expanded');
-            }
+            // Collapse all other app cards
+            document.querySelectorAll('.app-card').forEach(card => {
+                if (card !== parentCard) {
+                    card.classList.remove('expanded');
+                }
+            });
         });
     });
 
@@ -678,5 +703,62 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstApp = document.querySelector('.app-card');
         if (firstApp) firstApp.classList.add('expanded');
     }
+
+    /* ==========================================
+       11. SCROLLSPY NAVIGATION
+       ========================================== */
+    const spySections = [
+        document.getElementById('hero'),
+        document.getElementById('rubber-crumb'),
+        document.getElementById('rubber-colors-section'),
+        document.getElementById('additional-services'),
+        document.getElementById('diy-kits')
+    ].filter(el => el !== null);
+
+    const desktopNavLinks = document.querySelectorAll('.nav-link');
+    const mobileDrawerLinks = document.querySelectorAll('.drawer-link');
+
+    const scrollSpy = () => {
+        const scrollPosition = window.scrollY + 120; // Matches header offset
+
+        let activeSectionId = '';
+
+        spySections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                activeSectionId = section.getAttribute('id');
+            }
+        });
+
+        // Special case: if at the top of the page, activate hero
+        if (window.scrollY < 100) {
+            activeSectionId = 'hero';
+        }
+
+        const updateActiveState = (links) => {
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === '#' && activeSectionId === 'hero') {
+                    link.classList.add('active');
+                } else if (href === `#${activeSectionId}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        };
+
+        updateActiveState(desktopNavLinks);
+        updateActiveState(mobileDrawerLinks);
+    };
+
+    window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(scrollSpy);
+    });
+    
+    // Initial run to highlight correctly on load
+    scrollSpy();
 });
 
