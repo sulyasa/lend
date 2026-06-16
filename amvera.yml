@@ -4,7 +4,5 @@ meta:
     name: npm
     version: 20
 run:
-  persistence:
-    - mountPoint: /data
-      volumeName: data-volume
+  persistenceMount: /data
   command: node server.js
