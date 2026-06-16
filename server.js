@@ -114,7 +114,10 @@ const server = http.createServer((req, res) => {
                 res.writeHead(500, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: err.message }));
             } else {
-                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.writeHead(200, { 
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate'
+                });
                 res.end(JSON.stringify(rows || []));
             }
         });
