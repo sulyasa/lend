@@ -5,4 +5,5 @@ meta:
     version: 20
 run:
   persistenceMount: /data
+  containerPort: 3000
   command: node server.js
