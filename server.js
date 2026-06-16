@@ -50,9 +50,9 @@ function isAdminAuthorized(req) {
     return token === 'admin' || token === 'admin2026';
 }
 
-// Helper to serve static files
+// Helper to serve static files (optimized stream serving)
 function serveFile(res, filePath, contentType) {
-    fs.readFile(filePath, (err, content) => {
+    fs.stat(filePath, (err, stats) => {
         if (err) {
             if (err.code === 'ENOENT') {
                 res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -61,15 +61,24 @@ function serveFile(res, filePath, contentType) {
                 res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
                 res.end(`500 Server Error: ${err.code}`);
             }
-        } else {
-            const headers = { 'Content-Type': contentType };
-            // Кешируем статические файлы (изображения, стили, скрипты) на 1 час
-            if (contentType.startsWith('image/') || contentType.startsWith('text/css') || contentType.startsWith('application/javascript')) {
-                headers['Cache-Control'] = 'public, max-age=3600';
-            }
-            res.writeHead(200, headers);
-            res.end(content);
+            return;
         }
+
+        const headers = { 
+            'Content-Type': contentType,
+            'Content-Length': stats.size
+        };
+        // Кешируем статические файлы на 1 час
+        if (contentType.startsWith('image/') || contentType.startsWith('text/css') || contentType.startsWith('application/javascript')) {
+            headers['Cache-Control'] = 'public, max-age=3600';
+        }
+        res.writeHead(200, headers);
+
+        const stream = fs.createReadStream(filePath);
+        stream.on('error', (streamErr) => {
+            console.error('Ошибка при стриминге файла:', streamErr.message);
+        });
+        stream.pipe(res);
     });
 }
 

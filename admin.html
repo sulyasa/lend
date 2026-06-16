@@ -831,7 +831,12 @@
                         return res.json();
                     })
                     .then(data => {
-                        allLeads = data;
+                        if (!Array.isArray(data)) {
+                            console.error('Некорректный формат данных от сервера:', data);
+                            allLeads = [];
+                        } else {
+                            allLeads = data;
+                        }
                         localStorage.setItem('alfastroy_leads', JSON.stringify(allLeads));
                         renderLeads(allLeads);
                     })
