@@ -1,3 +1,5 @@
+const YANDEX_METRICA_ID = 'XXXXXX'; // Вставьте сюда ваш ID счетчика Яндекс Метрики (например, '12345678') для отправки целей
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================
@@ -294,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
        6. LEADS DATABASE MANAGER
        ========================================== */
     // Вспомогательная функция для сохранения лидов в localStorage для админ-панели
-    const saveLead = (leadType, name, phone, details = '', price = '') => {
+    const saveLead = async (leadType, name, phone, details = '', price = '') => {
         try {
             let leads = [];
             try {
@@ -314,15 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             leads.unshift(newLead);
             localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
-
-            // Отправка в локальный API (если запущен Node-сервер)
-            fetch('/api/leads', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newLead)
-            }).catch(err => {
-                console.log('Локальный сервер не запущен, данные сохранены только в localStorage');
-            });
 
             // Отправка в Telegram (если настроено в панели управления)
             const tgToken = localStorage.getItem('alfastroy_tg_token');
@@ -346,6 +339,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Ошибка отправки в Telegram:', err);
                 });
             }
+
+            // Отправка в API (с возвратом промиса для ожидания окончания запроса)
+            await fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newLead)
+            });
         } catch (e) {
             console.error('Ошибка сохранения лида:', e);
         }
@@ -529,22 +529,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = "Обработка запроса...";
                 submitBtn.disabled = true;
 
-                setTimeout(() => {
-                    closeAllModals();
-                    
-                    // Сохраняем заявку в админку
-                    saveLead("Обратный звонок", modalName.value, modalPhone.value, "Заказ бесплатной консультации из хедера/меню");
+                // Отправка целей в Яндекс Метрику
+                if (typeof ym === 'function' && YANDEX_METRICA_ID !== 'XXXXXX') {
+                    ym(YANDEX_METRICA_ID, 'reachGoal', 'callback_submitted');
+                    ym(YANDEX_METRICA_ID, 'reachGoal', 'lead_submitted');
+                }
 
-                    if (successDesc) {
-                        successDesc.textContent = "Благодарим за обращение! Наш специалист свяжется с вами по указанному телефону в течение 10 минут для детального обсуждения вашего проекта.";
-                    }
-                    
-                    openModal(successModal);
-                    
-                    callbackForm.reset();
-                    submitBtn.textContent = origText;
-                    submitBtn.disabled = false;
-                }, 1000);
+                saveLead("Обратный звонок", modalName.value, modalPhone.value, "Заказ бесплатной консультации из хедера/меню")
+                    .then(() => {
+                        callbackForm.reset();
+                        submitBtn.textContent = origText;
+                        submitBtn.disabled = false;
+                        window.location.href = '/thank-you.html';
+                    });
             }
         });
     }
@@ -566,26 +563,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = "Отправка запроса...";
                 submitBtn.disabled = true;
 
-                setTimeout(() => {
-                    closeAllModals();
+                // Отправка целей в Яндекс Метрику
+                if (typeof ym === 'function' && YANDEX_METRICA_ID !== 'XXXXXX') {
+                    ym(YANDEX_METRICA_ID, 'reachGoal', 'calc_submitted');
+                    ym(YANDEX_METRICA_ID, 'reachGoal', 'lead_submitted');
+                }
 
-                    // Сохраняем заявку в админку
-                    saveLead("Запрос расчета", name, phone, "Заявка на расчет стоимости благоустройства с сайта");
-
-                    if (successDesc) {
-                        successDesc.innerHTML = `
-                            <strong>Заявка на расчет стоимости принята!</strong><br><br>
-                            Благодарим за обращение!<br>
-                            Наш специалист свяжется с вами на номере <strong>${phone}</strong> в течение 10 минут для уточнения параметров проекта и составления сметы.
-                        `;
-                    }
-
-                    openModal(successModal);
-
-                    calcLeadForm.reset();
-                    submitBtn.textContent = "Рассчитать стоимость";
-                    submitBtn.disabled = false;
-                }, 1000);
+                saveLead("Запрос расчета", name, phone, "Заявка на расчет стоимости благоустройства с сайта")
+                    .then(() => {
+                        calcLeadForm.reset();
+                        submitBtn.textContent = "Рассчитать стоимость";
+                        submitBtn.disabled = false;
+                        window.location.href = '/thank-you.html';
+                    });
             }
         });
     }
@@ -606,26 +596,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = "Согласование выезда...";
                 submitBtn.disabled = true;
 
-                setTimeout(() => {
-                    closeAllModals();
+                // Отправка целей в Яндекс Метрику
+                if (typeof ym === 'function' && YANDEX_METRICA_ID !== 'XXXXXX') {
+                    ym(YANDEX_METRICA_ID, 'reachGoal', 'meas_submitted');
+                    ym(YANDEX_METRICA_ID, 'reachGoal', 'lead_submitted');
+                }
 
-                    // Сохраняем заявку в админку
-                    saveLead("Заказ замера", closingName.value, closingPhone.value, "Бесплатный выезд инженера с демонстрационным чемоданом образцов");
-
-                    if (successDesc) {
-                        successDesc.innerHTML = `
-                            <strong>Заявка на бесплатный замер принята!</strong><br><br>
-                            Наш главный инженер приедет к вам с демонстрационным чемоданом образцов.<br><br>
-                            Мы свяжемся с вами в течение 10 минут на номере <strong>${closingPhone.value}</strong>, чтобы согласовать точную дату и удобное время выезда на ваш объект.
-                        `;
-                    }
-
-                    openModal(successModal);
-
-                    closingForm.reset();
-                    submitBtn.textContent = origText;
-                    submitBtn.disabled = false;
-                }, 1200);
+                saveLead("Заказ замера", closingName.value, closingPhone.value, "Бесплатный выезд инженера с демонстрационным чемоданом образцов")
+                    .then(() => {
+                        closingForm.reset();
+                        submitBtn.textContent = origText;
+                        submitBtn.disabled = false;
+                        window.location.href = '/thank-you.html';
+                    });
             }
         });
     }

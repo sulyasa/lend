@@ -1,9 +1,46 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const sqlite3 = require('sqlite3').verbose();
 
 const PORT = 3000;
-const LEADS_FILE = path.join(__dirname, 'leads.json');
+
+// Determine database path (Amvera vs local)
+let dbPath;
+if (fs.existsSync('/data')) {
+    dbPath = '/data/leads.db';
+} else {
+    const localDataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(localDataDir)) {
+        fs.mkdirSync(localDataDir);
+    }
+    dbPath = path.join(localDataDir, 'leads.db');
+}
+
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+        console.error('Ошибка подключения к SQLite:', err.message);
+    } else {
+        console.log(`Подключение к базе данных SQLite установлено: ${dbPath}`);
+    }
+});
+
+// Initialize table
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS leads (
+        id INTEGER PRIMARY KEY,
+        date TEXT,
+        type TEXT,
+        name TEXT,
+        phone TEXT,
+        details TEXT,
+        price TEXT
+    )`, (err) => {
+        if (err) {
+            console.error('Ошибка создания таблицы leads:', err.message);
+        }
+    });
+});
 
 // Helper to serve static files
 function serveFile(res, filePath, contentType) {
@@ -52,13 +89,13 @@ const server = http.createServer((req, res) => {
 
     // API Endpoint: Get leads
     if (pathname === '/api/leads' && req.method === 'GET') {
-        fs.readFile(LEADS_FILE, 'utf8', (err, data) => {
+        db.all('SELECT * FROM leads ORDER BY id DESC', [], (err, rows) => {
             if (err) {
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify([]));
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: err.message }));
             } else {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(data || '[]');
+                res.end(JSON.stringify(rows || []));
             }
         });
         return;
@@ -71,30 +108,17 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             try {
                 const newLead = JSON.parse(body);
-                fs.readFile(LEADS_FILE, 'utf8', (err, data) => {
-                    let leads = [];
-                    if (!err && data) {
-                        try {
-                            leads = JSON.parse(data);
-                        } catch (e) {
-                            leads = [];
-                        }
+                const stmt = db.prepare('INSERT OR IGNORE INTO leads (id, date, type, name, phone, details, price) VALUES (?, ?, ?, ?, ?, ?, ?)');
+                stmt.run(newLead.id, newLead.date, newLead.type, newLead.name, newLead.phone, newLead.details, newLead.price, function(err) {
+                    if (err) {
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Database insert failed: ' + err.message }));
+                    } else {
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ success: true }));
                     }
-                    // Filter duplicates by checking ID
-                    const exists = leads.some(l => l.id === newLead.id);
-                    if (!exists) {
-                        leads.unshift(newLead);
-                    }
-                    fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf8', (writeErr) => {
-                        if (writeErr) {
-                            res.writeHead(500, { 'Content-Type': 'application/json' });
-                            res.end(JSON.stringify({ error: 'Failed to write leads' }));
-                        } else {
-                            res.writeHead(200, { 'Content-Type': 'application/json' });
-                            res.end(JSON.stringify({ success: true }));
-                        }
-                    });
                 });
+                stmt.finalize();
             } catch (e) {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Invalid JSON body' }));
@@ -110,23 +134,14 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             try {
                 const { id } = JSON.parse(body);
-                fs.readFile(LEADS_FILE, 'utf8', (err, data) => {
+                db.run('DELETE FROM leads WHERE id = ?', [id], function(err) {
                     if (err) {
                         res.writeHead(500, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: 'No leads found' }));
-                        return;
+                        res.end(JSON.stringify({ error: 'Database delete failed: ' + err.message }));
+                    } else {
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ success: true }));
                     }
-                    let leads = JSON.parse(data) || [];
-                    leads = leads.filter(l => l.id !== id);
-                    fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf8', (writeErr) => {
-                        if (writeErr) {
-                            res.writeHead(500, { 'Content-Type': 'application/json' });
-                            res.end(JSON.stringify({ error: 'Failed to update leads' }));
-                        } else {
-                            res.writeHead(200, { 'Content-Type': 'application/json' });
-                            res.end(JSON.stringify({ success: true }));
-                        }
-                    });
                 });
             } catch (e) {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -138,10 +153,10 @@ const server = http.createServer((req, res) => {
 
     // API Endpoint: Clear all leads
     if (pathname === '/api/clear-leads' && req.method === 'POST') {
-        fs.writeFile(LEADS_FILE, JSON.stringify([], null, 2), 'utf8', (err) => {
+        db.run('DELETE FROM leads', [], function(err) {
             if (err) {
                 res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: 'Failed to clear leads' }));
+                res.end(JSON.stringify({ error: 'Database clear failed: ' + err.message }));
             } else {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true }));
@@ -171,6 +186,6 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`==================================================`);
     console.log(`🚀 Локальный сервер запущен: http://localhost:${PORT}`);
-    console.log(`📂 Заявки сохраняются в файл: ${LEADS_FILE}`);
+    console.log(`📂 Заявки сохраняются в базу данных SQLite: ${dbPath}`);
     console.log(`==================================================`);
 });

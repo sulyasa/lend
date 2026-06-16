@@ -1,0 +1,15 @@
+meta:
+  environment: nodejs
+  toolchain:
+    name: node
+    version: 20
+build:
+  requirements:
+    - package.json
+  steps:
+    - npm install
+run:
+  persistence:
+    - mountPoint: /data
+      volumeName: data-volume
+  command: node server.js
