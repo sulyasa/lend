@@ -405,9 +405,10 @@ a {
     right: -100%;
     width: 320px;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-stone);
     z-index: 200;
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 4.5rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
