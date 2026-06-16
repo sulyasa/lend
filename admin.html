@@ -663,6 +663,7 @@
                 // Дефолтный пароль для премиум админки
                 if (pass === 'admin' || pass === 'admin2026') {
                     sessionStorage.setItem('admin_logged_in', 'true');
+                    sessionStorage.setItem('admin_pass', pass); // Сохраняем пароль для авторизации запросов
                     errorMsg.style.display = 'none';
                     showDashboard();
                 } else {
@@ -676,6 +677,7 @@
 
             btnLogout.addEventListener('click', () => {
                 sessionStorage.removeItem('admin_logged_in');
+                sessionStorage.removeItem('admin_pass'); // Очищаем пароль
                 hideDashboard();
             });
 
@@ -803,9 +805,31 @@
 
             let allLeads = [];
 
+            // Функция экранирования HTML для защиты от XSS
+            function escapeHTML(str) {
+                if (str === null || str === undefined) return '—';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
             function loadLeads() {
-                fetch('/api/leads')
-                    .then(res => res.json())
+                const pass = sessionStorage.getItem('admin_pass') || '';
+                fetch('/api/leads', {
+                    headers: { 'Authorization': `Bearer ${pass}` }
+                })
+                    .then(res => {
+                        if (res.status === 401) {
+                            sessionStorage.removeItem('admin_logged_in');
+                            sessionStorage.removeItem('admin_pass');
+                            hideDashboard();
+                            return [];
+                        }
+                        return res.json();
+                    })
                     .then(data => {
                         allLeads = data;
                         localStorage.setItem('alfastroy_leads', JSON.stringify(allLeads));
@@ -839,15 +863,21 @@
                     let badgeClass = 'lead-type-badge';
                     
                     const cleanPhone = lead.phone ? lead.phone.replace(/\D/g, '') : '';
-                    const encodedMsg = lead.details ? encodeURIComponent(`Здравствуйте, ${lead.name}! Вы оставляли заявку на расчет благоустройства: ${lead.details}.`) : '';
+                    const escapedDetails = escapeHTML(lead.details);
+                    const escapedName = escapeHTML(lead.name);
+                    const escapedType = escapeHTML(lead.type);
+                    const escapedPhone = escapeHTML(lead.phone);
+                    const escapedPrice = escapeHTML(lead.price);
+                    
+                    const encodedMsg = lead.details ? encodeURIComponent(`Здравствуйте, ${escapedName}! Вы оставляли заявку на расчет благоустройства: ${escapedDetails}.`) : '';
                     
                     tr.innerHTML = `
                         <td style="color: var(--text-light-muted); white-space: nowrap;">${lead.date}</td>
-                        <td><span class="${badgeClass}">${lead.type}</span></td>
-                        <td style="font-weight: 600;">${lead.name || '—'}</td>
-                        <td class="lead-phone">${lead.phone || '—'}</td>
-                        <td style="font-size: 0.85rem; max-width: 320px; line-height: 1.5;">${lead.details || '—'}</td>
-                        <td class="lead-price">${lead.price || '—'}</td>
+                        <td><span class="${badgeClass}">${escapedType}</span></td>
+                        <td style="font-weight: 600;">${escapedName}</td>
+                        <td class="lead-phone">${escapedPhone}</td>
+                        <td style="font-size: 0.85rem; max-width: 320px; line-height: 1.5;">${escapedDetails}</td>
+                        <td class="lead-price">${escapedPrice}</td>
                         <td class="lead-actions-cell">
                             ${lead.phone ? `
                                 <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="btn-action btn-wa-direct" title="Открыть чат в WhatsApp">WhatsApp</a>
@@ -863,11 +893,22 @@
             // Expose deleteLead to window so inline onclick can access it
             window.deleteLead = (id) => {
                 if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
+                    const pass = sessionStorage.getItem('admin_pass') || '';
                     fetch('/api/delete-lead', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${pass}`
+                        },
                         body: JSON.stringify({ id })
-                    }).then(() => {
+                    }).then(res => {
+                        if (res.status === 401) {
+                            alert('Сессия истекла или неавторизована. Пожалуйста, войдите снова.');
+                            sessionStorage.removeItem('admin_logged_in');
+                            sessionStorage.removeItem('admin_pass');
+                            hideDashboard();
+                            return;
+                        }
                         let leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
                         leads = leads.filter(l => l.id !== id);
                         localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
@@ -905,9 +946,18 @@
             if (btnClearLeads) {
                 btnClearLeads.addEventListener('click', () => {
                     if (confirm('Вы уверены, что хотите БЕЗВОЗВРАТНО удалить все заявки из базы?')) {
+                        const pass = sessionStorage.getItem('admin_pass') || '';
                         fetch('/api/clear-leads', {
-                            method: 'POST'
-                        }).then(() => {
+                            method: 'POST',
+                            headers: { 'Authorization': `Bearer ${pass}` }
+                        }).then(res => {
+                            if (res.status === 401) {
+                                alert('Сессия истекла или неавторизована. Пожалуйста, войдите снова.');
+                                sessionStorage.removeItem('admin_logged_in');
+                                sessionStorage.removeItem('admin_pass');
+                                hideDashboard();
+                                return;
+                            }
                             localStorage.removeItem('alfastroy_leads');
                             loadLeads();
                             showToast('База заявок полностью очищена');

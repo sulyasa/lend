@@ -42,6 +42,14 @@ db.serialize(() => {
     });
 });
 
+// Helper to check authorization
+function isAdminAuthorized(req) {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) return false;
+    const token = authHeader.replace('Bearer ', '').trim();
+    return token === 'admin' || token === 'admin2026';
+}
+
 // Helper to serve static files
 function serveFile(res, filePath, contentType) {
     fs.readFile(filePath, (err, content) => {
@@ -54,7 +62,12 @@ function serveFile(res, filePath, contentType) {
                 res.end(`500 Server Error: ${err.code}`);
             }
         } else {
-            res.writeHead(200, { 'Content-Type': contentType });
+            const headers = { 'Content-Type': contentType };
+            // Кешируем статические файлы (изображения, стили, скрипты) на 1 час
+            if (contentType.startsWith('image/') || contentType.startsWith('text/css') || contentType.startsWith('application/javascript')) {
+                headers['Cache-Control'] = 'public, max-age=3600';
+            }
+            res.writeHead(200, headers);
             res.end(content);
         }
     });
@@ -89,8 +102,15 @@ const server = http.createServer((req, res) => {
 
     // API Endpoint: Get leads
     if (pathname === '/api/leads' && req.method === 'GET') {
+        if (!isAdminAuthorized(req)) {
+            console.warn('Попытка неавторизованного доступа к API получения лидов');
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Unauthorized' }));
+            return;
+        }
         db.all('SELECT * FROM leads ORDER BY id DESC', [], (err, rows) => {
             if (err) {
+                console.error('Ошибка получения лидов из БД:', err.message);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: err.message }));
             } else {
@@ -108,18 +128,23 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             try {
                 const newLead = JSON.parse(body);
-                const stmt = db.prepare('INSERT OR IGNORE INTO leads (id, date, type, name, phone, details, price) VALUES (?, ?, ?, ?, ?, ?, ?)');
-                stmt.run(newLead.id, newLead.date, newLead.type, newLead.name, newLead.phone, newLead.details, newLead.price, function(err) {
-                    if (err) {
-                        res.writeHead(500, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: 'Database insert failed: ' + err.message }));
-                    } else {
-                        res.writeHead(200, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ success: true }));
+                db.run(
+                    'INSERT OR IGNORE INTO leads (id, date, type, name, phone, details, price) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                    [newLead.id, newLead.date, newLead.type, newLead.name, newLead.phone, newLead.details, newLead.price],
+                    function(err) {
+                        if (err) {
+                            console.error('Ошибка записи лида в БД:', err.message);
+                            res.writeHead(500, { 'Content-Type': 'application/json' });
+                            res.end(JSON.stringify({ error: 'Database insert failed: ' + err.message }));
+                        } else {
+                            console.log(`Заявка успешно сохранена в SQLite: ID=${newLead.id}`);
+                            res.writeHead(200, { 'Content-Type': 'application/json' });
+                            res.end(JSON.stringify({ success: true }));
+                        }
                     }
-                });
-                stmt.finalize();
+                );
             } catch (e) {
+                console.error('Ошибка парсинга JSON тела при записи лида:', e.message);
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Invalid JSON body' }));
             }
@@ -129,6 +154,11 @@ const server = http.createServer((req, res) => {
 
     // API Endpoint: Delete single lead
     if (pathname === '/api/delete-lead' && req.method === 'POST') {
+        if (!isAdminAuthorized(req)) {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Unauthorized' }));
+            return;
+        }
         let body = '';
         req.on('data', chunk => { body += chunk; });
         req.on('end', () => {
@@ -136,9 +166,11 @@ const server = http.createServer((req, res) => {
                 const { id } = JSON.parse(body);
                 db.run('DELETE FROM leads WHERE id = ?', [id], function(err) {
                     if (err) {
+                        console.error(`Ошибка удаления лида ID=${id} из БД:`, err.message);
                         res.writeHead(500, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ error: 'Database delete failed: ' + err.message }));
                     } else {
+                        console.log(`Лид ID=${id} успешно удален из БД`);
                         res.writeHead(200, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ success: true }));
                     }
@@ -153,11 +185,18 @@ const server = http.createServer((req, res) => {
 
     // API Endpoint: Clear all leads
     if (pathname === '/api/clear-leads' && req.method === 'POST') {
+        if (!isAdminAuthorized(req)) {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Unauthorized' }));
+            return;
+        }
         db.run('DELETE FROM leads', [], function(err) {
             if (err) {
+                console.error('Ошибка полной очистки лидов в БД:', err.message);
                 res.writeHead(500, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Database clear failed: ' + err.message }));
             } else {
+                console.log('Все лиды успешно удалены из БД (полная очистка)');
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true }));
             }
