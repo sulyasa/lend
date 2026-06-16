@@ -1,13 +1,8 @@
 meta:
-  environment: nodejs
+  environment: node
   toolchain:
-    name: node
+    name: npm
     version: 20
-build:
-  requirements:
-    - package.json
-  steps:
-    - npm install
 run:
   persistence:
     - mountPoint: /data
