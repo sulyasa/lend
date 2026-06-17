@@ -503,7 +503,7 @@ a {
     height: 100%;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(90deg, rgba(10, 11, 12, 0.92) 0%, rgba(10, 11, 12, 0.75) 45%, rgba(10, 11, 12, 0.3) 100%), url('images/yard_udmurtia_hero.png');
+    background-image: linear-gradient(90deg, rgba(10, 11, 12, 0.92) 0%, rgba(10, 11, 12, 0.75) 45%, rgba(10, 11, 12, 0.3) 100%), url('images/yard_udmurtia_hero.webp');
     z-index: 1;
 }
 
@@ -3045,7 +3045,7 @@ a {
 /* Mobile responsive padding and accordion styles */
 @media (max-width: 768px) {
     .hero-bg {
-        background-image: linear-gradient(180deg, rgba(10, 11, 12, 0.88) 0%, rgba(10, 11, 12, 0.8) 50%, rgba(10, 11, 12, 0.72) 100%), url('images/yard_udmurtia_hero.png') !important;
+        background-image: linear-gradient(180deg, rgba(10, 11, 12, 0.88) 0%, rgba(10, 11, 12, 0.8) 50%, rgba(10, 11, 12, 0.72) 100%), url('images/yard_udmurtia_hero.webp') !important;
     }
 
     .hero-subtitle {
