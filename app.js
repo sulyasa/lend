@@ -1,4 +1,4 @@
-const YANDEX_METRICA_ID = 'XXXXXX'; // Вставьте сюда ваш ID счетчика Яндекс Метрики (например, '12345678') для отправки целей
+const YANDEX_METRICA_ID = '109736596'; // Вставьте сюда ваш ID счетчика Яндекс Метрики (например, '12345678') для отправки целей
 
 document.addEventListener('DOMContentLoaded', () => {
 
