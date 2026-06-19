@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------
-   АльфаСтрой - Premium Landscape Architectural Coatings Design System
+   МастерПарк - Premium Landscape Architectural Coatings Design System
    Style: Architectural Minimalism, Quiet Luxury, Editorial Layout
    Palette: Graphite (#222222), Warm Beige/Stone (#F4F1EB), Deep Forest Green (#1F3C2C)
    Typography: Manrope & Inter
@@ -307,6 +307,15 @@ a {
     text-transform: uppercase;
     white-space: nowrap; /* Предотвращает перенос слов бренда */
     flex-shrink: 0; /* Гарантирует, что логотип не сожмется */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo-divider {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АльфаСтрой | Панель управления администратора</title>
+    <title>МастерПарк | Панель управления администратора</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,6 +90,16 @@
             margin-bottom: 0.8rem;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
         }
 
         .logo-divider {
@@ -192,6 +202,9 @@
             font-weight: 800;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .dashboard-header .btn-logout {
@@ -500,7 +513,7 @@
 
     <!-- 1. Вход в систему (Gate) -->
     <div class="login-card" id="login-card">
-        <h2>Альфа<span class="logo-divider">Строй</span></h2>
+        <h2><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span class="logo-divider">Парк</span></h2>
         <p>Панель управления администратора</p>
         
         <form id="login-form">
@@ -518,7 +531,7 @@
     <div class="dashboard-container" id="dashboard-container">
         <div class="dashboard-header">
             <div>
-                <h1>Альфа<span class="logo-divider">Строй</span></h1>
+                <h1><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span class="logo-divider">Парк</span></h1>
                 <p style="color: var(--text-light-muted); font-size: 0.85rem;">Система управления тарифами и заявками</p>
             </div>
             <button class="btn-logout" id="btn-logout">Выйти</button>

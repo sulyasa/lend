@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tgToken = localStorage.getItem('alfastroy_tg_token');
             const tgChatId = localStorage.getItem('alfastroy_tg_chat_id');
             if (tgToken && tgChatId) {
-                const text = `🔔 *Новая заявка на сайте АльфаСтрой!*\n\n` +
+                const text = `🔔 *Новая заявка на сайте МастерПарк!*\n\n` +
                              `👤 *Имя:* ${name}\n` +
                              `📞 *Телефон:* ${phone}\n` +
                              `📋 *Тип:* ${leadType}\n` +
