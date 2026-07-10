@@ -674,6 +674,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
+            // Миграция данных alfastroy -> masterpark в localStorage
+            ['leads', 'tg_token', 'tg_chat_id', 'pricing'].forEach(key => {
+                const oldVal = localStorage.getItem('alfastroy_' + key);
+                const newVal = localStorage.getItem('masterpark_' + key);
+                if (oldVal && !newVal) {
+                    localStorage.setItem('masterpark_' + key, oldVal);
+                }
+            });
+
             // 1. Password Protection Gateway
             const loginCard = document.getElementById('login-card');
             const dashboardContainer = document.getElementById('dashboard-container');
@@ -772,7 +781,7 @@
                 };
                 
                 let pricing = defaults;
-                const saved = localStorage.getItem('alfastroy_pricing');
+                const saved = localStorage.getItem('masterpark_pricing');
                 if (saved) {
                     try {
                         pricing = JSON.parse(saved);
@@ -789,8 +798,8 @@
                 inputBase.value = pricing.base;
 
                 // Load Telegram credentials
-                inputTgToken.value = localStorage.getItem('alfastroy_tg_token') || '';
-                inputTgChatId.value = localStorage.getItem('alfastroy_tg_chat_id') || '';
+                inputTgToken.value = localStorage.getItem('masterpark_tg_token') || '';
+                inputTgChatId.value = localStorage.getItem('masterpark_tg_chat_id') || '';
             }
 
             pricingForm.addEventListener('submit', (e) => {
@@ -805,11 +814,11 @@
                     base: parseInt(inputBase.value) || 0
                 };
 
-                localStorage.setItem('alfastroy_pricing', JSON.stringify(newPricing));
+                localStorage.setItem('masterpark_pricing', JSON.stringify(newPricing));
                 
                 // Save Telegram credentials
-                localStorage.setItem('alfastroy_tg_token', inputTgToken.value.trim());
-                localStorage.setItem('alfastroy_tg_chat_id', inputTgChatId.value.trim());
+                localStorage.setItem('masterpark_tg_token', inputTgToken.value.trim());
+                localStorage.setItem('masterpark_tg_chat_id', inputTgChatId.value.trim());
                 
                 showToast("Настройки успешно сохранены!");
             });
@@ -868,12 +877,12 @@
                         } else {
                             allLeads = data;
                         }
-                        localStorage.setItem('alfastroy_leads', JSON.stringify(allLeads));
+                        localStorage.setItem('masterpark_leads', JSON.stringify(allLeads));
                         renderLeads(allLeads);
                     })
                     .catch(err => {
                         console.log('Локальный сервер недоступен, загружаем данные из localStorage');
-                        allLeads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
+                        allLeads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
                         renderLeads(allLeads);
                     });
             }
@@ -945,15 +954,15 @@
                             hideDashboard();
                             return;
                         }
-                        let leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
+                        let leads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
                         leads = leads.filter(l => l.id !== id);
-                        localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
+                        localStorage.setItem('masterpark_leads', JSON.stringify(leads));
                         loadLeads();
                         showToast('Заявка удалена');
                     }).catch(err => {
-                        let leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
+                        let leads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
                         leads = leads.filter(l => l.id !== id);
-                        localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
+                        localStorage.setItem('masterpark_leads', JSON.stringify(leads));
                         loadLeads();
                         showToast('Заявка удалена (локально)');
                     });
@@ -994,11 +1003,11 @@
                                 hideDashboard();
                                 return;
                             }
-                            localStorage.removeItem('alfastroy_leads');
+                            localStorage.removeItem('masterpark_leads');
                             loadLeads();
                             showToast('База заявок полностью очищена');
                         }).catch(err => {
-                            localStorage.removeItem('alfastroy_leads');
+                            localStorage.removeItem('masterpark_leads');
                             loadLeads();
                             showToast('База заявок полностью очищена (локально)');
                         });
@@ -1034,7 +1043,7 @@
                     const url = URL.createObjectURL(blob);
                     const link = document.createElement("a");
                     link.setAttribute("href", url);
-                    link.setAttribute("download", `alfastroy_leads_${new Date().toLocaleDateString('ru-RU')}.csv`);
+                    link.setAttribute("download", `masterpark_leads_${new Date().toLocaleDateString('ru-RU')}.csv`);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -1044,7 +1053,7 @@
 
             // Автоматическая синхронизация заявок между вкладками в реальном времени
             window.addEventListener('storage', (e) => {
-                if (e.key === 'alfastroy_leads') {
+                if (e.key === 'masterpark_leads') {
                     loadLeads();
                     showToast('Поступила новая заявка с лендинга!');
                 }

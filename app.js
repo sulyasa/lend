@@ -2,6 +2,15 @@ const YANDEX_METRICA_ID = '109736596'; // Вставьте сюда ваш ID с
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Миграция данных alfastroy -> masterpark в localStorage
+    ['leads', 'tg_token', 'tg_chat_id', 'pricing'].forEach(key => {
+        const oldVal = localStorage.getItem('alfastroy_' + key);
+        const newVal = localStorage.getItem('masterpark_' + key);
+        if (oldVal && !newVal) {
+            localStorage.setItem('masterpark_' + key, oldVal);
+        }
+    });
+
     /* ==========================================
        1. HEADER scrolled & MOBILE NAVIGATION
        ========================================== */
@@ -300,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             let leads = [];
             try {
-                leads = JSON.parse(localStorage.getItem('alfastroy_leads')) || [];
+                leads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
                 if (!Array.isArray(leads)) leads = [];
             } catch (err) {
                 leads = [];
@@ -315,11 +324,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 price: price
             };
             leads.unshift(newLead);
-            localStorage.setItem('alfastroy_leads', JSON.stringify(leads));
+            localStorage.setItem('masterpark_leads', JSON.stringify(leads));
 
             // Отправка в Telegram (если настроено в панели управления)
-            const tgToken = localStorage.getItem('alfastroy_tg_token');
-            const tgChatId = localStorage.getItem('alfastroy_tg_chat_id');
+            const tgToken = localStorage.getItem('masterpark_tg_token');
+            const tgChatId = localStorage.getItem('masterpark_tg_chat_id');
             if (tgToken && tgChatId) {
                 const text = `🔔 *Новая заявка на сайте МастерПарк!*\n\n` +
                              `👤 *Имя:* ${name}\n` +
