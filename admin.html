@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МастерПарк | Панель управления администратора</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();
-       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-       ym(109736596, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-       });
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(109736596, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/109736596" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/109736596" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
     <!-- Styling -->
@@ -35,26 +42,28 @@
             --bg-secondary: #252525;
             --bg-light: #F4F1EB;
             --bg-stone-dark: #EAE6DF;
-            
+
             --accent-green: #1F3C2C;
             --accent-green-hover: #2E523E;
             --accent-green-light: rgba(31, 60, 44, 0.2);
-            
+
             --text-light: #F4F1EB;
             --text-light-muted: #AFAAA0;
             --text-dark: #1A1A1A;
             --text-muted: #6E6A60;
-            
+
             --border-dark: #3A3D3C;
             --border-light: #DDD8CE;
-            
+
             --shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             --font-headers: 'Manrope', sans-serif;
             --font-body: 'Inter', sans-serif;
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -179,7 +188,8 @@
 
         /* 2. Панель управления (Dashboard) */
         .dashboard-container {
-            display: none; /* Скрыта по умолчанию */
+            display: none;
+            /* Скрыта по умолчанию */
             width: 100%;
             max-width: 1240px;
             margin: 3rem auto;
@@ -270,8 +280,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* 3. Сетка настроек тарифов */
@@ -509,20 +526,22 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- 1. Вход в систему (Gate) -->
     <div class="login-card" id="login-card">
-        <h2><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span class="logo-divider">Парк</span></h2>
+        <h2><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span class="logo-divider">Парк</span>
+        </h2>
         <p>Панель управления администратора</p>
-        
+
         <form id="login-form">
             <div class="form-group">
                 <label for="admin-pass">Введите пароль доступа</label>
                 <input type="password" id="admin-pass" class="form-control" placeholder="••••••••" required>
                 <span class="error-msg" id="login-error-msg">Неверный пароль доступа</span>
             </div>
-            
+
             <button type="submit" class="btn btn-accent">Войти в панель</button>
         </form>
     </div>
@@ -531,8 +550,10 @@
     <div class="dashboard-container" id="dashboard-container">
         <div class="dashboard-header">
             <div>
-                <h1><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span class="logo-divider">Парк</span></h1>
-                <p style="color: var(--text-light-muted); font-size: 0.85rem;">Система управления тарифами и заявками</p>
+                <h1><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span
+                        class="logo-divider">Парк</span></h1>
+                <p style="color: var(--text-light-muted); font-size: 0.85rem;">Система управления тарифами и заявками
+                </p>
             </div>
             <button class="btn-logout" id="btn-logout">Выйти</button>
         </div>
@@ -546,7 +567,8 @@
         <!-- ВКЛАДКА 1: ЗАЯВКИ -->
         <div class="tab-content active" id="leads-tab">
             <div class="leads-controls">
-                <input type="text" id="leads-search-input" class="form-control leads-search" placeholder="Поиск по имени или телефону...">
+                <input type="text" id="leads-search-input" class="form-control leads-search"
+                    placeholder="Поиск по имени или телефону...">
                 <div class="leads-actions">
                     <button class="btn btn-outline btn-sm" id="btn-export-csv">Экспорт в CSV</button>
                     <button class="btn btn-outline btn-sm btn-delete-lead" id="btn-clear-leads">Очистить все</button>
@@ -582,11 +604,11 @@
         <div class="tab-content" id="pricing-tab">
             <form id="pricing-form" class="settings-form">
                 <div class="settings-grid">
-                    
+
                     <!-- Карточка 1: Основные покрытия -->
                     <div class="settings-card">
                         <h3>Базовые тарифы на покрытия (м²)</h3>
-                        
+
                         <div class="form-group">
                             <label for="price-stone-carpet">Каменный ковер (Флагман)</label>
                             <div class="input-group">
@@ -594,7 +616,7 @@
                                 <span class="input-addon">₽/м²</span>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="price-rubber-crumb">Резиновая крошка (Спорт/Детские)</label>
                             <div class="input-group">
@@ -602,7 +624,7 @@
                                 <span class="input-addon">₽/м²</span>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="price-paving-stones">Укладка брусчатки / плитки</label>
                             <div class="input-group">
@@ -611,11 +633,11 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Карточка 2: Дополнительные услуги -->
                     <div class="settings-card">
                         <h3>Дополнительные услуги / работы</h3>
-                        
+
                         <div class="form-group">
                             <label for="price-border">Установка скрытых бордюров (м)</label>
                             <div class="input-group">
@@ -623,7 +645,7 @@
                                 <span class="input-addon">₽/м</span>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="price-drain">Системы дренажа и водоотведения (м)</label>
                             <div class="input-group">
@@ -631,7 +653,7 @@
                                 <span class="input-addon">₽/м</span>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="price-base">Подготовка бетонного/щебеночного основания (м²)</label>
                             <div class="input-group">
@@ -640,49 +662,59 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Карточка 3: Уведомления Telegram -->
                     <div class="settings-card" style="grid-column: span 2;">
                         <h3>Уведомления в Telegram</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
+                        <p
+                            style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
                             Настройте моментальную отправку заявок с сайта в ваш Telegram-чат через Telegram Bot API.
                         </p>
-                        
+
                         <div class="form-group" style="margin-bottom: 1.5rem;">
                             <label for="tg-token">Токен Telegram-бота (Bot Token)</label>
-                            <input type="text" id="tg-token" class="form-control" placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
+                            <input type="text" id="tg-token" class="form-control"
+                                placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
                         </div>
-                        
+
                         <div class="form-group" style="margin-bottom: 0;">
                             <label for="tg-chat-id">ID чата или канала (Chat ID)</label>
-                            <input type="text" id="tg-chat-id" class="form-control" placeholder="-100123456789 или 123456789">
+                            <input type="text" id="tg-chat-id" class="form-control"
+                                placeholder="-100123456789 или 123456789">
                         </div>
                     </div>
 
                     <!-- Карточка 4: Уведомления на E-mail (SMTP) -->
                     <div class="settings-card" style="grid-column: span 2; margin-top: 1rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
                             <h3 style="margin-bottom: 0;">Уведомления на E-mail (SMTP)</h3>
-                            <button type="button" class="btn btn-outline btn-sm" id="btn-test-email" style="padding: 6px 14px; font-size: 0.8rem; width: auto; text-transform: none;">
+                            <button type="button" class="btn btn-outline btn-sm" id="btn-test-email"
+                                style="padding: 6px 14px; font-size: 0.8rem; width: auto; text-transform: none;">
                                 ✉️ Отправить тестовое письмо
                             </button>
                         </div>
-                        <p style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
-                            Настройте отправку заявок на вашу почту через SMTP-сервер (Яндекс Почта, Mail.ru, Gmail или корпоративный SMTP).
+                        <p
+                            style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
+                            Настройте отправку заявок на вашу почту через SMTP-сервер (Яндекс Почта, Mail.ru, Gmail или
+                            корпоративный SMTP).
                         </p>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="email-to">E-mail получателя заявок *</label>
                                 <input type="email" id="email-to" class="form-control" placeholder="info@masterpark.ru">
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="email-from">Имя / E-mail отправителя (From)</label>
-                                <input type="text" id="email-from" class="form-control" placeholder='МастерПарк <user@yandex.ru>'>
+                                <input type="text" id="email-from" class="form-control"
+                                    placeholder='МастерПарк <user@yandex.ru>'>
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="smtp-host">SMTP Сервер *</label>
                                 <input type="text" id="smtp-host" class="form-control" placeholder="smtp.yandex.ru">
@@ -693,32 +725,39 @@
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="smtp-secure">Защита (SSL/TLS)</label>
-                                <select id="smtp-secure" class="form-control" style="background: var(--bg-dark); color: var(--text-light);">
+                                <select id="smtp-secure" class="form-control"
+                                    style="background: var(--bg-dark); color: var(--text-light);">
                                     <option value="true">SSL (Порт 465)</option>
                                     <option value="false">STARTTLS / TLS (Порт 587)</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1rem;">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1rem;">
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="smtp-user">SMTP Логин (Email) *</label>
                                 <input type="text" id="smtp-user" class="form-control" placeholder="user@yandex.ru">
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="smtp-pass">SMTP Пароль приложения *</label>
-                                <input type="password" id="smtp-pass" class="form-control" placeholder="Пароль приложения (App Password)">
+                                <input type="password" id="smtp-pass" class="form-control"
+                                    placeholder="Пароль приложения (App Password)">
                             </div>
                         </div>
 
-                        <div style="background: rgba(31, 60, 44, 0.3); border: 1px solid var(--accent-green); padding: 12px 16px; border-radius: 6px; font-size: 0.82rem; color: var(--text-light-muted); margin-top: 1rem; line-height: 1.5;">
-                            💡 <strong>Подсказка:</strong> Для Яндекс Почты указывайте <code>smtp.yandex.ru</code> (порт 465). В поле пароля вводите <em>Пароль приложения</em> (создается в Яндекс ID &rarr; Безопасность &rarr; Пароли приложений).
+                        <div
+                            style="background: rgba(31, 60, 44, 0.3); border: 1px solid var(--accent-green); padding: 12px 16px; border-radius: 6px; font-size: 0.82rem; color: var(--text-light-muted); margin-top: 1rem; line-height: 1.5;">
+                            💡 <strong>Подсказка:</strong> Для Яндекс Почты указывайте <code>smtp.yandex.ru</code> (порт
+                            465). В поле пароля вводите <em>Пароль приложения</em> (создается в Яндекс ID &rarr;
+                            Безопасность &rarr; Пароли приложений).
                         </div>
                     </div>
                 </div>
 
                 <div style="margin-top: 3rem; display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">Сохранить настройки</button>
+                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">Сохранить
+                        настройки</button>
                 </div>
             </form>
         </div>
@@ -756,7 +795,7 @@
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const pass = adminPassInput.value.trim();
-                
+
                 // Дефолтный пароль для премиум админки
                 if (pass === 'admin' || pass === 'admin2026') {
                     sessionStorage.setItem('admin_logged_in', 'true');
@@ -802,7 +841,7 @@
             const tabContents = document.querySelectorAll('.tab-content');
 
             tabButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     tabButtons.forEach(b => b.classList.remove('active'));
                     tabContents.forEach(c => c.classList.remove('active'));
 
@@ -869,7 +908,7 @@
                     drain: 950,
                     base: 1200
                 };
-                
+
                 let pricing = defaults;
                 const saved = localStorage.getItem('masterpark_pricing');
                 if (saved) {
@@ -905,7 +944,7 @@
                 };
 
                 localStorage.setItem('masterpark_pricing', JSON.stringify(newPricing));
-                
+
                 // Save Telegram credentials
                 localStorage.setItem('masterpark_tg_token', inputTgToken.value.trim());
                 localStorage.setItem('masterpark_tg_chat_id', inputTgChatId.value.trim());
@@ -934,7 +973,7 @@
                 } catch (err) {
                     console.error('Ошибка при сохранении e-mail настроек:', err);
                 }
-                
+
                 showToast("Настройки успешно сохранены!");
             });
 
@@ -1068,16 +1107,16 @@
 
                     // Badge color matching the type of lead
                     let badgeClass = 'lead-type-badge';
-                    
+
                     const cleanPhone = lead.phone ? lead.phone.replace(/\D/g, '') : '';
                     const escapedDetails = escapeHTML(lead.details);
                     const escapedName = escapeHTML(lead.name);
                     const escapedType = escapeHTML(lead.type);
                     const escapedPhone = escapeHTML(lead.phone);
                     const escapedPrice = escapeHTML(lead.price);
-                    
+
                     const encodedMsg = lead.details ? encodeURIComponent(`Здравствуйте, ${escapedName}! Вы оставляли заявку на расчет благоустройства: ${escapedDetails}.`) : '';
-                    
+
                     tr.innerHTML = `
                         <td style="color: var(--text-light-muted); white-space: nowrap;">${lead.date}</td>
                         <td><span class="${badgeClass}">${escapedType}</span></td>
@@ -1103,7 +1142,7 @@
                     const pass = sessionStorage.getItem('admin_pass') || '';
                     fetch('/api/delete-lead', {
                         method: 'POST',
-                        headers: { 
+                        headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${pass}`
                         },
@@ -1133,7 +1172,7 @@
 
             // Search Filter
             if (searchInput) {
-                searchInput.addEventListener('input', function() {
+                searchInput.addEventListener('input', function () {
                     const query = this.value.toLowerCase().trim();
                     if (!query) {
                         renderLeads(allLeads);
@@ -1196,7 +1235,7 @@
                         const phone = lead.phone || '';
                         const details = (lead.details || '').replace(/;/g, ',').replace(/\n/g, ' ');
                         const price = (lead.price || '').replace(/;/g, '');
-                        
+
                         csvContent += `"${date}";"${type}";"${name}";"${phone}";"${details}";"${price}"\n`;
                     });
 
@@ -1224,4 +1263,5 @@
         });
     </script>
 </body>
+
 </html>
