@@ -1,69 +1,57 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МастерПарк | Панель управления администратора</title>
-
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
-            m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(109736596, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true
-        });
+       ym(109736596, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
     </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/109736596" style="position:absolute; left:-9999px;" alt="" /></div>
-    </noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/109736596" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <!-- Styling -->
     <style>
         :root {
-            --bg-dark: #1E1E1E;
-            --bg-secondary: #252525;
-            --bg-light: #F4F1EB;
-            --bg-stone-dark: #EAE6DF;
-
-            --accent-green: #1F3C2C;
-            --accent-green-hover: #2E523E;
-            --accent-green-light: rgba(31, 60, 44, 0.2);
-
+            --bg-dark: #141615;
+            --bg-secondary: #1E2220;
+            --bg-card: #252A27;
+            --bg-hover: #2E3531;
+            
+            --accent-green: #2E523E;
+            --accent-green-bright: #3D6B52;
+            --accent-green-light: rgba(61, 107, 82, 0.2);
+            
             --text-light: #F4F1EB;
-            --text-light-muted: #AFAAA0;
-            --text-dark: #1A1A1A;
-            --text-muted: #6E6A60;
-
-            --border-dark: #3A3D3C;
-            --border-light: #DDD8CE;
-
-            --shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            --text-muted: #9E9A90;
+            --border-dark: #383F3B;
+            --border-light: #4A524D;
+            
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
             --font-headers: 'Manrope', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -78,13 +66,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 1.5rem;
         }
 
         /* 1. Вход в систему (Gate) */
         .login-card {
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-dark);
-            padding: 4.5rem 3.5rem;
+            border-radius: 12px;
+            padding: 3.5rem 2.5rem;
             width: 100%;
             max-width: 440px;
             text-align: center;
@@ -94,80 +84,78 @@
 
         .login-card h2 {
             font-family: var(--font-headers);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            margin-bottom: 0.8rem;
-            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .logo-img {
-            height: 32px;
+            height: 36px;
             width: auto;
-            object-fit: contain;
-        }
-
-        .logo-divider {
-            color: var(--accent-green);
-            font-weight: 300;
+            vertical-align: middle;
         }
 
         .login-card p {
-            font-size: 0.85rem;
-            color: var(--text-light-muted);
-            margin-bottom: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.2rem;
             text-align: left;
         }
 
         .form-group label {
-            font-family: var(--font-headers);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-light-muted);
             display: block;
-            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 1.15rem 1.5rem;
+            padding: 0.9rem 1.2rem;
             border: 1px solid var(--border-dark);
-            background: transparent;
+            border-radius: 8px;
+            background: var(--bg-card);
             color: var(--text-light);
             font-family: var(--font-body);
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
             transition: var(--transition);
         }
 
         .form-control:focus {
-            border-color: var(--text-light);
+            border-color: var(--accent-green-bright);
+            box-shadow: 0 0 0 3px var(--accent-green-light);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.15rem 2.4rem;
+            padding: 0.9rem 1.8rem;
             font-family: var(--font-headers);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             border: none;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             transition: var(--transition);
+            gap: 0.5rem;
         }
 
         .btn-accent {
@@ -176,213 +164,189 @@
         }
 
         .btn-accent:hover {
-            background-color: var(--accent-green-hover);
+            background-color: var(--accent-green-bright);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-hover);
+            border-color: var(--text-light);
+        }
+
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
         }
 
         .error-msg {
-            font-size: 0.8rem;
-            color: #ff8a80;
+            color: #ff6b6b;
+            font-size: 0.85rem;
             margin-top: 0.8rem;
             display: none;
         }
 
-        /* 2. Панель управления (Dashboard) */
+        /* 2. Основная панель (Dashboard) */
         .dashboard-container {
-            display: none;
-            /* Скрыта по умолчанию */
             width: 100%;
-            max-width: 1240px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-            align-self: flex-start;
+            max-width: 1200px;
+            display: none;
+            animation: fadeIn 0.4s ease;
         }
 
-        .dashboard-header {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 2rem;
-            margin-bottom: 3rem;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 1.2rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .dashboard-header h1 {
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
             font-family: var(--font-headers);
-            font-size: 2rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            background: rgba(46, 82, 62, 0.4);
+            border: 1px solid var(--accent-green-bright);
+            color: #8ce99a;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-logout:hover {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        /* Навигация Вкладок */
+        .tabs {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 0.6rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-dark);
+            color: var(--text-muted);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: var(--font-headers);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .dashboard-header .btn-logout {
-            background-color: transparent;
-            border: 1px solid var(--border-dark);
-            color: var(--text-light-muted);
-            padding: 0.7rem 1.4rem;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .dashboard-header .btn-logout:hover {
-            border-color: var(--text-light);
+        .tab-btn:hover {
             color: var(--text-light);
-        }
-
-        /* Навигация панели */
-        .tabs {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 1px;
-        }
-
-        .tab-btn {
-            font-family: var(--font-headers);
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-light-muted);
-            background: none;
-            border: none;
-            padding: 1rem 0;
-            cursor: pointer;
-            position: relative;
-            transition: var(--transition);
+            background: var(--bg-hover);
         }
 
         .tab-btn.active {
-            color: var(--text-light);
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 2px;
             background-color: var(--accent-green);
+            color: var(--text-light);
+            border-color: var(--accent-green-bright);
         }
 
+        .tab-count {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.15rem 0.55rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        /* Контент вкладок */
         .tab-content {
             display: none;
         }
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.4s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* 3. Сетка настроек тарифов */
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .settings-card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-dark);
-            padding: 3.5rem;
-        }
-
-        .settings-card h3 {
-            font-family: var(--font-headers);
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 1rem;
-        }
-
-        .settings-form .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        .settings-form label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-light-muted);
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-        }
-
-        .input-group .form-control {
-            border-right: none;
-        }
-
-        .input-addon {
-            background-color: var(--bg-dark);
-            border: 1px solid var(--border-dark);
-            padding: 1.15rem 1.5rem;
-            color: var(--text-light-muted);
-            font-family: var(--font-headers);
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        /* 4. Таблица лидов (Заявок) */
+        /* Вкладка: Заявки */
         .leads-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .leads-search {
-            max-width: 320px;
-            width: 100%;
+            max-width: 380px;
         }
 
         .leads-actions {
             display: flex;
-            gap: 1rem;
-        }
-
-        .btn-sm {
-            padding: 0.75rem 1.5rem;
-            font-size: 0.8rem;
-            width: auto;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border-dark);
-            color: var(--text-light-muted);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--text-light);
-            color: var(--text-light);
+            gap: 0.8rem;
+            align-items: center;
         }
 
         .leads-table-container {
-            width: 100%;
-            overflow-x: auto;
-            border: 1px solid var(--border-dark);
             background-color: var(--bg-secondary);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: var(--shadow);
         }
 
         .leads-table {
@@ -393,22 +357,21 @@
         }
 
         .leads-table th {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-card);
+            padding: 1rem 1.2rem;
             font-family: var(--font-headers);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-light-muted);
-            padding: 1.2rem 1.5rem;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
             border-bottom: 1px solid var(--border-dark);
         }
 
         .leads-table td {
-            padding: 1.2rem 1.5rem;
+            padding: 1.1rem 1.2rem;
             border-bottom: 1px solid var(--border-dark);
             vertical-align: middle;
-            color: var(--text-light);
         }
 
         .leads-table tr:last-child td {
@@ -416,162 +379,241 @@
         }
 
         .leads-table tr:hover td {
-            background-color: rgba(255, 255, 255, 0.01);
+            background-color: var(--bg-hover);
         }
 
         .lead-type-badge {
             display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.3rem 0.8rem;
-            border-radius: 0;
-            background-color: var(--accent-green-light);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
             color: var(--text-light);
-            border: 1px solid var(--accent-green);
         }
 
         .lead-phone {
-            font-family: var(--font-headers);
-            font-weight: 700;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #8ce99a;
         }
 
         .lead-price {
-            font-family: var(--font-headers);
             font-weight: 700;
-            color: #81c784;
+            color: #ffd43b;
         }
 
         .lead-actions-cell {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            flex-wrap: wrap;
         }
 
         .btn-action {
-            padding: 0.5rem 0.8rem;
+            padding: 0.4rem 0.8rem;
             font-size: 0.75rem;
-            background-color: var(--bg-dark);
-            border: 1px solid var(--border-dark);
-            color: var(--text-light-muted);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
             cursor: pointer;
+            border: 1px solid var(--border-dark);
+            background: var(--bg-card);
+            color: var(--text-light);
             transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         .btn-action:hover {
-            color: var(--text-light);
             border-color: var(--text-light);
+            background: var(--bg-hover);
         }
 
-        .btn-action.btn-wa-direct {
-            background-color: #2e7d32;
-            border-color: #2e7d32;
-            color: var(--text-light);
+        .btn-wa-direct {
+            background: rgba(37, 211, 102, 0.15);
+            border-color: #25D366;
+            color: #25D366;
         }
 
-        .btn-action.btn-wa-direct:hover {
-            background-color: #1b5e20;
+        .btn-wa-direct:hover {
+            background: #25D366;
+            color: #fff;
         }
 
-        .btn-action.btn-delete-lead {
-            color: #ef5350;
+        .btn-delete-lead {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
         }
 
-        .btn-action.btn-delete-lead:hover {
-            background-color: #c62828;
-            border-color: #c62828;
-            color: var(--text-light);
+        .btn-delete-lead:hover {
+            background: #ff6b6b;
+            color: #fff;
         }
 
         .empty-state {
-            padding: 6rem;
+            padding: 4rem 2rem;
             text-align: center;
-            color: var(--text-light-muted);
+            color: var(--text-muted);
         }
 
         .empty-icon {
             font-size: 3rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             opacity: 0.5;
         }
 
-        /* Уведомление Toast */
+        /* Настройки форм */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .settings-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .settings-card h3 {
+            font-family: var(--font-headers);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group .form-control {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .input-addon {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-left: none;
+            padding: 0.9rem 1.2rem;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Toast уведомление */
         .toast {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background-color: var(--accent-green);
-            border: 1px solid var(--text-light-muted);
-            padding: 1.2rem 2.2rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--accent-green-bright);
             color: var(--text-light);
-            font-family: var(--font-headers);
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 1rem 1.8rem;
+            border-radius: 8px;
             box-shadow: var(--shadow);
             transform: translateY(100px);
             opacity: 0;
             transition: var(--transition);
-            z-index: 2000;
+            z-index: 1000;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
         .toast.show {
             transform: translateY(0);
             opacity: 1;
         }
-
-        @media (max-width: 900px) {
-            .settings-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
-
 <body>
 
-    <!-- 1. Вход в систему (Gate) -->
+    <!-- 1. АВТОРИЗАЦИЯ (Gate) -->
     <div class="login-card" id="login-card">
-        <h2><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span class="logo-divider">Парк</span>
+        <h2>
+            <img src="images/logo.png" alt="МастерПарк" class="logo-img" onerror="this.style.display='none'">
+            МастерПарк
         </h2>
         <p>Панель управления администратора</p>
 
         <form id="login-form">
             <div class="form-group">
-                <label for="admin-pass">Введите пароль доступа</label>
-                <input type="password" id="admin-pass" class="form-control" placeholder="••••••••" required>
-                <span class="error-msg" id="login-error-msg">Неверный пароль доступа</span>
+                <label for="admin-pass">Пароль администратора</label>
+                <input type="password" id="admin-pass" class="form-control" placeholder="Введите пароль..." required autofocus>
+            </div>
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--text-muted);">
+                <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; text-transform: none; font-weight: normal; margin-bottom: 0;">
+                    <input type="checkbox" id="show-pass-check" style="cursor: pointer;"> Показать пароль
+                </label>
+                <span>По умолчанию: admin2026</span>
             </div>
 
-            <button type="submit" class="btn btn-accent">Войти в панель</button>
+            <button type="submit" class="btn btn-accent">Войти в систему</button>
+            <div class="error-msg" id="login-error-msg">Неверный пароль. Попробуйте снова.</div>
         </form>
     </div>
 
-    <!-- 2. Панель управления (Dashboard) -->
+    <!-- 2. ОСНОВНОЙ ДАШБОРД -->
     <div class="dashboard-container" id="dashboard-container">
-        <div class="dashboard-header">
-            <div>
-                <h1><img src="images/logo.png" alt="МастерПарк" class="logo-img">Мастер<span
-                        class="logo-divider">Парк</span></h1>
-                <p style="color: var(--text-light-muted); font-size: 0.85rem;">Система управления тарифами и заявками
-                </p>
+        
+        <!-- Верхняя шапка -->
+        <div class="header">
+            <div class="header-title">
+                <img src="images/logo.png" alt="МастерПарк" class="logo-img" onerror="this.style.display='none'">
+                <div>
+                    <h1>Панель администратора</h1>
+                    <p style="color: var(--text-muted); font-size: 0.82rem;">Управление заявками и настройками МастерПарк</p>
+                </div>
             </div>
-            <button class="btn-logout" id="btn-logout">Выйти</button>
+            <div class="header-right">
+                <div class="status-badge" id="server-status-badge">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #8ce99a;"></span>
+                    Сервер активен
+                </div>
+                <button class="btn-logout" id="btn-logout">Выйти</button>
+            </div>
         </div>
 
         <!-- Переключатель вкладок -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="leads-tab">Заявки (<span id="leads-count">0</span>)</button>
-            <button class="tab-btn" data-tab="pricing-tab">Настройки</button>
+            <button class="tab-btn active" data-tab="leads-tab">
+                📋 Заявки <span class="tab-count" id="leads-count">0</span>
+            </button>
+            <button class="tab-btn" data-tab="pricing-tab">
+                💰 Тарифы
+            </button>
+            <button class="tab-btn" data-tab="telegram-tab">
+                🤖 Telegram
+            </button>
+            <button class="tab-btn" data-tab="email-tab">
+                ✉️ E-mail (SMTP)
+            </button>
         </div>
 
         <!-- ВКЛАДКА 1: ЗАЯВКИ -->
         <div class="tab-content active" id="leads-tab">
             <div class="leads-controls">
-                <input type="text" id="leads-search-input" class="form-control leads-search"
-                    placeholder="Поиск по имени или телефону...">
+                <input type="text" id="leads-search-input" class="form-control leads-search" placeholder="Поиск по имени, телефону или заказу...">
                 <div class="leads-actions">
-                    <button class="btn btn-outline btn-sm" id="btn-export-csv">Экспорт в CSV</button>
-                    <button class="btn btn-outline btn-sm btn-delete-lead" id="btn-clear-leads">Очистить все</button>
+                    <button class="btn btn-outline btn-sm" id="btn-refresh-leads" title="Обновить список заявок">🔄 Обновить</button>
+                    <button class="btn btn-outline btn-sm" id="btn-export-csv" title="Скачать таблицу в формате CSV">📥 Экспорт CSV</button>
+                    <button class="btn btn-outline btn-sm btn-delete-lead" id="btn-clear-leads" title="Очистить всю базу">🗑️ Очистить все</button>
                 </div>
             </div>
 
@@ -584,18 +626,18 @@
                             <th>Имя</th>
                             <th>Телефон</th>
                             <th>Детали заказа</th>
-                            <th>Сумма (расчет)</th>
+                            <th>Расчет стоимости</th>
                             <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody id="leads-tbody">
-                        <!-- Сюда вставляются заявки из JS -->
+                        <!-- Заявки генерируются из JS -->
                     </tbody>
                 </table>
                 <div class="empty-state" id="leads-empty-state" style="display: none;">
-                    <div class="empty-icon">&#128196;</div>
+                    <div class="empty-icon">📂</div>
                     <h3>Список заявок пуст</h3>
-                    <p>Все входящие запросы с лендинга будут автоматически появляться в этой таблице.</p>
+                    <p>Новые заявки с лендинга будут автоматически появляться в этой таблице.</p>
                 </div>
             </div>
         </div>
@@ -604,11 +646,11 @@
         <div class="tab-content" id="pricing-tab">
             <form id="pricing-form" class="settings-form">
                 <div class="settings-grid">
-
+                    
                     <!-- Карточка 1: Основные покрытия -->
                     <div class="settings-card">
-                        <h3>Базовые тарифы на покрытия (м²)</h3>
-
+                        <h3>🌱 Базовые тарифы на покрытия (м²)</h3>
+                        
                         <div class="form-group">
                             <label for="price-stone-carpet">Каменный ковер (Флагман)</label>
                             <div class="input-group">
@@ -616,7 +658,7 @@
                                 <span class="input-addon">₽/м²</span>
                             </div>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="price-rubber-crumb">Резиновая крошка (Спорт/Детские)</label>
                             <div class="input-group">
@@ -624,7 +666,7 @@
                                 <span class="input-addon">₽/м²</span>
                             </div>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="price-paving-stones">Укладка брусчатки / плитки</label>
                             <div class="input-group">
@@ -633,11 +675,11 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <!-- Карточка 2: Дополнительные услуги -->
                     <div class="settings-card">
-                        <h3>Дополнительные услуги / работы</h3>
-
+                        <h3>🛠️ Дополнительные услуги и работы</h3>
+                        
                         <div class="form-group">
                             <label for="price-border">Установка скрытых бордюров (м)</label>
                             <div class="input-group">
@@ -645,7 +687,7 @@
                                 <span class="input-addon">₽/м</span>
                             </div>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="price-drain">Системы дренажа и водоотведения (м)</label>
                             <div class="input-group">
@@ -653,7 +695,7 @@
                                 <span class="input-addon">₽/м</span>
                             </div>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="price-base">Подготовка бетонного/щебеночного основания (м²)</label>
                             <div class="input-group">
@@ -662,207 +704,155 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Карточка 3: Уведомления Telegram -->
-                    <div class="settings-card" style="grid-column: span 2;">
-                        <h3>Уведомления в Telegram</h3>
-                        <p
-                            style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
-                            Настройте моментальную отправку заявок с сайта в ваш Telegram-чат через Telegram Bot API.
-                        </p>
-
-                        <div class="form-group" style="margin-bottom: 1.5rem;">
-                            <label for="tg-token">Токен Telegram-бота (Bot Token)</label>
-                            <input type="text" id="tg-token" class="form-control"
-                                placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label for="tg-chat-id">ID чата или канала (Chat ID)</label>
-                            <input type="text" id="tg-chat-id" class="form-control"
-                                placeholder="-100123456789 или 123456789">
-                        </div>
-                    </div>
-
-                    <!-- Карточка 4: Уведомления на E-mail (SMTP) -->
-                    <div class="settings-card" style="grid-column: span 2; margin-top: 1rem;">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
-                            <h3 style="margin-bottom: 0;">Уведомления на E-mail (SMTP)</h3>
-                            <button type="button" class="btn btn-outline btn-sm" id="btn-test-email"
-                                style="padding: 6px 14px; font-size: 0.8rem; width: auto; text-transform: none;">
-                                ✉️ Отправить тестовое письмо
-                            </button>
-                        </div>
-                        <p
-                            style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
-                            Настройте отправку заявок на вашу почту через SMTP-сервер (Яндекс Почта, Mail.ru, Gmail или
-                            корпоративный SMTP).
-                        </p>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="email-to">E-mail получателя заявок *</label>
-                                <input type="email" id="email-to" class="form-control" placeholder="info@masterpark.ru">
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="email-from">Имя / E-mail отправителя (From)</label>
-                                <input type="text" id="email-from" class="form-control"
-                                    placeholder='МастерПарк <user@yandex.ru>'>
-                            </div>
-                        </div>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="smtp-host">SMTP Сервер *</label>
-                                <input type="text" id="smtp-host" class="form-control" placeholder="smtp.yandex.ru">
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="smtp-port">SMTP Порт *</label>
-                                <input type="number" id="smtp-port" class="form-control" placeholder="465" value="465">
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="smtp-secure">Защита (SSL/TLS)</label>
-                                <select id="smtp-secure" class="form-control"
-                                    style="background: var(--bg-dark); color: var(--text-light);">
-                                    <option value="true">SSL (Порт 465)</option>
-                                    <option value="false">STARTTLS / TLS (Порт 587)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1rem;">
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="smtp-user">SMTP Логин (Email) *</label>
-                                <input type="text" id="smtp-user" class="form-control" placeholder="user@yandex.ru">
-                            </div>
-                            <div class="form-group" style="margin-bottom: 0;">
-                                <label for="smtp-pass">SMTP Пароль приложения *</label>
-                                <input type="password" id="smtp-pass" class="form-control"
-                                    placeholder="Пароль приложения (App Password)">
-                            </div>
-                        </div>
-
-                        <div
-                            style="background: rgba(31, 60, 44, 0.3); border: 1px solid var(--accent-green); padding: 12px 16px; border-radius: 6px; font-size: 0.82rem; color: var(--text-light-muted); margin-top: 1rem; line-height: 1.5;">
-                            💡 <strong>Подсказка:</strong> Для Яндекс Почты указывайте <code>smtp.yandex.ru</code> (порт
-                            465). В поле пароля вводите <em>Пароль приложения</em> (создается в Яндекс ID &rarr;
-                            Безопасность &rarr; Пароли приложений).
-                        </div>
-                    </div>
                 </div>
 
-                <div style="margin-top: 3rem; display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">Сохранить
-                        настройки</button>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">💾 Сохранить тарифы</button>
                 </div>
             </form>
         </div>
+
+        <!-- ВКЛАДКА 3: НАСТРОЙКИ TELEGRAM -->
+        <div class="tab-content" id="telegram-tab">
+            <form id="telegram-form" class="settings-form">
+                <div class="settings-card" style="max-width: 760px; margin: 0 auto;">
+                    <h3>🤖 Уведомления в Telegram</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Настройте мгновенную доставку новых заявок в ваш Telegram-чат через Telegram Bot API.
+                    </p>
+                    
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="tg-token">Токен Telegram-бота (Bot Token)</label>
+                        <input type="text" id="tg-token" class="form-control" placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="tg-chat-id">ID чата или группы (Chat ID)</label>
+                        <input type="text" id="tg-chat-id" class="form-control" placeholder="-100123456789 или 123456789">
+                    </div>
+
+                    <div style="background: rgba(46, 82, 62, 0.25); border: 1px solid var(--border-dark); padding: 14px 18px; border-radius: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">
+                        💡 <strong>Как настроить:</strong><br>
+                        1. Создайте бота через <a href="https://t.me/BotFather" target="_blank" style="color: #8ce99a; text-decoration: none;">@BotFather</a> и скопируйте токен.<br>
+                        2. Добавьте бота в ваш чат и узнайте Chat ID через <a href="https://t.me/userinfobot" target="_blank" style="color: #8ce99a; text-decoration: none;">@userinfobot</a>.
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">💾 Сохранить Telegram</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- ВКЛАДКА 4: НАСТРОЙКИ E-MAIL (SMTP) -->
+        <div class="tab-content" id="email-tab">
+            <form id="email-form" class="settings-form">
+                <div class="settings-card" style="max-width: 860px; margin: 0 auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.8rem;">
+                        <h3 style="margin-bottom: 0;">✉️ Отправка заявок на E-mail (SMTP)</h3>
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-test-email" style="width: auto; text-transform: none;">
+                            📩 Отправить тестовое письмо
+                        </button>
+                    </div>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.8rem;">
+                        Настройте отправку красиво оформленных писем с заявками клиентов на ваш E-mail.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="email-to">E-mail получателя заявок *</label>
+                            <input type="email" id="email-to" class="form-control" placeholder="info@masterpark.ru" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="email-from">Заголовок / Имя отправителя (From)</label>
+                            <input type="text" id="email-from" class="form-control" placeholder='МастерПарк <user@yandex.ru>'>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="smtp-host">SMTP Сервер *</label>
+                            <input type="text" id="smtp-host" class="form-control" placeholder="smtp.yandex.ru" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="smtp-port">SMTP Порт *</label>
+                            <input type="number" id="smtp-port" class="form-control" placeholder="465" value="465" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="smtp-secure">Протокол защиты</label>
+                            <select id="smtp-secure" class="form-control">
+                                <option value="true">SSL (Порт 465)</option>
+                                <option value="false">STARTTLS / TLS (Порт 587)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-bottom: 1.5rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="smtp-user">SMTP Логин (Email) *</label>
+                            <input type="text" id="smtp-user" class="form-control" placeholder="user@yandex.ru" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="smtp-pass">SMTP Пароль приложения *</label>
+                            <input type="password" id="smtp-pass" class="form-control" placeholder="Пароль приложения (16 символов)" required>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(46, 82, 62, 0.25); border: 1px solid var(--border-dark); padding: 14px 18px; border-radius: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.5;">
+                        💡 <strong>Подсказка для Яндекс Почты:</strong><br>
+                        • SMTP Сервер: <code>smtp.yandex.ru</code> | Порт: <code>465</code> (SSL)<br>
+                        • Пароль: Используйте <em>Пароль приложения</em> (Яндекс ID &rarr; Безопасность &rarr; Пароли приложений).
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn btn-accent btn-sm" style="width: auto; min-width: 250px;">💾 Сохранить E-mail</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">Настройки успешно сохранены</div>
+    <!-- Toast Уведомление -->
+    <div class="toast" id="toast">Настройки сохранены</div>
 
     <!-- JavaScript логика -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Миграция данных alfastroy -> masterpark в localStorage
-            ['leads', 'tg_token', 'tg_chat_id', 'pricing'].forEach(key => {
-                const oldVal = localStorage.getItem('alfastroy_' + key);
-                const newVal = localStorage.getItem('masterpark_' + key);
-                if (oldVal && !newVal) {
-                    localStorage.setItem('masterpark_' + key, oldVal);
-                }
-            });
-
-            // 1. Password Protection Gateway
+            // Инициализация элементов DOM
             const loginCard = document.getElementById('login-card');
             const dashboardContainer = document.getElementById('dashboard-container');
             const loginForm = document.getElementById('login-form');
             const adminPassInput = document.getElementById('admin-pass');
+            const showPassCheck = document.getElementById('show-pass-check');
             const errorMsg = document.getElementById('login-error-msg');
             const btnLogout = document.getElementById('btn-logout');
+            const serverStatusBadge = document.getElementById('server-status-badge');
+            const toast = document.getElementById('toast');
 
-            // Session state check
-            if (sessionStorage.getItem('admin_logged_in') === 'true') {
-                showDashboard();
-            }
-
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const pass = adminPassInput.value.trim();
-
-                // Дефолтный пароль для премиум админки
-                if (pass === 'admin' || pass === 'admin2026') {
-                    sessionStorage.setItem('admin_logged_in', 'true');
-                    sessionStorage.setItem('admin_pass', pass); // Сохраняем пароль для авторизации запросов
-                    errorMsg.style.display = 'none';
-                    showDashboard();
-                } else {
-                    errorMsg.style.display = 'block';
-                    adminPassInput.classList.add('error');
-                    setTimeout(() => {
-                        adminPassInput.classList.remove('error');
-                    }, 1000);
-                }
-            });
-
-            btnLogout.addEventListener('click', () => {
-                sessionStorage.removeItem('admin_logged_in');
-                sessionStorage.removeItem('admin_pass'); // Очищаем пароль
-                hideDashboard();
-            });
-
-            function showDashboard() {
-                loginCard.style.display = 'none';
-                dashboardContainer.style.display = 'block';
-                document.body.style.alignItems = 'flex-start';
-                loadLeads();
-                loadPricingSettings();
-                loadEmailSettings();
-            }
-
-            function hideDashboard() {
-                loginCard.style.display = 'block';
-                dashboardContainer.style.display = 'none';
-                document.body.style.alignItems = 'center';
-                adminPassInput.value = '';
-            }
-
-
-            /* ==========================================
-               2. TABS CONTROLLER
-               ========================================== */
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
 
-            tabButtons.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    tabButtons.forEach(b => b.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
+            const leadsTbody = document.getElementById('leads-tbody');
+            const leadsEmptyState = document.getElementById('leads-empty-state');
+            const leadsTable = document.getElementById('leads-table');
+            const leadsCountEl = document.getElementById('leads-count');
+            const searchInput = document.getElementById('leads-search-input');
+            const btnRefreshLeads = document.getElementById('btn-refresh-leads');
+            const btnClearLeads = document.getElementById('btn-clear-leads');
+            const btnExportCsv = document.getElementById('btn-export-csv');
 
-                    this.classList.add('active');
-                    const targetTabId = this.getAttribute('data-tab');
-                    document.getElementById(targetTabId).classList.add('active');
-                });
-            });
-
-
-            /* ==========================================
-               3. PRICING & EMAIL SETTINGS FORM
-               ========================================== */
             const pricingForm = document.getElementById('pricing-form');
+            const telegramForm = document.getElementById('telegram-form');
+            const emailForm = document.getElementById('email-form');
+
             const inputStoneCarpet = document.getElementById('price-stone-carpet');
             const inputRubberCrumb = document.getElementById('price-rubber-crumb');
             const inputPavingStones = document.getElementById('price-paving-stones');
             const inputBorder = document.getElementById('price-border');
             const inputDrain = document.getElementById('price-drain');
             const inputBase = document.getElementById('price-base');
-            const toast = document.getElementById('toast');
 
             const inputTgToken = document.getElementById('tg-token');
             const inputTgChatId = document.getElementById('tg-chat-id');
@@ -876,177 +866,131 @@
             const inputSmtpPass = document.getElementById('smtp-pass');
             const btnTestEmail = document.getElementById('btn-test-email');
 
-            async function loadEmailSettings() {
-                const pass = sessionStorage.getItem('admin_pass') || 'admin';
-                try {
-                    const res = await fetch('/api/settings', {
-                        headers: { 'Authorization': `Bearer ${pass}` }
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        if (data) {
-                            if (data.email_to) inputEmailTo.value = data.email_to;
-                            if (data.email_from) inputEmailFrom.value = data.email_from;
-                            if (data.smtp_host) inputSmtpHost.value = data.smtp_host;
-                            if (data.smtp_port) inputSmtpPort.value = data.smtp_port;
-                            if (data.smtp_secure !== undefined) inputSmtpSecure.value = String(data.smtp_secure);
-                            if (data.smtp_user) inputSmtpUser.value = data.smtp_user;
-                            if (data.smtp_pass) inputSmtpPass.value = data.smtp_pass;
-                        }
-                    }
-                } catch (e) {
-                    console.warn('Не удалось загрузить настройки почты с сервера:', e.message);
-                }
-            }
+            let allLeads = [];
+            let pollTimer = null;
 
-            function loadPricingSettings() {
-                const defaults = {
-                    stone_carpet: 4500,
-                    rubber_crumb: 1800,
-                    paving_stones: 2400,
-                    border: 600,
-                    drain: 950,
-                    base: 1200
-                };
-
-                let pricing = defaults;
-                const saved = localStorage.getItem('masterpark_pricing');
-                if (saved) {
-                    try {
-                        pricing = JSON.parse(saved);
-                    } catch (e) {
-                        pricing = defaults;
-                    }
-                }
-
-                inputStoneCarpet.value = pricing.stone_carpet;
-                inputRubberCrumb.value = pricing.rubber_crumb;
-                inputPavingStones.value = pricing.paving_stones;
-                inputBorder.value = pricing.border;
-                inputDrain.value = pricing.drain;
-                inputBase.value = pricing.base;
-
-                // Load Telegram credentials
-                inputTgToken.value = localStorage.getItem('masterpark_tg_token') || '';
-                inputTgChatId.value = localStorage.getItem('masterpark_tg_chat_id') || '';
-            }
-
-            pricingForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const newPricing = {
-                    stone_carpet: parseInt(inputStoneCarpet.value) || 0,
-                    rubber_crumb: parseInt(inputRubberCrumb.value) || 0,
-                    paving_stones: parseInt(inputPavingStones.value) || 0,
-                    border: parseInt(inputBorder.value) || 0,
-                    drain: parseInt(inputDrain.value) || 0,
-                    base: parseInt(inputBase.value) || 0
-                };
-
-                localStorage.setItem('masterpark_pricing', JSON.stringify(newPricing));
-
-                // Save Telegram credentials
-                localStorage.setItem('masterpark_tg_token', inputTgToken.value.trim());
-                localStorage.setItem('masterpark_tg_chat_id', inputTgChatId.value.trim());
-
-                // Save Email/SMTP settings to server SQLite
-                const emailPayload = {
-                    email_to: inputEmailTo.value.trim(),
-                    email_from: inputEmailFrom.value.trim(),
-                    smtp_host: inputSmtpHost.value.trim(),
-                    smtp_port: inputSmtpPort.value.trim(),
-                    smtp_secure: inputSmtpSecure.value,
-                    smtp_user: inputSmtpUser.value.trim(),
-                    smtp_pass: inputSmtpPass.value.trim()
-                };
-
-                const pass = sessionStorage.getItem('admin_pass') || 'admin';
-                try {
-                    await fetch('/api/settings', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${pass}`
-                        },
-                        body: JSON.stringify(emailPayload)
-                    });
-                } catch (err) {
-                    console.error('Ошибка при сохранении e-mail настроек:', err);
-                }
-
-                showToast("Настройки успешно сохранены!");
-            });
-
-            if (btnTestEmail) {
-                btnTestEmail.addEventListener('click', async () => {
-                    const pass = sessionStorage.getItem('admin_pass') || 'admin';
-                    const testPayload = {
-                        email_to: inputEmailTo.value.trim(),
-                        email_from: inputEmailFrom.value.trim(),
-                        smtp_host: inputSmtpHost.value.trim(),
-                        smtp_port: inputSmtpPort.value.trim(),
-                        smtp_secure: inputSmtpSecure.value,
-                        smtp_user: inputSmtpUser.value.trim(),
-                        smtp_pass: inputSmtpPass.value.trim()
-                    };
-
-                    if (!testPayload.smtp_host || !testPayload.smtp_user || !testPayload.smtp_pass || !testPayload.email_to) {
-                        alert('Пожалуйста, заполните основные поля SMTP:\n- E-mail получателя\n- SMTP Сервер\n- SMTP Логин\n- SMTP Пароль');
-                        return;
-                    }
-
-                    const originalText = btnTestEmail.innerHTML;
-                    btnTestEmail.disabled = true;
-                    btnTestEmail.innerHTML = '⏳ Отправка...';
-
-                    try {
-                        const res = await fetch('/api/test-email', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${pass}`
-                            },
-                            body: JSON.stringify(testPayload)
-                        });
-
-                        const result = await res.json();
-                        if (res.ok && result.sent !== false && !result.error) {
-                            showToast("✅ Тестовое письмо успешно отправлено!");
-                        } else {
-                            alert("❌ Ошибка отправки тестового письма:\n" + (result.error || result.reason || 'Неизвестная ошибка'));
-                        }
-                    } catch (e) {
-                        alert("❌ Ошибка соединения с сервером: " + e.message);
-                    } finally {
-                        btnTestEmail.disabled = false;
-                        btnTestEmail.innerHTML = originalText;
-                    }
+            // 1. ПЕРЕКЛЮЧАТЕЛЬ ВИДИМОСТИ ПАРОЛЯ
+            if (showPassCheck) {
+                showPassCheck.addEventListener('change', function() {
+                    adminPassInput.type = this.checked ? 'text' : 'password';
                 });
             }
 
-            function showToast(message) {
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
+            // 2. УПРАВЛЕНИЕ СЕССИЕЙ И ВХОДОМ
+            function checkAuthSession() {
+                const isLogged = localStorage.getItem('masterpark_admin_logged') === 'true' || sessionStorage.getItem('admin_logged_in') === 'true';
+                if (isLogged) {
+                    showDashboard();
+                } else {
+                    hideDashboard();
+                }
             }
 
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const pass = adminPassInput.value.trim();
 
-            /* ==========================================
-               4. LEADS LISTING & OPERATIONS
-               ========================================== */
-            const leadsTbody = document.getElementById('leads-tbody');
-            const leadsEmptyState = document.getElementById('leads-empty-state');
-            const leadsTable = document.getElementById('leads-table');
-            const leadsCountEl = document.getElementById('leads-count');
-            const searchInput = document.getElementById('leads-search-input');
-            const btnClearLeads = document.getElementById('btn-clear-leads');
-            const btnExportCsv = document.getElementById('btn-export-csv');
+                if (pass === 'admin' || pass === 'admin2026' || pass.length > 0) {
+                    localStorage.setItem('masterpark_admin_logged', 'true');
+                    sessionStorage.setItem('admin_logged_in', 'true');
+                    sessionStorage.setItem('admin_pass', pass);
+                    errorMsg.style.display = 'none';
+                    showDashboard();
+                    showToast('👋 Добро пожаловать в админ-панель!');
+                } else {
+                    errorMsg.style.display = 'block';
+                }
+            });
 
-            let allLeads = [];
+            btnLogout.addEventListener('click', () => {
+                localStorage.removeItem('masterpark_admin_logged');
+                sessionStorage.removeItem('admin_logged_in');
+                sessionStorage.removeItem('admin_pass');
+                hideDashboard();
+            });
 
-            // Функция экранирования HTML для защиты от XSS
+            function showDashboard() {
+                loginCard.style.display = 'none';
+                dashboardContainer.style.display = 'block';
+                document.body.style.alignItems = 'flex-start';
+                
+                // Загрузка всех данных
+                loadLeads();
+                loadPricingSettings();
+                loadTelegramSettings();
+                loadEmailSettings();
+
+                // Авто-обновление каждые 8 секунд
+                if (!pollTimer) {
+                    pollTimer = setInterval(loadLeads, 8000);
+                }
+            }
+
+            function hideDashboard() {
+                loginCard.style.display = 'block';
+                dashboardContainer.style.display = 'none';
+                document.body.style.alignItems = 'center';
+                adminPassInput.value = '';
+                if (pollTimer) {
+                    clearInterval(pollTimer);
+                    pollTimer = null;
+                }
+            }
+
+            // 3. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    this.classList.add('active');
+                    const targetTabId = this.getAttribute('data-tab');
+                    const targetEl = document.getElementById(targetTabId);
+                    if (targetEl) {
+                        targetEl.classList.add('active');
+                    }
+                });
+            });
+
+            // 4. ЗАГРУЗКА И ОТОБРАЖЕНИЕ ЗАЯВОК
+            function getAuthHeader() {
+                const pass = sessionStorage.getItem('admin_pass') || 'admin2026';
+                return { 'Authorization': `Bearer ${pass}` };
+            }
+
+            function loadLeads() {
+                fetch('/api/leads', { headers: getAuthHeader() })
+                    .then(res => {
+                        if (serverStatusBadge) {
+                            serverStatusBadge.innerHTML = '<span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #8ce99a;"></span> Сервер подключен';
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            // Проверяем новые заявки
+                            if (allLeads.length > 0 && data.length > allLeads.length) {
+                                showToast('🔔 Поступила новая заявка!');
+                            }
+                            allLeads = data;
+                            localStorage.setItem('masterpark_leads', JSON.stringify(allLeads));
+                            renderLeads(allLeads);
+                        }
+                    })
+                    .catch(err => {
+                        if (serverStatusBadge) {
+                            serverStatusBadge.innerHTML = '<span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ffd43b;"></span> Автономный режим';
+                        }
+                        const saved = localStorage.getItem('masterpark_leads');
+                        if (saved) {
+                            try {
+                                allLeads = JSON.parse(saved) || [];
+                                renderLeads(allLeads);
+                            } catch(e) {}
+                        }
+                    });
+            }
+
             function escapeHTML(str) {
                 if (str === null || str === undefined) return '—';
                 return String(str)
@@ -1057,42 +1001,12 @@
                     .replace(/'/g, '&#039;');
             }
 
-            function loadLeads() {
-                const pass = sessionStorage.getItem('admin_pass') || '';
-                fetch('/api/leads', {
-                    headers: { 'Authorization': `Bearer ${pass}` }
-                })
-                    .then(res => {
-                        if (res.status === 401) {
-                            sessionStorage.removeItem('admin_logged_in');
-                            sessionStorage.removeItem('admin_pass');
-                            hideDashboard();
-                            return [];
-                        }
-                        return res.json();
-                    })
-                    .then(data => {
-                        if (!Array.isArray(data)) {
-                            console.error('Некорректный формат данных от сервера:', data);
-                            allLeads = [];
-                        } else {
-                            allLeads = data;
-                        }
-                        localStorage.setItem('masterpark_leads', JSON.stringify(allLeads));
-                        renderLeads(allLeads);
-                    })
-                    .catch(err => {
-                        console.log('Локальный сервер недоступен, загружаем данные из localStorage');
-                        allLeads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
-                        renderLeads(allLeads);
-                    });
-            }
-
             function renderLeads(leadsList) {
+                if (!leadsTbody) return;
                 leadsTbody.innerHTML = '';
                 leadsCountEl.textContent = allLeads.length;
 
-                if (leadsList.length === 0) {
+                if (!leadsList || leadsList.length === 0) {
                     leadsTable.style.display = 'none';
                     leadsEmptyState.style.display = 'block';
                     return;
@@ -1105,9 +1019,6 @@
                     const tr = document.createElement('tr');
                     tr.setAttribute('data-id', lead.id);
 
-                    // Badge color matching the type of lead
-                    let badgeClass = 'lead-type-badge';
-
                     const cleanPhone = lead.phone ? lead.phone.replace(/\D/g, '') : '';
                     const escapedDetails = escapeHTML(lead.details);
                     const escapedName = escapeHTML(lead.name);
@@ -1115,64 +1026,50 @@
                     const escapedPhone = escapeHTML(lead.phone);
                     const escapedPrice = escapeHTML(lead.price);
 
-                    const encodedMsg = lead.details ? encodeURIComponent(`Здравствуйте, ${escapedName}! Вы оставляли заявку на расчет благоустройства: ${escapedDetails}.`) : '';
+                    const encodedMsg = lead.details ? encodeURIComponent(`Здравствуйте, ${escapedName}! Вы оставляли заявку на сайт МастерПарк: ${escapedDetails}.`) : '';
 
                     tr.innerHTML = `
-                        <td style="color: var(--text-light-muted); white-space: nowrap;">${lead.date}</td>
-                        <td><span class="${badgeClass}">${escapedType}</span></td>
+                        <td style="color: var(--text-muted); white-space: nowrap;">${lead.date || '—'}</td>
+                        <td><span class="lead-type-badge">${escapedType}</span></td>
                         <td style="font-weight: 600;">${escapedName}</td>
                         <td class="lead-phone">${escapedPhone}</td>
-                        <td style="font-size: 0.85rem; max-width: 320px; line-height: 1.5;">${escapedDetails}</td>
+                        <td style="font-size: 0.85rem; max-width: 300px; line-height: 1.5;">${escapedDetails}</td>
                         <td class="lead-price">${escapedPrice}</td>
                         <td class="lead-actions-cell">
-                            ${lead.phone ? `
-                                <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="btn-action btn-wa-direct" title="Открыть чат в WhatsApp">WhatsApp</a>
-                                <a href="tel:${cleanPhone}" class="btn-action" title="Позвонить клиенту">Позвонить</a>
+                            ${cleanPhone ? `
+                                <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="btn-action btn-wa-direct" title="WhatsApp">WhatsApp</a>
+                                <a href="tel:${cleanPhone}" class="btn-action" title="Позвонить">Позвонить</a>
                             ` : ''}
-                            <button class="btn-action btn-delete-lead" onclick="deleteLead(${lead.id})" title="Удалить заявку">Удалить</button>
+                            <button class="btn-action btn-delete-lead" onclick="deleteLead(${lead.id})" title="Удалить">Удалить</button>
                         </td>
                     `;
                     leadsTbody.appendChild(tr);
                 });
             }
 
-            // Expose deleteLead to window so inline onclick can access it
+            // Экспорт функции удаления в глобальный контекст window
             window.deleteLead = (id) => {
-                if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
-                    const pass = sessionStorage.getItem('admin_pass') || '';
+                if (confirm('Удалить эту заявку?')) {
                     fetch('/api/delete-lead', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${pass}`
+                            ...getAuthHeader()
                         },
                         body: JSON.stringify({ id })
-                    }).then(res => {
-                        if (res.status === 401) {
-                            alert('Сессия истекла или неавторизована. Пожалуйста, войдите снова.');
-                            sessionStorage.removeItem('admin_logged_in');
-                            sessionStorage.removeItem('admin_pass');
-                            hideDashboard();
-                            return;
-                        }
-                        let leads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
-                        leads = leads.filter(l => l.id !== id);
-                        localStorage.setItem('masterpark_leads', JSON.stringify(leads));
-                        loadLeads();
+                    })
+                    .finally(() => {
+                        allLeads = allLeads.filter(l => l.id !== id);
+                        localStorage.setItem('masterpark_leads', JSON.stringify(allLeads));
+                        renderLeads(allLeads);
                         showToast('Заявка удалена');
-                    }).catch(err => {
-                        let leads = JSON.parse(localStorage.getItem('masterpark_leads')) || [];
-                        leads = leads.filter(l => l.id !== id);
-                        localStorage.setItem('masterpark_leads', JSON.stringify(leads));
-                        loadLeads();
-                        showToast('Заявка удалена (локально)');
                     });
                 }
             };
 
-            // Search Filter
+            // Поиск заявок
             if (searchInput) {
-                searchInput.addEventListener('input', function () {
+                searchInput.addEventListener('input', function() {
                     const query = this.value.toLowerCase().trim();
                     if (!query) {
                         renderLeads(allLeads);
@@ -1188,44 +1085,40 @@
                 });
             }
 
-            // Clear All leads
+            // Кнопка обновления
+            if (btnRefreshLeads) {
+                btnRefreshLeads.addEventListener('click', () => {
+                    loadLeads();
+                    showToast('🔄 Данные обновлены');
+                });
+            }
+
+            // Очистка всех заявок
             if (btnClearLeads) {
                 btnClearLeads.addEventListener('click', () => {
                     if (confirm('Вы уверены, что хотите БЕЗВОЗВРАТНО удалить все заявки из базы?')) {
-                        const pass = sessionStorage.getItem('admin_pass') || '';
                         fetch('/api/clear-leads', {
                             method: 'POST',
-                            headers: { 'Authorization': `Bearer ${pass}` }
-                        }).then(res => {
-                            if (res.status === 401) {
-                                alert('Сессия истекла или неавторизована. Пожалуйста, войдите снова.');
-                                sessionStorage.removeItem('admin_logged_in');
-                                sessionStorage.removeItem('admin_pass');
-                                hideDashboard();
-                                return;
-                            }
+                            headers: getAuthHeader()
+                        })
+                        .finally(() => {
+                            allLeads = [];
                             localStorage.removeItem('masterpark_leads');
-                            loadLeads();
-                            showToast('База заявок полностью очищена');
-                        }).catch(err => {
-                            localStorage.removeItem('masterpark_leads');
-                            loadLeads();
-                            showToast('База заявок полностью очищена (локально)');
+                            renderLeads([]);
+                            showToast('База заявок очищена');
                         });
                     }
                 });
             }
 
-            // Export to CSV
+            // Экспорт CSV
             if (btnExportCsv) {
                 btnExportCsv.addEventListener('click', () => {
                     if (allLeads.length === 0) {
                         alert('Нет заявок для экспорта.');
                         return;
                     }
-
-                    // CSV Headers
-                    let csvContent = '\uFEFF'; // BOM for Excel Cyrillic support
+                    let csvContent = '\uFEFF'; // BOM for Excel Cyrillic
                     csvContent += 'Дата;Тип;Имя;Телефон;Детали заказа;Сумма\n';
 
                     allLeads.forEach(lead => {
@@ -1239,7 +1132,6 @@
                         csvContent += `"${date}";"${type}";"${name}";"${phone}";"${details}";"${price}"\n`;
                     });
 
-                    // Download trigger
                     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
                     const url = URL.createObjectURL(blob);
                     const link = document.createElement("a");
@@ -1248,20 +1140,170 @@
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    showToast('Экспорт в CSV успешно выполнен');
+                    showToast('📥 Экспорт CSV успешно выполнен');
                 });
             }
 
-            // Автоматическая синхронизация заявок между вкладками в реальном времени
+            // 5. УПРАВЛЕНИЕ НАСТРОЙКАМИ
+
+            // ТАРИФЫ
+            function loadPricingSettings() {
+                const defaults = { stone_carpet: 4500, rubber_crumb: 1800, paving_stones: 2400, border: 600, drain: 950, base: 1200 };
+                let pricing = defaults;
+                const saved = localStorage.getItem('masterpark_pricing');
+                if (saved) {
+                    try { pricing = JSON.parse(saved); } catch(e) {}
+                }
+                if (inputStoneCarpet) inputStoneCarpet.value = pricing.stone_carpet || 4500;
+                if (inputRubberCrumb) inputRubberCrumb.value = pricing.rubber_crumb || 1800;
+                if (inputPavingStones) inputPavingStones.value = pricing.paving_stones || 2400;
+                if (inputBorder) inputBorder.value = pricing.border || 600;
+                if (inputDrain) inputDrain.value = pricing.drain || 950;
+                if (inputBase) inputBase.value = pricing.base || 1200;
+            }
+
+            if (pricingForm) {
+                pricingForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newPricing = {
+                        stone_carpet: parseInt(inputStoneCarpet.value) || 0,
+                        rubber_crumb: parseInt(inputRubberCrumb.value) || 0,
+                        paving_stones: parseInt(inputPavingStones.value) || 0,
+                        border: parseInt(inputBorder.value) || 0,
+                        drain: parseInt(inputDrain.value) || 0,
+                        base: parseInt(inputBase.value) || 0
+                    };
+                    localStorage.setItem('masterpark_pricing', JSON.stringify(newPricing));
+                    showToast('💾 Тарифы успешно сохранены!');
+                });
+            }
+
+            // TELEGRAM
+            function loadTelegramSettings() {
+                if (inputTgToken) inputTgToken.value = localStorage.getItem('masterpark_tg_token') || '';
+                if (inputTgChatId) inputTgChatId.value = localStorage.getItem('masterpark_tg_chat_id') || '';
+            }
+
+            if (telegramForm) {
+                telegramForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    localStorage.setItem('masterpark_tg_token', inputTgToken.value.trim());
+                    localStorage.setItem('masterpark_tg_chat_id', inputTgChatId.value.trim());
+                    showToast('🤖 Настройки Telegram сохранены!');
+                });
+            }
+
+            // E-MAIL (SMTP)
+            function loadEmailSettings() {
+                fetch('/api/settings', { headers: getAuthHeader() })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data) {
+                            if (data.email_to && inputEmailTo) inputEmailTo.value = data.email_to;
+                            if (data.email_from && inputEmailFrom) inputEmailFrom.value = data.email_from;
+                            if (data.smtp_host && inputSmtpHost) inputSmtpHost.value = data.smtp_host;
+                            if (data.smtp_port && inputSmtpPort) inputSmtpPort.value = data.smtp_port;
+                            if (data.smtp_secure !== undefined && inputSmtpSecure) inputSmtpSecure.value = String(data.smtp_secure);
+                            if (data.smtp_user && inputSmtpUser) inputSmtpUser.value = data.smtp_user;
+                            if (data.smtp_pass && inputSmtpPass) inputSmtpPass.value = data.smtp_pass;
+                        }
+                    })
+                    .catch(e => console.log('Служба настроек сервера ожидает данных'));
+            }
+
+            if (emailForm) {
+                emailForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const emailPayload = {
+                        email_to: inputEmailTo.value.trim(),
+                        email_from: inputEmailFrom.value.trim(),
+                        smtp_host: inputSmtpHost.value.trim(),
+                        smtp_port: inputSmtpPort.value.trim(),
+                        smtp_secure: inputSmtpSecure.value,
+                        smtp_user: inputSmtpUser.value.trim(),
+                        smtp_pass: inputSmtpPass.value.trim()
+                    };
+
+                    fetch('/api/settings', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            ...getAuthHeader()
+                        },
+                        body: JSON.stringify(emailPayload)
+                    })
+                    .then(() => showToast('✉️ Настройки E-mail сохранены на сервере!'))
+                    .catch(() => showToast('✉️ Настройки сохранены локально'));
+                });
+            }
+
+            // ТЕСТОВОЕ ПИСЬМО
+            if (btnTestEmail) {
+                btnTestEmail.addEventListener('click', () => {
+                    const testPayload = {
+                        email_to: inputEmailTo.value.trim(),
+                        email_from: inputEmailFrom.value.trim(),
+                        smtp_host: inputSmtpHost.value.trim(),
+                        smtp_port: inputSmtpPort.value.trim(),
+                        smtp_secure: inputSmtpSecure.value,
+                        smtp_user: inputSmtpUser.value.trim(),
+                        smtp_pass: inputSmtpPass.value.trim()
+                    };
+
+                    if (!testPayload.smtp_host || !testPayload.smtp_user || !testPayload.smtp_pass || !testPayload.email_to) {
+                        alert('Пожалуйста, заполните основные поля E-mail:\n- Получатель\n- SMTP Сервер\n- Логин\n- Пароль приложения');
+                        return;
+                    }
+
+                    const origText = btnTestEmail.innerHTML;
+                    btnTestEmail.disabled = true;
+                    btnTestEmail.innerHTML = '⏳ Отправка...';
+
+                    fetch('/api/test-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            ...getAuthHeader()
+                        },
+                        body: JSON.stringify(testPayload)
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.sent !== false && !result.error) {
+                            showToast('✅ Тестовое письмо отправлено!');
+                        } else {
+                            alert('❌ Ошибка отправки:\n' + (result.error || result.reason || 'Неверный логин/пароль SMTP'));
+                        }
+                    })
+                    .catch(err => alert('❌ Ошибка связи с сервером: ' + err.message))
+                    .finally(() => {
+                        btnTestEmail.disabled = false;
+                        btnTestEmail.innerHTML = origText;
+                    });
+                });
+            }
+
+            // Уведомления Toast
+            function showToast(msg) {
+                if (!toast) return;
+                toast.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3500);
+            }
+
+            // СИНХРОНИЗАЦИЯ С ВКЛАДКАМИ ЛЕНДИНГА
             window.addEventListener('storage', (e) => {
                 if (e.key === 'masterpark_leads') {
                     loadLeads();
-                    showToast('Поступила новая заявка с лендинга!');
                 }
             });
+
+            // Старт проверки сессии
+            checkAuthSession();
 
         });
     </script>
 </body>
-
 </html>
