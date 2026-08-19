@@ -658,6 +658,63 @@
                             <input type="text" id="tg-chat-id" class="form-control" placeholder="-100123456789 или 123456789">
                         </div>
                     </div>
+
+                    <!-- Карточка 4: Уведомления на E-mail (SMTP) -->
+                    <div class="settings-card" style="grid-column: span 2; margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                            <h3 style="margin-bottom: 0;">Уведомления на E-mail (SMTP)</h3>
+                            <button type="button" class="btn btn-outline btn-sm" id="btn-test-email" style="padding: 6px 14px; font-size: 0.8rem; width: auto; text-transform: none;">
+                                ✉️ Отправить тестовое письмо
+                            </button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-light-muted); margin-bottom: 1.5rem; text-transform: none; letter-spacing: normal;">
+                            Настройте отправку заявок на вашу почту через SMTP-сервер (Яндекс Почта, Mail.ru, Gmail или корпоративный SMTP).
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="email-to">E-mail получателя заявок *</label>
+                                <input type="email" id="email-to" class="form-control" placeholder="info@masterpark.ru">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="email-from">Имя / E-mail отправителя (From)</label>
+                                <input type="text" id="email-from" class="form-control" placeholder='МастерПарк <user@yandex.ru>'>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="smtp-host">SMTP Сервер *</label>
+                                <input type="text" id="smtp-host" class="form-control" placeholder="smtp.yandex.ru">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="smtp-port">SMTP Порт *</label>
+                                <input type="number" id="smtp-port" class="form-control" placeholder="465" value="465">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="smtp-secure">Защита (SSL/TLS)</label>
+                                <select id="smtp-secure" class="form-control" style="background: var(--bg-dark); color: var(--text-light);">
+                                    <option value="true">SSL (Порт 465)</option>
+                                    <option value="false">STARTTLS / TLS (Порт 587)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1rem;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="smtp-user">SMTP Логин (Email) *</label>
+                                <input type="text" id="smtp-user" class="form-control" placeholder="user@yandex.ru">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="smtp-pass">SMTP Пароль приложения *</label>
+                                <input type="password" id="smtp-pass" class="form-control" placeholder="Пароль приложения (App Password)">
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(31, 60, 44, 0.3); border: 1px solid var(--accent-green); padding: 12px 16px; border-radius: 6px; font-size: 0.82rem; color: var(--text-light-muted); margin-top: 1rem; line-height: 1.5;">
+                            💡 <strong>Подсказка:</strong> Для Яндекс Почты указывайте <code>smtp.yandex.ru</code> (порт 465). В поле пароля вводите <em>Пароль приложения</em> (создается в Яндекс ID &rarr; Безопасность &rarr; Пароли приложений).
+                        </div>
+                    </div>
                 </div>
 
                 <div style="margin-top: 3rem; display: flex; justify-content: flex-end;">
@@ -727,6 +784,7 @@
                 document.body.style.alignItems = 'flex-start';
                 loadLeads();
                 loadPricingSettings();
+                loadEmailSettings();
             }
 
             function hideDashboard() {
@@ -756,7 +814,7 @@
 
 
             /* ==========================================
-               3. PRICING SETTINGS FORM
+               3. PRICING & EMAIL SETTINGS FORM
                ========================================== */
             const pricingForm = document.getElementById('pricing-form');
             const inputStoneCarpet = document.getElementById('price-stone-carpet');
@@ -769,6 +827,38 @@
 
             const inputTgToken = document.getElementById('tg-token');
             const inputTgChatId = document.getElementById('tg-chat-id');
+
+            const inputEmailTo = document.getElementById('email-to');
+            const inputEmailFrom = document.getElementById('email-from');
+            const inputSmtpHost = document.getElementById('smtp-host');
+            const inputSmtpPort = document.getElementById('smtp-port');
+            const inputSmtpSecure = document.getElementById('smtp-secure');
+            const inputSmtpUser = document.getElementById('smtp-user');
+            const inputSmtpPass = document.getElementById('smtp-pass');
+            const btnTestEmail = document.getElementById('btn-test-email');
+
+            async function loadEmailSettings() {
+                const pass = sessionStorage.getItem('admin_pass') || 'admin';
+                try {
+                    const res = await fetch('/api/settings', {
+                        headers: { 'Authorization': `Bearer ${pass}` }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data) {
+                            if (data.email_to) inputEmailTo.value = data.email_to;
+                            if (data.email_from) inputEmailFrom.value = data.email_from;
+                            if (data.smtp_host) inputSmtpHost.value = data.smtp_host;
+                            if (data.smtp_port) inputSmtpPort.value = data.smtp_port;
+                            if (data.smtp_secure !== undefined) inputSmtpSecure.value = String(data.smtp_secure);
+                            if (data.smtp_user) inputSmtpUser.value = data.smtp_user;
+                            if (data.smtp_pass) inputSmtpPass.value = data.smtp_pass;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Не удалось загрузить настройки почты с сервера:', e.message);
+                }
+            }
 
             function loadPricingSettings() {
                 const defaults = {
@@ -802,7 +892,7 @@
                 inputTgChatId.value = localStorage.getItem('masterpark_tg_chat_id') || '';
             }
 
-            pricingForm.addEventListener('submit', (e) => {
+            pricingForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
                 const newPricing = {
@@ -819,9 +909,81 @@
                 // Save Telegram credentials
                 localStorage.setItem('masterpark_tg_token', inputTgToken.value.trim());
                 localStorage.setItem('masterpark_tg_chat_id', inputTgChatId.value.trim());
+
+                // Save Email/SMTP settings to server SQLite
+                const emailPayload = {
+                    email_to: inputEmailTo.value.trim(),
+                    email_from: inputEmailFrom.value.trim(),
+                    smtp_host: inputSmtpHost.value.trim(),
+                    smtp_port: inputSmtpPort.value.trim(),
+                    smtp_secure: inputSmtpSecure.value,
+                    smtp_user: inputSmtpUser.value.trim(),
+                    smtp_pass: inputSmtpPass.value.trim()
+                };
+
+                const pass = sessionStorage.getItem('admin_pass') || 'admin';
+                try {
+                    await fetch('/api/settings', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${pass}`
+                        },
+                        body: JSON.stringify(emailPayload)
+                    });
+                } catch (err) {
+                    console.error('Ошибка при сохранении e-mail настроек:', err);
+                }
                 
                 showToast("Настройки успешно сохранены!");
             });
+
+            if (btnTestEmail) {
+                btnTestEmail.addEventListener('click', async () => {
+                    const pass = sessionStorage.getItem('admin_pass') || 'admin';
+                    const testPayload = {
+                        email_to: inputEmailTo.value.trim(),
+                        email_from: inputEmailFrom.value.trim(),
+                        smtp_host: inputSmtpHost.value.trim(),
+                        smtp_port: inputSmtpPort.value.trim(),
+                        smtp_secure: inputSmtpSecure.value,
+                        smtp_user: inputSmtpUser.value.trim(),
+                        smtp_pass: inputSmtpPass.value.trim()
+                    };
+
+                    if (!testPayload.smtp_host || !testPayload.smtp_user || !testPayload.smtp_pass || !testPayload.email_to) {
+                        alert('Пожалуйста, заполните основные поля SMTP:\n- E-mail получателя\n- SMTP Сервер\n- SMTP Логин\n- SMTP Пароль');
+                        return;
+                    }
+
+                    const originalText = btnTestEmail.innerHTML;
+                    btnTestEmail.disabled = true;
+                    btnTestEmail.innerHTML = '⏳ Отправка...';
+
+                    try {
+                        const res = await fetch('/api/test-email', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${pass}`
+                            },
+                            body: JSON.stringify(testPayload)
+                        });
+
+                        const result = await res.json();
+                        if (res.ok && result.sent !== false && !result.error) {
+                            showToast("✅ Тестовое письмо успешно отправлено!");
+                        } else {
+                            alert("❌ Ошибка отправки тестового письма:\n" + (result.error || result.reason || 'Неизвестная ошибка'));
+                        }
+                    } catch (e) {
+                        alert("❌ Ошибка соединения с сервером: " + e.message);
+                    } finally {
+                        btnTestEmail.disabled = false;
+                        btnTestEmail.innerHTML = originalText;
+                    }
+                });
+            }
 
             function showToast(message) {
                 toast.textContent = message;
